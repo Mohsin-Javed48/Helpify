@@ -1,11 +1,12 @@
 /** @format */
 
 import LoginPage from "./ui/LoginPage";
+import SignupPage from "./ui/SignupPage";
 
 function App() {
   return (
     <div>
-      <LoginPage />
+      <SignupPage />
     </div>
   );
 }

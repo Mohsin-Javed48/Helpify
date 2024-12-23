@@ -35,7 +35,7 @@ function LoginPage() {
           {/* Login input */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2 ml-3">
-              Login
+              Email Address
             </label>
             <input
               type="text"

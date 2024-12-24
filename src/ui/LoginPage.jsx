@@ -3,12 +3,40 @@
 import { useState } from "react";
 import Google_icon from "../assets/google_icon";
 import { FaEye as ViewPasswordIcon } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { login } from "../store/authSlice";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [viewPassword, setViewPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const password = watch("password");
+
+  function onSubmit(data) {
+    try {
+      dispatch(login(data));
+      console.log("jel");
+      navigate("/home");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col lg:flex-row h-screen"
+    >
       {/* Left side image section */}
       <div className="hidden lg:flex h-full w-full lg:w-8/12">
         <img
@@ -32,7 +60,7 @@ function LoginPage() {
             Nice to see you
           </h2>
 
-          {/* Login input */}
+          {/* Email input */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2 ml-3">
               Email Address
@@ -41,6 +69,7 @@ function LoginPage() {
               type="text"
               placeholder="Email or phone number"
               className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+              {...register("email", { required: true, maxLength: 20 })}
             />
           </div>
 
@@ -54,12 +83,18 @@ function LoginPage() {
                 type={viewPassword ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+                {...register("password", { required: true, maxLength: 20 })}
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
               <div
                 className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
                 onClick={() => setViewPassword((prev) => !prev)}
               >
-                <ViewPasswordIcon />
+                {password && <ViewPasswordIcon />}
               </div>
             </div>
           </div>
@@ -71,7 +106,10 @@ function LoginPage() {
           </div>
 
           {/* Sign in button */}
-          <button className="w-full h-10 bg-[#007bff] text-white font-medium rounded-lg text-sm mt-4">
+          <button
+            type="submit"
+            className="w-full h-10 bg-[#007bff] text-white font-medium rounded-lg text-sm mt-4"
+          >
             Sign in
           </button>
 
@@ -84,15 +122,17 @@ function LoginPage() {
           </button>
 
           {/* Sign up link */}
-          <div className="text-center mt-4 text-sm">
+          <div className="text-center mt-4 text-sm ">
             <p>
-              Don’t have an account?{" "}
-              <span className="text-[#007bff] cursor-pointer">Sign up now</span>
+              Don’t have an account?
+              <Link to="/signup" className="text-[#007bff] cursor-pointer">
+                Signup now
+              </Link>
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

@@ -6,10 +6,10 @@ function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <>
-      <nav className="bg-white">
+      <nav className="bg-[#ffff]">
         <div className="flex items-center justify-between px-4 md:px-8 lg:px-[65px] py-[25px] max-w-screen-xl mx-auto">
           {/* Logo */}
-          <h2 className="text-black text-center font-extrabold text-[25px] leading-[26px] tracking-[-0.35px] font-wixmadefor">
+          <h2 className="text-black text-center font-extrabold text-[18px] sm:text-[20px] md:text-[22px] lg:text-[25px] leading-[26px] tracking-[-0.35px] font-wixmadefor">
             HELPIFY
           </h2>
 
@@ -126,7 +126,7 @@ function Navbar() {
         <div
           className={`fixed top-0 left-0 h-[80vh] w-[250px] bg-white shadow-lg transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 ease-in-out md:hidden z-50`}
+          } transition-transform duration-300 ease-in-out md:hidden z-50 bg-[#ffff]`}
         >
           {/* Close Button */}
           <button

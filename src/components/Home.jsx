@@ -41,12 +41,12 @@ function Home() {
       {/* Booking summary */}
 
       <div
-        className="bg-cover bg-center w-screen h-screen"
+        className="bg-cover bg-center bg-no-repeat h-[738px] w-full"
         style={{ backgroundImage: `url(${workerImg})` }}
       >
         {/* Content */}
-        <div className="flex flex-col justify-center items-start max-w-screen-xl mx-auto h-full px-10">
-          <h1 className="text-[#ffff] not-italic text-white font-bold text-[38px] sm:text-[48px] md:text-[64px] lg:text-[78px] leading-normal capitalize tracking-[-2.34px]">
+        <div className="flex flex-col justify-center items-center sm:items-start max-w-screen-xl mx-auto h-full px-[25px] sm:px-[40px]">
+          <h1 className="text-center sm:text-start text-[#ffff] not-italic text-white font-bold text-[25px] sm:text-[48px] md:text-[64px] lg:text-[78px] leading-normal capitalize tracking-[-2.34px]">
             Get Help From <br />
             Experienced Person, <br />
             And Made Life Easy.

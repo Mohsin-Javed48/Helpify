@@ -41,7 +41,7 @@ function Home() {
       {/* Booking summary */}
 
       <div
-        className="bg-cover bg-center bg-no-repeat h-[738px] w-full"
+        className="bg-cover bg-center bg-no-repeat h-screen w-full"
         style={{ backgroundImage: `url(${workerImg})` }}
       >
         {/* Content */}

@@ -14,6 +14,7 @@ export default {
     colors: {
       "custom-gray": "rgba(20, 20, 20, 0.75)",
       "custom-white": "rgba(255, 255, 255, 0.75)",
+      "border-gray": "rgba(20, 20, 20, 0.40)",
     },
   },
   plugins: [],

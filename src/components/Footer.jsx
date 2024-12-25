@@ -5,7 +5,7 @@ import LocationIcon from "../images/Location.png";
 export default function Footer() {
   return (
     <footer className="bg-[#091054] text-white pt-[100px] pb-[50px] font-wixmadefor">
-      <div className="container mx-auto px-[80px] md:px-[135px]">
+      <div className="container mx-auto px-[45px] md:px-[135px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-[30.5px] xl:gap-[85.5px]">
           <div className="flex flex-col gap-[24px]">
             <h3 className="not-italic text-[#ffff] font-semibold text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px] leading-[30px] sm:leading-[36px] tracking-[-0.24px]">
@@ -54,7 +54,7 @@ export default function Footer() {
                   <img
                     src={CallIcon}
                     alt=""
-                    className="h-[16px] w-[16px] sm:h-[18px] sm:w-[18px] md:w-[20px] lg:h-[22px] lg:w-[22px] xl:h-[24px] xl:w-[24px]"
+                    className="h-[16px] w-[16px] sm:h-[18px] sm:w-[18px] md:w-[20px] md:h-[20px] lg:h-[22px] lg:w-[22px] xl:h-[24px] xl:w-[24px]"
                   />
                 </span>
                 <span>
@@ -66,7 +66,7 @@ export default function Footer() {
                   <img
                     src={EmailIcon}
                     alt=""
-                    className="h-[16px] w-[16px] sm:h-[18px] sm:w-[18px] md:w-[20px] lg:h-[24px] lg:w-[24px]"
+                    className="h-[16px] w-[16px] sm:h-[18px] sm:w-[18px] md:w-[20px] md:h-[20px] lg:h-[22px] lg:w-[22px] xl:h-[24px] xl:w-[24px]"
                   />
                 </span>
                 <span className="">
@@ -79,7 +79,7 @@ export default function Footer() {
                   <img
                     src={LocationIcon}
                     alt=""
-                    className="h-[16px] w-[16px] sm:h-[18px] sm:w-[18px] md:h-[20px] md:w-[20px] lg:h-[22px] lg:w-[22px] xl:h-[24px] xl:w-[24px]"
+                    className="h-[16px] w-[16px] sm:h-[18px] sm:w-[18px] md:w-[20px] md:h-[20px] lg:h-[22px] lg:w-[22px] xl:h-[24px] xl:w-[24px]"
                   />
                 </span>
                 <span>

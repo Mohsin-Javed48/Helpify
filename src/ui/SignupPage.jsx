@@ -3,12 +3,40 @@
 import { useState } from "react";
 import Google_icon from "../assets/google_icon";
 import { FaEye as ViewPasswordIcon } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { login } from "../store/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignupPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [viewPassword, setViewPassword] = useState(false);
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const password = watch("password"); // Get value of password from forms
+
+  function onSubmit(data) {
+    try {
+      dispatch(login(data));
+      console.log("jel");
+      navigate("/home");
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row h-screen">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col lg:flex-row h-screen"
+    >
       {/* Left side image section */}
       <div className="hidden lg:flex h-full w-full lg:w-8/12">
         <img
@@ -18,9 +46,9 @@ function SignupPage() {
         />
       </div>
 
-      {/* Right side login form section */}
+      {/* Right side signup form section */}
       <div className="w-full lg:w-6/12 p-8 lg:p-12 flex flex-col justify-center">
-        <div className="text-left mb-6">
+        <div className="text-left mb-4">
           <h1 className="text-4xl font-bold">HELPIFY</h1>
           <p className="text-xs font-light tracking-widest mt-1">
             TRUSTED SERVICES AT YOUR FINGERTIPS.
@@ -28,10 +56,11 @@ function SignupPage() {
         </div>
 
         <div className="flex flex-col gap-5">
-          <h2 className="font-inter font-medium text-xl mb-7">
+          <h2 className="font-inter font-medium text-xl mb-2">
             Nice to see you
           </h2>
 
+          {/* Name input */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2 ml-3">
               Name
@@ -40,10 +69,14 @@ function SignupPage() {
               type="text"
               placeholder="Enter your full name"
               className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+              {...register("name", { required: true, maxLength: 20 })}
             />
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name.message}</p>
+            )}
           </div>
 
-          {/* Login input */}
+          {/* Email input */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2 ml-3">
               Email Address
@@ -52,7 +85,11 @@ function SignupPage() {
               type="text"
               placeholder="Email or phone number"
               className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+              {...register("email", { required: true, maxLength: 20 })}
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
           </div>
 
           {/* Password input */}
@@ -65,12 +102,18 @@ function SignupPage() {
                 type={viewPassword ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
+                {...register("password", { required: true, maxLength: 20 })}
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
               <div
                 className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
                 onClick={() => setViewPassword((prev) => !prev)}
               >
-                <ViewPasswordIcon />
+                {password && <ViewPasswordIcon />}
               </div>
             </div>
           </div>
@@ -81,29 +124,34 @@ function SignupPage() {
             <p className="text-[#007bff] cursor-pointer">Forgot password?</p>
           </div>
 
-          {/* Sign in button */}
-          <button className="w-full h-10 bg-[#007bff] text-white font-medium rounded-lg text-sm mt-4">
+          {/* Signup button */}
+          <button
+            type="submit"
+            className="w-full h-10 bg-[#007bff] text-white font-medium rounded-lg text-sm mt-2"
+          >
             Sign up
           </button>
 
           {/* Divider */}
-          <hr className="border-t border-gray-200 w-full my-4" />
+          <hr className="border-t border-gray-200 w-full my-2" />
 
           {/* Google sign-in button */}
           <button className="w-full h-10 bg-[#303030] text-white font-normal rounded-lg flex justify-center items-center text-sm">
             <Google_icon className="mr-2" /> Or sign in with Google
           </button>
 
-          {/* Sign up link */}
-          <div className="text-center mt-4 text-sm">
+          {/* Login link */}
+          <div className="text-center mt-1 text-sm">
             <p>
               Already have an account?{" "}
-              <span className="text-[#007bff] cursor-pointer">Sign up now</span>
+              <Link to="/login" className="text-[#007bff] cursor-pointer">
+                Login now
+              </Link>
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

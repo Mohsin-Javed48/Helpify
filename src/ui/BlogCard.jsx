@@ -3,6 +3,7 @@ function BlogCard({ image, time, date, title }) {
     <div className="h-[424px] w-[326.6px] flex-shrink-0">
       {/* Image */}
       {"hello"}
+      {"fakhra"}
       <img
         className="bg-lightgray bg-no-repeat bg-cover rounded-2xl h-[292px] w-full object-cover"
         src={image}

@@ -6,7 +6,9 @@ import BookIcon from "../images/Icon11.png";
 import RelaxIcon from "../images/Icon12.png";
 import Bluearrow from "../images/bluearrow.png";
 import Yellowarrow from "../images/yellowarrow.png";
-
+{
+  ("images are rename to capital latter");
+}
 import HandymanIcon from "../images/Icon1.png";
 import HandymanBackImg from "../images/HandymanBackImg.jpg";
 

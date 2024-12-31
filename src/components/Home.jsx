@@ -1,6 +1,8 @@
+/** @format */
+
 import workerImg from "../images/workerImg.png";
 import ServiceIcon from "../images/Icon10.png";
-import BookIcon from "../images/Icon11.png";
+import BookIcon from "../images/icon11.png";
 import RelaxIcon from "../images/Icon12.png";
 import Bluearrow from "../images/bluearrow.png";
 import Yellowarrow from "../images/yellowarrow.png";

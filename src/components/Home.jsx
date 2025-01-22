@@ -149,8 +149,9 @@ function Home() {
               Select Service
             </h2>
             <p className="text-center not-italic text-custom-gray font-normal text-[12px] sm:text-[15px] md:text-[18px] leading-[30px]">
-              Read verified reviews by owners like you and choose a sitter who's
-              great.
+              Read verified reviews by owners like you and choose a sitter who
+              Read verified reviews by owners like you and choose a sitter who
+              great
             </p>
           </div>
           {/* Step 2: Book Your Day */}
@@ -164,7 +165,8 @@ function Home() {
               Book Your Day
             </h2>
             <p className="text-center not-italic text-custom-gray font-normal text-[12px] sm:text-[15px] md:text-[18px] leading-[30px]">
-              Read verified reviews by owners like you and choose a sitter who's
+              Read verified reviews by owners like you and choose a sitter who
+              Read verified reviews by owners like you and choose a sitter who
               great.
             </p>
           </div>
@@ -179,7 +181,8 @@ function Home() {
               Have Relax
             </h2>
             <p className="text-center not-italic text-custom-gray font-normal text-[12px] sm:text-[15px] md:text-[18px] leading-[30px]">
-              Read verified reviews by owners like you and choose a sitter who's
+              Read verified reviews by owners like you and choose a sitter who
+              Read verified reviews by owners like you and choose a sitter who
               great.
             </p>
           </div>

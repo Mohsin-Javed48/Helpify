@@ -1,17 +1,9 @@
-import { useNavigate } from "react-router-dom";
-
 export default function BookButton({
   text,
   onClick,
   variant = "primary",
   additionalClasses = "",
 }) {
-  const navigate = useNavigate();
-
-  const handleBookAppointment = () => {
-    navigate("/services");
-  };
-
   // Base styles
   const baseStyles =
     "text-center font-medium not-italic mt-6  text-[12px] sm:text-[15px] md:text-[18px] lg:text-[24px] leading-[36px] tracking-[-0.24px] px-[25px] py-[10px] sm:px-[40px] sm:py-[15px] md:px-[50px] md:py-[18px] lg:px-[60px] lg:py-[22px]  leading-[26px] tracking-[-0.15px] rounded-md shadow-md transition duration-200";
@@ -29,7 +21,7 @@ export default function BookButton({
   return (
     <button
       className={`${baseStyles} ${variants[variant]} ${additionalClasses}`}
-      onClick={handleBookAppointment}
+      onClick={onClick}
     >
       {text}
     </button>

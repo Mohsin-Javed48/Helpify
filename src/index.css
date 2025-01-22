@@ -1,0 +1,24 @@
+/** @format */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.img {
+  height: 100vh;
+}
+
+.b {
+  border: 1px solid black;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: "Wix Madefor Display", serif;
+  font-optical-sizing: auto;
+}

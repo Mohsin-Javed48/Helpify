@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         wixmadefor: ['"Wix Madefor Display"', "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
     colors: {

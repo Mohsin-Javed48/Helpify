@@ -10,23 +10,25 @@ import Services from "./components/Services";
 import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import OrderPage from "./components/OrderPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import MainLayout from "./components/MainLayout";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
         <Routes>
-          <Route index element={<Home />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/services" element={<Services />}></Route>
-          <Route path="/blog" element={<Blog />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
+          <Route element={<MainLayout />}>
+            <Route index element={<Home />}></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/blog" element={<Blog />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+          </Route>
+          <Route path="/services" element={<OrderPage />}></Route>
           {/* <Route path="/signup" element={<SignupPage />}></Route> */}
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );

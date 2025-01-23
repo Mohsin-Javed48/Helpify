@@ -1,3 +1,5 @@
+/** @format */
+
 import ItemImg from "../images/ItemImg.png";
 import ServiceProviderIcon from "../images/ServiceProviderIcon.png";
 

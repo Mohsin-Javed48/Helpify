@@ -1,3 +1,8 @@
+/** @format */
+
+import React from "react";
+import PropTypes from "prop-types";
+
 function PlumberServiceCard({ title, subtitle, price, image }) {
   return (
     <>
@@ -48,5 +53,21 @@ function PlumberServiceCard({ title, subtitle, price, image }) {
     </>
   );
 }
+
+// Prop validation using PropTypes
+PlumberServiceCard.propTypes = {
+  title: PropTypes.string.isRequired, // title must be a string and required
+  subtitle: PropTypes.string.isRequired, // subtitle must be a string and required
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // price must be a number or string and required
+  image: PropTypes.string.isRequired, // image must be a string (URL) and required
+};
+
+// Default props in case any prop is not provided
+PlumberServiceCard.defaultProps = {
+  title: "Default Title",
+  subtitle: "Default Subtitle",
+  price: "0",
+  image: "https://via.placeholder.com/100", // Placeholder image
+};
 
 export default PlumberServiceCard;

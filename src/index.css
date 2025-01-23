@@ -22,3 +22,16 @@ body {
   font-family: "Wix Madefor Display", serif;
   font-optical-sizing: auto;
 }
+
+.popupAnimate {
+  animation: popup 1.4s infinite ease-in-out;
+}
+@keyframes popup {
+  0%,
+  100% {
+    transform: height;
+  }
+  50% {
+    transform: scaleY(1.2);
+  }
+}

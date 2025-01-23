@@ -36,8 +36,10 @@ import GardenerBackImg from "../images/GardenerBackImg.jpg";
 
 import Carousell from "./Carousell";
 import BookButton from "../ui/BookButton";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <>
       {/* Booking summary */}
@@ -74,7 +76,11 @@ function Home() {
             { bgImg: HandymanBackImg, icon: HandymanIcon, title: "Handyman" },
             { bgImg: ACRepairBackImg, icon: ACRepairIcon, title: "AC Repair" },
             { bgImg: PainterBackImg, icon: PainterIcon, title: "Painter" },
-            { bgImg: PlumberBackImg, icon: PlumberIcon, title: "Plumber" },
+            {
+              bgImg: PlumberBackImg,
+              icon: PlumberIcon,
+              title: "Plumber",
+            },
             {
               bgImg: CarpenterBackImg,
               icon: CarpenterIcon,
@@ -96,6 +102,11 @@ function Home() {
             <div
               key={index}
               className="cursor-pointer group flex flex-col justify-center items-start gap-[28px] w-[270px] md:w-[320px] lg:w-[270px] xl:w-[370px]   h-[164px] transition-all duration-300 ease-in-out relative"
+              onClick={
+                item.title === "Plumber"
+                  ? () => navigate("services/plumber")
+                  : undefined
+              }
             >
               {/* Background Image Layer */}
               <div

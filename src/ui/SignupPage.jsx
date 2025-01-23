@@ -26,7 +26,7 @@ function SignupPage() {
     try {
       dispatch(login(data));
       console.log("jel");
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }

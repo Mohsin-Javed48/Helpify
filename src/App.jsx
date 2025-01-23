@@ -1,12 +1,8 @@
 /** @format */
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import LoginPage from "./ui/LoginPage";
-// import SignupPage from "./ui/SignupPage";
-
-// import LoginPage from "./ui/LoginPage";
-// import SignupPage from "./ui/SignupPage";
-
+import LoginPage from "./ui/LoginPage";
+import SignupPage from "./ui/SignupPage";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -25,13 +21,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route index element={<Home />}></Route>
+            <Route index path="/" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
             <Route path="/services" element={<Services />}></Route>
             <Route path="/blog" element={<Blog />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
           </Route>
           <Route path="/order" element={<OrderPage />}></Route>
+          <Route path="/signup" element={<SignupPage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

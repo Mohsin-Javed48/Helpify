@@ -29,10 +29,16 @@ const ordersSlice = createSlice({
         });
       }
     },
+    removeOrder(state, action) {
+      const orderId = action.payload;
+      state.ordersList = state.ordersList.filter(
+        (order) => order.id !== orderId
+      );
+    },
   },
 });
 // Export actions
-export const { addOrder } = ordersSlice.actions;
+export const { addOrder, removeOrder } = ordersSlice.actions;
 
 // Export reducer
 export default ordersSlice.reducer;

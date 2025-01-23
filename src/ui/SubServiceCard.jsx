@@ -89,6 +89,7 @@ SubServiceCard.defaultProps = {
   subtitle: "Default Subtitle",
   price: "0",
   image: "https://via.placeholder.com/100", // Placeholder image
+  quantity: "1",
 };
 
 export default SubServiceCard;

@@ -1,38 +1,38 @@
 /** @format */
 
-import workerImg from "../images/workerImg.png";
-import ServiceIcon from "../images/Icon10.png";
-import BookIcon from "../images/Icon11.png";
-import RelaxIcon from "../images/Icon12.png";
-import Bluearrow from "../images/bluearrow.png";
-import Yellowarrow from "../images/yellowarrow.png";
+const workerImg = "/workerImg.png";
+const ServiceIcon = "/Icon10.png";
+const BookIcon = "/Icon11.png";
+const RelaxIcon = "/Icon12.png";
+const Bluearrow = "/bluearrow.png";
+const Yellowarrow = "/yellowarrow.png";
 
-import HandymanIcon from "../images/Icon1.png";
-import HandymanBackImg from "../images/HandymanBackImg.jpg";
+const HandymanIcon = "/Icon1.png";
+const HandymanBackImg = "/HandymanBackImg.jpg";
 
-import ACRepairIcon from "../images/Icon2.png";
-import ACRepairBackImg from "../images/ACRepairBackImg.jpg";
+const ACRepairIcon = "/Icon2.png";
+const ACRepairBackImg = "/ACRepairBackImg.jpg";
 
-import PainterIcon from "../images/Icon3.png";
-import PainterBackImg from "../images/PainterBackImg.jpg";
+const PainterIcon = "/Icon3.png";
+const PainterBackImg = "/PainterBackImg.jpg";
 
-import PlumberIcon from "../images/Icon4.png";
-import PlumberBackImg from "../images/PlumberBackImg.png";
+const PlumberIcon = "/Icon4.png";
+const PlumberBackImg = "/PlumberBackImg.png";
 
-import CarpenterIcon from "../images/Icon5.png";
-import CarpenterBackImg from "../images/CarpenterBackImg.jpg";
+const CarpenterIcon = "/Icon5.png";
+const CarpenterBackImg = "/CarpenterBackImg.jpg";
 
-import ElectricianIcon from "../images/Icon6.png";
-import ElectricianBackImg from "../images/ElectricianBackImg.png";
+const ElectricianIcon = "/Icon6.png";
+const ElectricianBackImg = "/ElectricianBackImg.png";
 
-import HomeAppliancesIcon from "../images/Icon7.png";
-import HomeAppBackImg from "../images/HomeAppBackImg.jpg";
+const HomeAppliancesIcon = "/Icon7.png";
+const HomeAppBackImg = "/HomeAppBackImg.jpg";
 
-import GeyserIcon from "../images/Icon8.png";
-import GeyserBackImg from "../images/GeyserBackImg.jpeg";
+const GeyserIcon = "/Icon8.png";
+const GeyserBackImg = "/GeyserBackImg.jpeg";
 
-import GardnerIcon from "../images/Icon9.png";
-import GardenerBackImg from "../images/GardenerBackImg.jpg";
+const GardnerIcon = "/Icon9.png";
+const GardenerBackImg = "/GardenerBackImg.jpg";
 
 import Carousell from "./Carousell";
 import BookButton from "../ui/BookButton";

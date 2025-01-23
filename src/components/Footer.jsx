@@ -1,6 +1,8 @@
-import CallIcon from "../images/Call.png";
-import EmailIcon from "../images/Email.png";
-import LocationIcon from "../images/Location.png";
+/** @format */
+
+import CallIcon from "/Call.png";
+import EmailIcon from "/Email.png";
+import LocationIcon from "/Location.png";
 
 export default function Footer() {
   return (

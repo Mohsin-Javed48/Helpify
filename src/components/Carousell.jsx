@@ -1,7 +1,9 @@
+/** @format */
+
 import Slider from "react-slick";
 import { useRef, useState } from "react";
-import FounderIcon from "../images/Ellipse 15.png";
-import StarIcon from "../images/Star 6.png";
+import FounderIcon from "/Ellipse 15.png";
+import StarIcon from "/Star 6.png";
 
 const testimonials = [
   {

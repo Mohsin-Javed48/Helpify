@@ -1,8 +1,10 @@
-import FormImg from "../images/Image (1).png";
-import ProfileImg from "../images/Profile.png";
-import EmailImg from "../images/Message.png";
-import CallImg from "../images/FormCall.png";
-import MessageImg from "../images/FormMessage.png";
+/** @format */
+
+import FormImg from "/Image (1).png";
+import ProfileImg from "/Profile.png";
+import EmailImg from "/Message.png";
+import CallImg from "/FormCall.png";
+import MessageImg from "/FormMessage.png";
 
 import BookButton from "../ui/BookButton";
 const MsgButton = BookButton;

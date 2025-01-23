@@ -1,17 +1,19 @@
+/** @format */
+
 import ChecklistItem from "../ui/CheckListItem";
 
-import WindowCleanerImg from "../images/WindowCleanerImg.png";
-import OfficeCleanersImg from "../images/OfficeCleanersImg.png";
-import SinkCleanerImg from "../images/SinkCleanerImg.png";
+// Correct paths for images directly in the public folder
+const WindowCleanerImg = "/WindowCleanerImg.png";
+const OfficeCleanersImg = "/imOfficeCleanersImg.png";
+const SinkCleanerImg = "/SinkCleanerImg.png";
+const CleaningProfessionalImg = "/CleaingProfessionalWithSteamCleaner.png";
 
-import CleaningProfessionalImg from "../images/CleaingProfessionalWithSteamCleaner.png";
+const HandPointerIcon = "/HandPointer.png";
+const MedalIcon = "/MedalIcon.png";
+const StopWatchIcon = "/StopWatchIcon.png";
+const ShieldCheckIcon = "/ShieldCheckIcon.png";
 
-import HandPointerIcon from "../images/HandPointer.png";
-import MedalIcon from "../images/MedalIcon.png";
-import StopWatchIcon from "../images/StopWatchIcon.png";
-import ShieldCheckIcon from "../images/ShieldCheckIcon.png";
-
-import FAQItem from "./FAQItem"; // Import the FAQItem componente
+import FAQItem from "./FAQItem"; // Import the FAQItem component
 
 function About() {
   return (

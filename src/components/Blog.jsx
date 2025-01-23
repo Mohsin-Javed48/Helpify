@@ -1,14 +1,18 @@
-import BloggerImg from "../images/BloggerImg.png";
-import TVImg from "../images/TVImg.png";
+/** @format */
 
-import PressingImg from "../images/PressingImg.png";
-import CleaningWindowImg from "../images/CleaningWindowImg.png";
+// Correct paths for images in the public folder
+const BloggerImg = "/BloggerImg.png";
+const TVImg = "/TVImg.png";
 
-import ElectricityWires from "../images/ElectricityWires.png";
-import WallPaintImg from "../images/WallPaintImg.jpg";
-import YardCareImg from "../images/YardCareImg.png";
-import FurnitureImg from "../images/FurnitureImg.jpg";
+const PressingImg = "/PressingImg.png";
+const CleaningWindowImg = "/CleaningWindowImg.png";
 
+const ElectricityWires = "/ElectricityWires.png";
+const WallPaintImg = "/WallPaintImg.jpg";
+const YardCareImg = "/YardCareImg.png";
+const FurnitureImg = "/FurnitureImg.jpg";
+
+// These can still be imported normally since they are from `src`
 import BlogCard from "../ui/BlogCard.jsx";
 import NewsCard from "../ui/NewsCard.jsx";
 
@@ -40,7 +44,7 @@ function Blog() {
                   "I have been a customer of Helpify for the last 5+ years and
                   my lawn has looked great. The last few years Farhan has been
                   treating my lawn and he takes the time to explain the process
-                  and does a fantastic job, he's great.”
+                  and does a fantastic job, he great.”
                 </p>
                 <p className="text-[rgba(20,20,20,0.75)] font-wixmadefor text-sm lg:text-[18px] font-normal leading-[27px]">
                   ’Highest Rated Service Company in Lahore’

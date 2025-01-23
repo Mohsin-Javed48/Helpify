@@ -1,7 +1,7 @@
 /** @format */
 
-import ItemImg from "../images/ItemImg.png";
-import ServiceProviderIcon from "../images/ServiceProviderIcon.png";
+import ItemImg from "/ItemImg.png";
+import ServiceProviderIcon from "/ServiceProviderIcon.png";
 
 function ServiceItems() {
   return (

@@ -1,8 +1,8 @@
 /** @format */
 
-import crossIcon from "../images/crossIcon.png";
-import moneyBagIcon from "../images/moneyBagIcon.png";
-import ItemImg from "../images/ItemImg.png";
+import crossIcon from "/crossIcon.png";
+import moneyBagIcon from "/moneyBagIcon.png";
+import ItemImg from "/ItemImg.png";
 
 import PlumberServiceCard from "../ui/PlumberServiceCard";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,8 @@ import { useSelector } from "react-redux";
 
 function PlumberServices() {
   const navigate = useNavigate(); // React Router hook for navigation
-  const services = useSelector((state) => {
-    console.log(state); // Check the structure of the state
-    return state.plumber?.services || [];
-  });
+  const services = useSelector((state) => state.plumber?.services || []);
+  console.log(services.image);
 
   return (
     <>

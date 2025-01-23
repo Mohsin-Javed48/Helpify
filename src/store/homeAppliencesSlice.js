@@ -71,7 +71,7 @@ const initialState = {
   ],
 };
 
-const plumberSlice = createSlice({
+const homeAppliencesSlice = createSlice({
   name: "plumber",
   initialState,
   reducers: {
@@ -90,5 +90,5 @@ const plumberSlice = createSlice({
   },
 });
 
-export const { addService, removeService } = plumberSlice.actions;
-export default plumberSlice.reducer;
+export const { addService, removeService } = homeAppliencesSlice.actions;
+export default homeAppliencesSlice.reducer;

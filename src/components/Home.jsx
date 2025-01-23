@@ -73,39 +73,66 @@ function Home() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-start not-italic text-[#141414] font-semibold text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] leading-[34px]">
           {[
-            { bgImg: HandymanBackImg, icon: HandymanIcon, title: "Handyman" },
-            { bgImg: ACRepairBackImg, icon: ACRepairIcon, title: "AC Repair" },
-            { bgImg: PainterBackImg, icon: PainterIcon, title: "Painter" },
+            {
+              bgImg: HandymanBackImg,
+              icon: HandymanIcon,
+              title: "Handyman",
+              name: "handyman",
+            },
+            {
+              bgImg: ACRepairBackImg,
+              icon: ACRepairIcon,
+              title: "AC Repair",
+              name: "acRepair",
+            },
+            {
+              bgImg: PainterBackImg,
+              icon: PainterIcon,
+              title: "Painter",
+              name: "painter",
+            },
             {
               bgImg: PlumberBackImg,
               icon: PlumberIcon,
               title: "Plumber",
+              name: "plumber",
             },
             {
               bgImg: CarpenterBackImg,
               icon: CarpenterIcon,
               title: "Carpenter",
+              name: "carpenter",
             },
             {
               bgImg: ElectricianBackImg,
               icon: ElectricianIcon,
               title: "Electrician",
+              name: "electrician",
             },
             {
               bgImg: HomeAppBackImg,
               icon: HomeAppliancesIcon,
               title: "Home Appliances",
+              name: "homeAppliences",
             },
-            { bgImg: GeyserBackImg, icon: GeyserIcon, title: "Geyser" },
-            { bgImg: GardenerBackImg, icon: GardnerIcon, title: "Gardener" },
+            {
+              bgImg: GeyserBackImg,
+              icon: GeyserIcon,
+              title: "Geyser",
+              name: "geyser",
+            },
+            {
+              bgImg: GardenerBackImg,
+              icon: GardnerIcon,
+              title: "Gardener",
+              name: "gardner",
+            },
           ].map((item, index) => (
             <div
               key={index}
               className="cursor-pointer group flex flex-col justify-center items-start gap-[28px] w-[270px] md:w-[320px] lg:w-[270px] xl:w-[370px]   h-[164px] transition-all duration-300 ease-in-out relative"
-              onClick={
-                item.title === "Plumber"
-                  ? () => navigate("services/plumber")
-                  : undefined
+              onClick={() =>
+                navigate(`services/${item.name} `, console.log(item))
               }
             >
               {/* Background Image Layer */}

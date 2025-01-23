@@ -71,8 +71,8 @@ const initialState = {
   ],
 };
 
-const plumberSlice = createSlice({
-  name: "plumber",
+const painterSlice = createSlice({
+  name: "painter",
   initialState,
   reducers: {
     addService(state, action) {
@@ -90,5 +90,5 @@ const plumberSlice = createSlice({
   },
 });
 
-export const { addService, removeService } = plumberSlice.actions;
-export default plumberSlice.reducer;
+export const { addService, removeService } = painterSlice.actions;
+export default painterSlice.reducer;

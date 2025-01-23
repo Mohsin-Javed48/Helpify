@@ -9,6 +9,7 @@ import waterHeaterInstallation from "/waterHeaterInstallation.jpg";
 import toiletInstallation from "/toiletInstallation.jpg";
 import showerHeadReplacement from "/showerHeadReplacement.jpg";
 import geyserMaintenance from "/geyserMaintenance.jpg";
+
 const initialState = {
   services: [
     {
@@ -71,7 +72,7 @@ const initialState = {
   ],
 };
 
-const plumberSlice = createSlice({
+const acRepairSlice = createSlice({
   name: "plumber",
   initialState,
   reducers: {
@@ -90,5 +91,5 @@ const plumberSlice = createSlice({
   },
 });
 
-export const { addService, removeService } = plumberSlice.actions;
-export default plumberSlice.reducer;
+export const { addService, removeService } = acRepairSlice.actions;
+export default acRepairSlice.reducer;

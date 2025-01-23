@@ -2,8 +2,26 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { addOrder } from "../store/ordersSlice";
 
-function PlumberServiceCard({ title, subtitle, price, image }) {
+function SubServiceCard({ id, title, subtitle, price, image, quantity }) {
+  const orders = useSelector((state) => state.orders?.ordersList || []);
+  const dispatch = useDispatch();
+
+  function addOrderItem() {
+    const newOrder = {
+      id: id, // Consider using a more reliable ID generation method
+      title: title,
+      price: price,
+      image: image,
+      quantity: quantity,
+    };
+    console.log(newOrder);
+    console.log(orders);
+    dispatch(addOrder(newOrder));
+  }
+
   return (
     <>
       {/* Service Card */}
@@ -31,7 +49,10 @@ function PlumberServiceCard({ title, subtitle, price, image }) {
           {/* Add Button Section */}
           <div className="flex items-center justify-center sm:justify-start w-[120px] h-[41px] border border-black rounded-sm mx-auto sm:mx-0">
             {/* Text Section */}
-            <div className="flex-1 flex items-center justify-center text-[#000] font-[Wix Madefor Display] text-[18px] sm:text-[20px] font-semibold">
+            <div
+              className="flex-1 flex items-center justify-center text-[#000] font-[Wix Madefor Display] text-[18px] sm:text-[20px] font-semibold"
+              onClick={addOrderItem}
+            >
               ADD
             </div>
             {/* Plus Button */}
@@ -55,7 +76,7 @@ function PlumberServiceCard({ title, subtitle, price, image }) {
 }
 
 // Prop validation using PropTypes
-PlumberServiceCard.propTypes = {
+SubServiceCard.propTypes = {
   title: PropTypes.string.isRequired, // title must be a string and required
   subtitle: PropTypes.string.isRequired, // subtitle must be a string and required
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // price must be a number or string and required
@@ -63,11 +84,11 @@ PlumberServiceCard.propTypes = {
 };
 
 // Default props in case any prop is not provided
-PlumberServiceCard.defaultProps = {
+SubServiceCard.defaultProps = {
   title: "Default Title",
   subtitle: "Default Subtitle",
   price: "0",
   image: "https://via.placeholder.com/100", // Placeholder image
 };
 
-export default PlumberServiceCard;
+export default SubServiceCard;

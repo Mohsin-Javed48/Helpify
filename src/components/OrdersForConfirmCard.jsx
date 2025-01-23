@@ -30,7 +30,7 @@ function OrdersForConfirmCard({ order }) {
           {order.subtitle}
         </p>
         <p className="text-[#000] font-[Wix Madefor Display] text-[14px] sm:text-[15px] font-normal">
-          Rs {order.price}
+          Rs {order.price} x {order.quantity}
         </p>
 
         {/* Add Button Section */}

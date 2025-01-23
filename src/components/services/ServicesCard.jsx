@@ -25,7 +25,10 @@ function ServicesCard({ services, name }) {
         {/* Header */}
         <div className="w-full max-w-[1665px] h-[85px] bg-white flex items-center justify-between flex-shrink-0 border-b border-gray-200">
           {/* Close Button */}
-          <button className="flex flex-shrink-0 items-center justify-center w-[80px] h-[70px] sm:w-[90px] sm:h-[75px] lg:w-[106px] lg:h-[85px] border border-black bg-[rgba(217,217,217,0.05)]">
+          <button
+            className="flex flex-shrink-0 items-center justify-center w-[80px] h-[70px] sm:w-[90px] sm:h-[75px] lg:w-[106px] lg:h-[85px] border border-black bg-[rgba(217,217,217,0.05)]"
+            onClick={() => navigate("/")}
+          >
             <img
               src={crossIcon}
               alt="Close Page"

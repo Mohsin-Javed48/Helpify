@@ -31,9 +31,23 @@ const ordersSlice = createSlice({
     },
     removeOrder(state, action) {
       const orderId = action.payload;
-      state.ordersList = state.ordersList.filter(
-        (order) => order.id !== orderId
+
+      // Find the order in the ordersList
+      const existingOrder = state.ordersList.find(
+        (order) => order.id === orderId
       );
+
+      if (existingOrder) {
+        if (existingOrder.quantity > 1) {
+          // Decrement the quantity
+          existingOrder.quantity -= 1;
+        } else {
+          // If the quantity is 1, remove the item from the list
+          state.ordersList = state.ordersList.filter(
+            (order) => order.id !== orderId
+          );
+        }
+      }
     },
   },
 });

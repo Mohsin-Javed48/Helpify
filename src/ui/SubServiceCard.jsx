@@ -47,12 +47,12 @@ function SubServiceCard({ id, title, subtitle, price, image, quantity }) {
           </p>
 
           {/* Add Button Section */}
-          <div className="flex items-center justify-center sm:justify-start w-[120px] h-[41px] border border-black rounded-sm mx-auto sm:mx-0">
+          <div
+            className="flex items-center justify-center sm:justify-start w-[120px] h-[41px] border border-black rounded-sm mx-auto sm:mx-0"
+            onClick={addOrderItem}
+          >
             {/* Text Section */}
-            <div
-              className="flex-1 flex items-center justify-center text-[#000] font-[Wix Madefor Display] text-[18px] sm:text-[20px] font-semibold"
-              onClick={addOrderItem}
-            >
+            <div className="flex-1 flex items-center justify-center text-[#000] font-[Wix Madefor Display] text-[18px] sm:text-[20px] font-semibold">
               ADD
             </div>
             {/* Plus Button */}

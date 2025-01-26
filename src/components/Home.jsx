@@ -1,42 +1,42 @@
 /** @format */
 
-const workerImg = "/workerImg.png";
-const ServiceIcon = "/Icon10.png";
-const BookIcon = "/Icon11.png";
-const RelaxIcon = "/Icon12.png";
-const Bluearrow = "/bluearrow.png";
-const Yellowarrow = "/yellowarrow.png";
+const workerImg = '/workerImg.png';
+const ServiceIcon = '/Icon10.png';
+const BookIcon = '/Icon11.png';
+const RelaxIcon = '/Icon12.png';
+const Bluearrow = '/bluearrow.png';
+const Yellowarrow = '/yellowarrow.png';
 
-const HandymanIcon = "/Icon1.png";
-const HandymanBackImg = "/HandymanBackImg.jpg";
+const HandymanIcon = '/Icon1.png';
+const HandymanBackImg = '/HandymanBackImg.jpg';
 
-const ACRepairIcon = "/Icon2.png";
-const ACRepairBackImg = "/ACRepairBackImg.jpg";
+const ACRepairIcon = '/Icon2.png';
+const ACRepairBackImg = '/ACRepairBackImg.jpg';
 
-const PainterIcon = "/Icon3.png";
-const PainterBackImg = "/PainterBackImg.jpg";
+const PainterIcon = '/Icon3.png';
+const PainterBackImg = '/PainterBackImg.jpg';
 
-const PlumberIcon = "/Icon4.png";
-const PlumberBackImg = "/PlumberBackImg.png";
+const PlumberIcon = '/Icon4.png';
+const PlumberBackImg = '/PlumberBackImg.png';
 
-const CarpenterIcon = "/Icon5.png";
-const CarpenterBackImg = "/CarpenterBackImg.jpg";
+const CarpenterIcon = '/Icon5.png';
+const CarpenterBackImg = '/CarpenterBackImg.jpg';
 
-const ElectricianIcon = "/Icon6.png";
-const ElectricianBackImg = "/ElectricianBackImg.png";
+const ElectricianIcon = '/Icon6.png';
+const ElectricianBackImg = '/ElectricianBackImg.png';
 
-const HomeAppliancesIcon = "/Icon7.png";
-const HomeAppBackImg = "/HomeAppBackImg.jpg";
+const HomeAppliancesIcon = '/Icon7.png';
+const HomeAppBackImg = '/HomeAppBackImg.jpg';
 
-const GeyserIcon = "/Icon8.png";
-const GeyserBackImg = "/GeyserBackImg.jpeg";
+const GeyserIcon = '/Icon8.png';
+const GeyserBackImg = '/GeyserBackImg.jpeg';
 
-const GardnerIcon = "/Icon9.png";
-const GardenerBackImg = "/GardenerBackImg.jpg";
+const GardnerIcon = '/Icon9.png';
+const GardenerBackImg = '/GardenerBackImg.jpg';
 
-import Carousell from "./Carousell";
-import BookButton from "../ui/BookButton";
-import { useNavigate } from "react-router-dom";
+import Carousell from './Carousell';
+import BookButton from '../ui/BookButton';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ function Home() {
           </h1>
           <BookButton
             text="Book Appointment"
-            onClick={() => console.log("Primary button clicked!")}
+            onClick={() => console.log('Primary button clicked!')}
             variant="primary"
           />
         </div>
@@ -76,56 +76,56 @@ function Home() {
             {
               bgImg: HandymanBackImg,
               icon: HandymanIcon,
-              title: "Handyman",
-              name: "handyman",
+              title: 'Handyman',
+              name: 'handyman',
             },
             {
               bgImg: ACRepairBackImg,
               icon: ACRepairIcon,
-              title: "AC Repair",
-              name: "acRepair",
+              title: 'AC Repair',
+              name: 'acRepair',
             },
             {
               bgImg: PainterBackImg,
               icon: PainterIcon,
-              title: "Painter",
-              name: "painter",
+              title: 'Painter',
+              name: 'painter',
             },
             {
               bgImg: PlumberBackImg,
               icon: PlumberIcon,
-              title: "Plumber",
-              name: "plumber",
+              title: 'Plumber',
+              name: 'plumber',
             },
             {
               bgImg: CarpenterBackImg,
               icon: CarpenterIcon,
-              title: "Carpenter",
-              name: "carpenter",
+              title: 'Carpenter',
+              name: 'carpenter',
             },
             {
               bgImg: ElectricianBackImg,
               icon: ElectricianIcon,
-              title: "Electrician",
-              name: "electrician",
+              title: 'Electrician',
+              name: 'electrician',
             },
             {
               bgImg: HomeAppBackImg,
               icon: HomeAppliancesIcon,
-              title: "Home Appliances",
-              name: "homeAppliences",
+              title: 'Home Appliances',
+              name: 'homeAppliences',
             },
             {
               bgImg: GeyserBackImg,
               icon: GeyserIcon,
-              title: "Geyser",
-              name: "geyser",
+              title: 'Geyser',
+              name: 'geyser',
             },
             {
               bgImg: GardenerBackImg,
               icon: GardnerIcon,
-              title: "Gardener",
-              name: "gardner",
+              title: 'Gardener',
+              name: 'gardner',
             },
           ].map((item, index) => (
             <div
@@ -227,7 +227,7 @@ function Home() {
         </div>
         <BookButton
           text="Book Appointment"
-          onClick={() => console.log("Primary button clicked!")}
+          onClick={() => console.log('Primary button clicked!')}
           variant="secondary"
         />
       </div>
@@ -274,7 +274,7 @@ function Home() {
         </div>
         <BookButton
           text="Book Appointment"
-          onClick={() => console.log("Primary button clicked!")}
+          onClick={() => console.log('Primary button clicked!')}
           variant="outline"
         />
       </div>

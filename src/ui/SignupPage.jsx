@@ -1,12 +1,12 @@
 /** @format */
 
-import { useState } from "react";
-import Google_icon from "../assets/google_icon";
-import { FaEye as ViewPasswordIcon } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { login } from "../store/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import Google_icon from '../assets/google_icon';
+import { FaEye as ViewPasswordIcon } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/authSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SignupPage() {
   const dispatch = useDispatch();
@@ -20,13 +20,13 @@ function SignupPage() {
     formState: { errors },
   } = useForm();
 
-  const password = watch("password"); // Get value of password from forms
+  const password = watch('password'); // Get value of password from forms
 
   function onSubmit(data) {
     try {
       dispatch(login(data));
-      console.log("jel");
-      navigate("/");
+      console.log('jel');
+      navigate('/');
     } catch (error) {
       console.log(error.message);
     }
@@ -69,7 +69,7 @@ function SignupPage() {
               type="text"
               placeholder="Enter your full name"
               className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
-              {...register("name", { required: true, maxLength: 20 })}
+              {...register('name', { required: true, maxLength: 20 })}
             />
             {errors.name && (
               <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -85,7 +85,7 @@ function SignupPage() {
               type="text"
               placeholder="Email or phone number"
               className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
-              {...register("email", { required: true, maxLength: 20 })}
+              {...register('email', { required: true, maxLength: 20 })}
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -99,10 +99,10 @@ function SignupPage() {
             </label>
             <div className="relative">
               <input
-                type={viewPassword ? "text" : "password"}
+                type={viewPassword ? 'text' : 'password'}
                 placeholder="Enter password"
                 className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
-                {...register("password", { required: true, maxLength: 20 })}
+                {...register('password', { required: true, maxLength: 20 })}
               />
               {errors.password && (
                 <p className="text-red-500 text-sm">
@@ -143,7 +143,7 @@ function SignupPage() {
           {/* Login link */}
           <div className="text-center mt-1 text-sm">
             <p>
-              Already have an account?{" "}
+              Already have an account?{' '}
               <Link to="/login" className="text-[#007bff] cursor-pointer">
                 Login now
               </Link>

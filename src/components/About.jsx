@@ -1,19 +1,19 @@
 /** @format */
 
-import ChecklistItem from "../ui/CheckListItem";
+import ChecklistItem from '../ui/CheckListItem';
 
 // Correct paths for images directly in the public folder
-const WindowCleanerImg = "/WindowCleanerImg.png";
-const OfficeCleanersImg = "/imOfficeCleanersImg.png";
-const SinkCleanerImg = "/SinkCleanerImg.png";
-const CleaningProfessionalImg = "/CleaingProfessionalWithSteamCleaner.png";
+const WindowCleanerImg = '/WindowCleanerImg.png';
+const OfficeCleanersImg = '/imOfficeCleanersImg.png';
+const SinkCleanerImg = '/SinkCleanerImg.png';
+const CleaningProfessionalImg = '/CleaingProfessionalWithSteamCleaner.png';
 
-const HandPointerIcon = "/HandPointer.png";
-const MedalIcon = "/MedalIcon.png";
-const StopWatchIcon = "/StopWatchIcon.png";
-const ShieldCheckIcon = "/ShieldCheckIcon.png";
+const HandPointerIcon = '/HandPointer.png';
+const MedalIcon = '/MedalIcon.png';
+const StopWatchIcon = '/StopWatchIcon.png';
+const ShieldCheckIcon = '/ShieldCheckIcon.png';
 
-import FAQItem from "./FAQItem"; // Import the FAQItem component
+import FAQItem from './FAQItem'; // Import the FAQItem component
 
 function About() {
   return (
@@ -82,8 +82,8 @@ function About() {
               className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[492px] lg:h-[495px] flex-shrink-0 bg-lightgray bg-no-repeat bg-center"
               style={{
                 backgroundImage: `url(${CleaningProfessionalImg})`,
-                backgroundPosition: "-150.828px 0px",
-                backgroundSize: "150.915% 100%",
+                backgroundPosition: '-150.828px 0px',
+                backgroundSize: '150.915% 100%',
               }}
             ></div>
 
@@ -173,39 +173,39 @@ function About() {
           <div className="flex flex-col items-start w-full gap-5 sm:gap-6 md:gap-8">
             {[
               {
-                question: "How do I pay for my Household service?",
+                question: 'How do I pay for my Household service?',
                 answer:
-                  "You can pay online using credit card or cash on delivery.",
+                  'You can pay online using credit card or cash on delivery.',
               },
               {
-                question: "Are the Service teams trained and supervised?",
+                question: 'Are the Service teams trained and supervised?',
                 answer:
-                  "We aim for a consistent cleaning team for your home, though occasional changes may occur due to illness, vacations, or staff rotations. Our dedicated team leader ensures familiarity with your home and trains others to meet your expectations for quality service.",
+                  'We aim for a consistent cleaning team for your home, though occasional changes may occur due to illness, vacations, or staff rotations. Our dedicated team leader ensures familiarity with your home and trains others to meet your expectations for quality service.',
               },
               {
-                question: "Will I always have the same Service team?",
+                question: 'Will I always have the same Service team?',
                 answer:
-                  "We strive to provide the same team for consistency whenever possible.",
+                  'We strive to provide the same team for consistency whenever possible.',
               },
               {
-                question: "Can I be out while my house is being Serviced?",
+                question: 'Can I be out while my house is being Serviced?',
                 answer:
-                  "Yes, you can. Just ensure access arrangements are made beforehand.",
+                  'Yes, you can. Just ensure access arrangements are made beforehand.',
               },
               {
-                question: "Is your service guaranteed?",
+                question: 'Is your service guaranteed?',
                 answer:
-                  "Yes, we offer a satisfaction guarantee for our services.",
+                  'Yes, we offer a satisfaction guarantee for our services.',
               },
               {
-                question: "Do I tip the house?",
+                question: 'Do I tip the house?',
                 answer:
-                  "Tipping is optional but appreciated for great service.",
+                  'Tipping is optional but appreciated for great service.',
               },
               {
-                question: "What are your rates for house services?",
+                question: 'What are your rates for house services?',
                 answer:
-                  "Our rates vary based on the type and scope of the service. Contact us for details.",
+                  'Our rates vary based on the type and scope of the service. Contact us for details.',
               },
             ].map((item, index) => (
               <FAQItem

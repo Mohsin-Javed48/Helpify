@@ -3,11 +3,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './ui/LoginPage';
 import SignupPage from './ui/SignupPage';
+<<<<<<< HEAD
+=======
+import Navbar from './components/Navbar';
+>>>>>>> c2b37dccabeb9aefb30d3f461245fe5187d38c57
 import Home from './components/Home';
 import About from './components/About';
 import Services from './components/services/PlumberServices';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
+<<<<<<< HEAD
+=======
+import Footer from './components/Footer';
+>>>>>>> c2b37dccabeb9aefb30d3f461245fe5187d38c57
 import OrderPage from './components/OrderPage';
 import AppLayout from './components/AppLayout';
 import 'slick-carousel/slick/slick.css';
@@ -21,6 +29,7 @@ import ElectricianServices from './components/services/ElectricianServices';
 import HomeAppliencesServices from './components/services/HomeAppliencesServices';
 import GeyserServices from './components/services/GeyserServices';
 import GardnerServices from './components/services/GardnerServices';
+<<<<<<< HEAD
 import ServiveProviderDashboard from './components/ServiveProviderDashboard';
 import OrderList from './components/OrderList';
 import ServiveProviderDashboardLayout from './ui/ServiveProviderDashboardLayout';
@@ -29,6 +38,8 @@ import CustomerHistory from './components/CustomerHistory';
 import Notification from './components/Notification';
 import Wallet from './components/Wallet';
 import Chat from './components/Chat';
+=======
+>>>>>>> c2b37dccabeb9aefb30d3f461245fe5187d38c57
 
 function App() {
   return (
@@ -93,5 +104,5 @@ function App() {
     </>
   );
 }
-
+//hello kia kro?
 export default App;

@@ -1,5 +1,3 @@
-import AdminHeader from '../components/AdminHeader.jsx';
-
 const serviceProviders = [
   {
     image: '/AfeefW_SP.png',
@@ -42,11 +40,8 @@ const serviceProviders = [
 function ServiceProvidersPage() {
   return (
     <>
-      {/*Header*/}
-      <AdminHeader />
-
       {/*ServiceProviderPage*/}
-      <div className="px-4 sm:px-6  py-4 w-full h-auto bg-[#161928]">
+      <div className="px-4 sm:px-6  py-4 w-full min-h-[100vh] bg-[#161928]">
         {/* Page Title */}
         <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-poppins font-semibold text-[#ADB3CC] tracking-[-0.64px] mt-2">
           Service Providers
@@ -156,7 +151,7 @@ function ServiceProvidersPage() {
         {/*Showing*/}
         {/*Service Provider Card 1*/}
         <div className="flex flex-col gap-5 p-4">
-          <div className="w-full max-w-[1041px] bg-[#0049A8] rounded-[17px] flex flex-wrap items-center justify-between p-4">
+          <div className="w-full max-w-4xl bg-[#0049A8] rounded-[17px] flex flex-wrap items-center justify-between p-4">
             {/* Profile Info */}
             <div className="flex items-center gap-4 flex-1">
               <img
@@ -210,7 +205,7 @@ function ServiceProvidersPage() {
         </div>
         {/*Service Provider Card 2*/}
         <div className="flex flex-col gap-5 p-4">
-          <div className="w-full max-w-[1041px] bg-[#0049A8] rounded-[17px] flex flex-wrap items-center justify-between p-4">
+          <div className="w-full max-w-4xl bg-[#0049A8] rounded-[17px] flex flex-wrap items-center justify-between p-4">
             {/* Profile Info */}
             <div className="flex items-center gap-4">
               <img

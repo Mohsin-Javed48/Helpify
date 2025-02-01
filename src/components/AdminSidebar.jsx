@@ -9,7 +9,7 @@ function AdminSidebar() {
     <>
       {/* Mobile Sidebar Toggle Button */}
       <button
-        className="fixed top-4 left-4 z-50  bg-[#171B2D] text-white lg:hidden rounded-lg shadow-md"
+        className="fixed top-4 left-4 z-30  bg-[#171B2D] text-white lg:hidden rounded-lg shadow-md"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
         <svg
@@ -32,7 +32,7 @@ function AdminSidebar() {
       {/*Side Bar*/}
 
       <div
-        className={`fixed lg:relative w-[240px] flex flex-col h-auto flex-shrink-0 border-r border-[rgba(225, 228, 242, 0.08)] p-8 bg-[#171B2D] transform transition-transform duration-200 ease-in-out ${
+        className={`fixed lg:relative w-[240px] flex flex-col h-auto flex-shrink-0 border-r border-[rgba(225, 228, 242, 0.08)] p-8 bg-[#171B2D] transform transition-transform duration-200 ease-in-out z-20 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
@@ -48,12 +48,13 @@ function AdminSidebar() {
           {/*DashBoard*/}
           <li>
             <NavLink
-              to="/"
+              to="admin-dashboard"
               className={({ isActive }) =>
-                `flex items-center gap-2 font-medium text-[14px] leading-normal text-[#FFF] tracking-[-0.14px] font-poppins
-         transition duration-200 ${
-           isActive ? 'text-[#42BBFF]' : 'text-[#ADB3CC] hover:text-[#42BBFF]'
-         }`
+                `flex items-center gap-2 font-medium text-[14px] leading-normal tracking-[-0.14px] font-poppins transition duration-200 ${
+                  isActive
+                    ? 'text-[#42BBFF]'
+                    : 'text-[#ADB3CC] hover:text-[#42BBFF]'
+                }`
               }
             >
               {/* SVG Icon */}
@@ -88,7 +89,7 @@ function AdminSidebar() {
             <NavLink
               to="/customers-page"
               className={({ isActive }) =>
-                `flex items-center gap-2 font-medium text-[14px] leading-normal text-[#FFF] tracking-[-0.14px] font-poppins
+                `flex items-center gap-2 font-medium text-[14px] leading-normal  tracking-[-0.14px] font-poppins
          transition duration-200 ${
            isActive ? 'text-[#42BBFF]' : 'text-[#ADB3CC] hover:text-[#42BBFF]'
          }`
@@ -131,7 +132,7 @@ function AdminSidebar() {
             <NavLink
               to="/service-providers"
               className={({ isActive }) =>
-                `flex items-center gap-2 font-medium text-[14px] leading-normal text-[#FFF] tracking-[-0.14px] font-poppins
+                `flex items-center gap-2 font-medium text-[14px] leading-normal  tracking-[-0.14px] font-poppins
          transition duration-200 ${
            isActive ? 'text-[#42BBFF]' : 'text-[#ADB3CC] hover:text-[#42BBFF]'
          }`
@@ -169,7 +170,7 @@ function AdminSidebar() {
             <NavLink
               to="/admin-orders"
               className={({ isActive }) =>
-                `flex items-center gap-2 font-medium text-[14px] leading-normal text-[#FFF] tracking-[-0.14px] font-poppins
+                `flex items-center gap-2 font-medium text-[14px] leading-normal  tracking-[-0.14px] font-poppins
          transition duration-200 ${
            isActive ? 'text-[#42BBFF]' : 'text-[#ADB3CC] hover:text-[#42BBFF]'
          }`
@@ -206,7 +207,7 @@ function AdminSidebar() {
             <NavLink
               to="/notifications"
               className={({ isActive }) =>
-                `flex items-center gap-2 font-medium text-[14px] leading-normal text-[#FFF] tracking-[-0.14px] font-poppins
+                `flex items-center gap-2 font-medium text-[14px] leading-normal  tracking-[-0.14px] font-poppins
          transition duration-200 ${
            isActive ? 'text-[#42BBFF]' : 'text-[#ADB3CC] hover:text-[#42BBFF]'
          }`
@@ -241,7 +242,7 @@ function AdminSidebar() {
             <NavLink
               to="/complaints-page"
               className={({ isActive }) =>
-                `flex items-center gap-2 font-medium text-[14px] leading-normal text-[#FFF] tracking-[-0.14px] font-poppins
+                `flex items-center gap-2 font-medium text-[14px] leading-normal  tracking-[-0.14px] font-poppins
          transition duration-200 ${
            isActive ? 'text-[#42BBFF]' : 'text-[#ADB3CC] hover:text-[#42BBFF]'
          }`

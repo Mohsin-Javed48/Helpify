@@ -1,14 +1,10 @@
-import AdminHeader from '../components/AdminHeader.jsx';
 import CustomerCard from '../ui/CustomerCard.jsx';
 
 function CustomersPage() {
   return (
     <>
-      {/*Header*/}
-      <AdminHeader />
-
       {/*CustomersPage*/}
-      <div className="px-4 sm:px-6  py-4 w-full h-auto bg-[#161928]">
+      <div className="px-4 sm:px-6  py-4 w-full min-h-[100vh] bg-[#161928]">
         {/* Page Title */}
         <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-poppins font-semibold text-[#ADB3CC] tracking-[-0.64px] mt-2 mb-6">
           Customers
@@ -19,7 +15,7 @@ function CustomersPage() {
           <CustomerCard />
 
           {/* Customer Info Card */}
-          <div className="w-full max-w-[1033px] bg-[#0049A8] rounded-[17px] p-8 text-[#FFF] flex flex-col md:flex-row md:items-start gap-8 ">
+          <div className="w-full max-w-4xl bg-[#0049A8] rounded-[17px] p-8 text-[#FFF] flex flex-col md:flex-row md:items-start gap-6 ">
             {/* Profile Image */}
             <div className="flex-shrink-0 self-start mt-10">
               <img
@@ -49,27 +45,21 @@ function CustomersPage() {
                   Order History
                 </h2>
 
-                {/* Order Card 1 */}
-                <div className="bg-[#5A5FD4] rounded-[17px] p-4 w-full md:w-[650px] text-sm">
-                  <p>Service Type: Plumber</p>
-                  <p>Service Date: 23 November, 2023</p>
-                  <p>Service Provider assigned: Mohsin Javed (Id: 232423)</p>
-                  <p>
-                    Order Status:{' '}
-                    <span className="text-[#0F5] font-bold">Completed</span>
-                  </p>
-                </div>
-
-                {/* Order Card 2 */}
-                <div className="bg-[#5A5FD4] rounded-[17px] p-4 w-full md:w-[650px] text-sm mt-4">
-                  <p>Service Type: Plumber</p>
-                  <p>Service Date: 23 November, 2023</p>
-                  <p>Service Provider assigned: Mohsin Javed (Id: 232423)</p>
-                  <p>
-                    Order Status:{' '}
-                    <span className="text-[#0F5] font-bold">Completed</span>
-                  </p>
-                </div>
+                {/* Order Cards */}
+                {[1, 2].map((order, index) => (
+                  <div
+                    key={index}
+                    className="bg-[#5A5FD4] rounded-[17px] p-4 w-full text-sm mb-4"
+                  >
+                    <p>Service Type: Plumber</p>
+                    <p>Service Date: 23 November, 2023</p>
+                    <p>Service Provider assigned: Mohsin Javed (Id: 232423)</p>
+                    <p>
+                      Order Status:{' '}
+                      <span className="text-[#0F5] font-bold">Completed</span>
+                    </p>
+                  </div>
+                ))}
               </div>
 
               {/* Action Buttons: Aligned to the Right */}

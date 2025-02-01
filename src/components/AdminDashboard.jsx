@@ -1,13 +1,8 @@
-import AdminHeader from '../components/AdminHeader.jsx';
-
 function AdminDashboard() {
   return (
     <>
-      {/* Header */}
-      <AdminHeader />
-
       {/*DashBoard*/}
-      <div className="px-4 sm:px-6  py-4 w-full h-auto bg-[#161928]">
+      <div className="px-4 sm:px-6  py-4 w-full min-h-[100vh] bg-[#161928]">
         {/* Page Title */}
         <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-poppins font-semibold text-[#ADB3CC] tracking-[-0.64px] mt-2">
           Dashboard

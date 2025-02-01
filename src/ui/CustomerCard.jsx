@@ -1,6 +1,6 @@
 const CustomerCard = () => {
   return (
-    <div className="w-full max-w-[1041px] bg-[#0049A8] rounded-[17px] flex items-center justify-between p-4">
+    <div className="w-full max-w-4xl bg-[#0049A8] rounded-[17px] flex items-center justify-between p-4">
       {/* Profile Info */}
       <div className="flex items-center gap-4">
         <img

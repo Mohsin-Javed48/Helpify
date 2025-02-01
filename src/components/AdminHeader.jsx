@@ -3,7 +3,7 @@ const ProfileImage = '/ProfileImage.png';
 function AdminHeader() {
   return (
     <>
-      <header className="flex justify-between items-center px-4 py-3 w-full h-auto">
+      <header className="flex justify-between items-center px-4 py-3 w-full h-auto z-10">
         {/*Search bar*/}
         <div className="relative inline-flex items-start gap-2 md:gap-[275px] px-[12px] py-[11px] bg-[#1D2032] rounded-lg">
           {/* Search Input (Hidden on Small Screens) */}

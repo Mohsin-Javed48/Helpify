@@ -1,12 +1,12 @@
 /** @format */
 
-import { useState } from "react";
-import Google_icon from "../assets/google_icon";
-import { FaEye as ViewPasswordIcon } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import { login } from "../store/authSlice";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import Google_icon from '../assets/google_icon';
+import { FaEye as ViewPasswordIcon } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
+import { login } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -20,13 +20,13 @@ function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const password = watch("password");
+  const password = watch('password');
 
   function onSubmit(data) {
     try {
       dispatch(login(data));
-      console.log("jel");
-      navigate("/");
+      console.log('jel');
+      navigate('/');
     } catch (error) {
       console.log(error.message);
     }
@@ -69,7 +69,7 @@ function LoginPage() {
               type="text"
               placeholder="Email or phone number"
               className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
-              {...register("email", { required: true, maxLength: 20 })}
+              {...register('email', { required: true, maxLength: 20 })}
             />
           </div>
 
@@ -80,10 +80,10 @@ function LoginPage() {
             </label>
             <div className="relative">
               <input
-                type={viewPassword ? "text" : "password"}
+                type={viewPassword ? 'text' : 'password'}
                 placeholder="Enter password"
                 className="w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300"
-                {...register("password", { required: true, maxLength: 20 })}
+                {...register('password', { required: true, maxLength: 20 })}
               />
               {errors.password && (
                 <p className="text-red-500 text-sm">

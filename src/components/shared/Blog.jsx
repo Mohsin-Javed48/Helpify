@@ -1,20 +1,20 @@
 /** @format */
 
 // Correct paths for images in the public folder
-const BloggerImg = "/BloggerImg.png";
-const TVImg = "/TVImg.png";
+const BloggerImg = '/BloggerImg.png';
+const TVImg = '/TVImg.png';
 
-const PressingImg = "/PressingImg.png";
-const CleaningWindowImg = "/CleaningWindowImg.png";
+const PressingImg = '/PressingImg.png';
+const CleaningWindowImg = '/CleaningWindowImg.png';
 
-const ElectricityWires = "/ElectricityWires.png";
-const WallPaintImg = "/WallPaintImg.jpg";
-const YardCareImg = "/YardCareImg.png";
-const FurnitureImg = "/FurnitureImg.jpg";
+const ElectricityWires = '/ElectricityWires.png';
+const WallPaintImg = '/WallPaintImg.jpg';
+const YardCareImg = '/YardCareImg.png';
+const FurnitureImg = '/FurnitureImg.jpg';
 
 // These can still be imported normally since they are from `src`
-import BlogCard from "../ui/BlogCard.jsx";
-import NewsCard from "../ui/NewsCard.jsx";
+import BlogCard from '../../ui/BlogCard.jsx';
+import NewsCard from '../../ui/NewsCard.jsx';
 
 function Blog() {
   return (
@@ -104,23 +104,23 @@ function Blog() {
             {[
               {
                 image: ElectricityWires,
-                date: "Garden / Sep 26, 2022",
-                title: "Best Electric wiring for house safety",
+                date: 'Garden / Sep 26, 2022',
+                title: 'Best Electric wiring for house safety',
               },
               {
                 image: WallPaintImg,
-                date: "Garden / Sep 26, 2022",
-                title: "Which one is best for your wall?",
+                date: 'Garden / Sep 26, 2022',
+                title: 'Which one is best for your wall?',
               },
               {
                 image: YardCareImg,
-                date: "Garden / Sep 26, 2022",
-                title: "5 Fall Yard Care & Maintenance Tips",
+                date: 'Garden / Sep 26, 2022',
+                title: '5 Fall Yard Care & Maintenance Tips',
               },
               {
                 image: FurnitureImg,
-                date: "Garden / Sep 26, 2022",
-                title: "5 Steps to Design The Furniture of Your Dreams",
+                date: 'Garden / Sep 26, 2022',
+                title: '5 Steps to Design The Furniture of Your Dreams',
               },
             ].map((card, index) => (
               <NewsCard

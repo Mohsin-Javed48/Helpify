@@ -298,10 +298,10 @@
 
 // export default App;
 
-// =======
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './ui/LoginPage';
 import SignupPage from './ui/SignupPage';
+
 // <<<<<<< HEAD
 // =======
 import Navbar from './components/Navbar';

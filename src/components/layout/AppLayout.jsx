@@ -3,8 +3,8 @@
 import React from 'react';
 
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
-import Navbar from '../Navbar';
+import Footer from '../layout/Footer';
+import Navbar from '../layout/Navbar';
 import { useSelector } from 'react-redux';
 
 function AppLayout() {

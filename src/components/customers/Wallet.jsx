@@ -1,5 +1,5 @@
 // import WalletBackgroundImg from '../../public/WalletBackgroundImg.png';
-import walletIcon from '../../public/walletIcon.png';
+import walletIcon from '../../../public/walletIcon.png';
 
 function Wallet() {
   return (

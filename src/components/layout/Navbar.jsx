@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Button from "../ui/Button";
-import { NavLink } from "react-router-dom";
+import { useState } from 'react';
+import Button from '../../ui/Button';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -41,20 +41,20 @@ function Navbar() {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Home
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
             <li>
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
-                {" "}
+                {' '}
                 About
               </NavLink>
             </li>
@@ -63,11 +63,11 @@ function Navbar() {
                 <NavLink
                   to="/services"
                   className={({ isActive }) =>
-                    isActive ? "border-b-2 border-blue-700" : ""
+                    isActive ? 'border-b-2 border-blue-700' : ''
                   }
                 >
                   Services
-                </NavLink>{" "}
+                </NavLink>{' '}
               </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,21 +91,21 @@ function Navbar() {
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Blog
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
             <li>
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Contact
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
           </ul>
 
@@ -114,7 +114,7 @@ function Navbar() {
             <Button
               text="Lahore"
               variant="secondary"
-              onClick={() => console.log("Lahore button clicked")}
+              onClick={() => console.log('Lahore button clicked')}
             />
             <NavLink to="/signup">
               <Button text="Signup" variant="primary" />
@@ -125,7 +125,7 @@ function Navbar() {
         {/* Sidebar for Mobile */}
         <div
           className={`fixed top-0 left-0 h-[80vh] w-[250px] bg-white shadow-lg transform ${
-            isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           } transition-transform duration-300 ease-in-out md:hidden z-50 bg-[#ffff]`}
         >
           {/* Close Button */}
@@ -140,20 +140,20 @@ function Navbar() {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Home
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
             <li>
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
-                {" "}
+                {' '}
                 About
               </NavLink>
             </li>
@@ -161,31 +161,31 @@ function Navbar() {
               <NavLink
                 to="/services"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Services
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
             <li>
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Blog
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
             <li>
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
-                  isActive ? "border-b-2 border-blue-700" : ""
+                  isActive ? 'border-b-2 border-blue-700' : ''
                 }
               >
                 Contact
-              </NavLink>{" "}
+              </NavLink>{' '}
             </li>
           </ul>
         </div>

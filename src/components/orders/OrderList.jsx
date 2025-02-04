@@ -1,4 +1,4 @@
-import ServiceProviderIcon from '../../public/ServiceProviderIcon.png';
+import ServiceProviderIcon from '../../../public/ServiceProviderIcon.png';
 
 const orders = [
   {

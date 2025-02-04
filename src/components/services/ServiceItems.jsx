@@ -1,6 +1,6 @@
 /** @format */
 
-import OrdersForConfirm from "./OrdersForConfirm";
+import OrdersForConfirm from '../orders/OrdersForConfirm';
 
 function ServiceItems() {
   return (

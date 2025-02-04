@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import Header from '../../ui/Header';
 import Sidebar from '../../ui/Sidebar';
-import ChartCards from './ChartCards';
-import DashboardCards from '../DashboardCards';
+import ChartCards from '../shared/ChartCards';
+import DashboardCards from '../../ui/DashboardCards';
+import { useState } from 'react';
 
 function ServiveProviderDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

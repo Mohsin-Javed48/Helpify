@@ -1,9 +1,10 @@
 /** @format */
 
-import DateTimeSelector from './DateTimeSelector';
-import InformationForm from './InformationForm';
-import ServiceItems from '../services/ServiceItems';
-import OrderSummary from './OrderSummary';
+import DateTimeSelector from '../../components/shared/DateTimeSelector';
+import InformationForm from '../../components/shared/InformationForm';
+import ServiceItems from '../../components/services/ServiceItems';
+import OrderSummary from '../../components/orders/OrderSummary';
+
 import { useNavigate } from 'react-router-dom';
 
 function OrderPage() {

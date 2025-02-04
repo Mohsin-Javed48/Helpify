@@ -302,23 +302,21 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './ui/LoginPage';
 import SignupPage from './ui/SignupPage';
 
-// <<<<<<< HEAD
-// =======
-import Navbar from './components/Navbar';
-// >>>>>>> c2b37dccabeb9aefb30d3f461245fe5187d38c57
-import Home from './components/Home';
-import About from './components/About';
+// Layout Components
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import AppLayout from './components/layout/AppLayout';
+
+// Shared Components
+import Home from './components/shared/Home';
+import About from './components/shared/About';
+import Blog from './components/shared/Blog';
+import Contact from './components/shared/Contact';
+import Notification from './components/shared/Notification';
+import Chat from './components/shared/Chat';
+
+// Service Components
 import Services from './components/services/PlumberServices';
-import Blog from './components/Blog';
-import Contact from './components/Contact';
-// <<<<<<< HEAD
-// =======
-import Footer from './components/Footer';
-// >>>>>>> c2b37dccabeb9aefb30d3f461245fe5187d38c57
-import OrderPage from './components/OrderPage';
-import AppLayout from './components/AppLayout';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import PlumberServices from './components/services/PlumberServices';
 import HandymanServices from './components/services/HandymanServices';
 import AcRepairServices from './components/services/AcRepairServices';
@@ -328,24 +326,33 @@ import ElectricianServices from './components/services/ElectricianServices';
 import HomeAppliencesServices from './components/services/HomeAppliencesServices';
 import GeyserServices from './components/services/GeyserServices';
 import GardnerServices from './components/services/GardnerServices';
-// <<<<<<< HEAD
-import ServiveProviderDashboard from './components/ServiveProviderDashboard';
-import OrderList from './components/OrderList';
+import ServiceProviderDashboard from './components/serviceProvider/ServiveProviderDashboard';
+
+// Order Components
+import OrderPage from './components/orders/OrderPage';
+import OrderList from './components/orders/OrderList';
+
+// Customer Components
+import Customer from './components/customers/Customer';
+import CustomerHistory from './components/customers/CustomerHistory';
+import CustomersPage from './components/customers/CustomersPage';
+import Wallet from './components/customers/Wallet';
+
+// Admin Components
+import AdminDashboard from './components/admin/AdminDashboard';
+import AdminOrdersPage from './components/admin/AdminOrdersPage';
+import ComplaintsPage from './components/admin/ComplaintsPage';
+import AdminDashboardLayout from './ui/AdminDashboardLayout';
+
+import ServiveProviderDashboard from '../src/components/serviceProvider/ServiveProviderDashboard';
+
+// Service Provider Components
+import ServiceProvidersPage from './components/serviceProvider/ServiceProvidersPage';
 import ServiveProviderDashboardLayout from './ui/ServiveProviderDashboardLayout';
-import Customer from './components/Customer';
-import CustomerHistory from './components/CustomerHistory';
-import Notification from './components/Notification';
-import Wallet from './components/Wallet';
-import Chat from './components/Chat';
-// =======
-// >>>>>>> c2b37dccabeb9aefb30d3f461245fe5187d38c57
-// import { Route, BrowserRouter } from 'react-router-dom';
-import AdminDashboard from './components/AdminDashboard.jsx';
-import CustomersPage from './components/CustomersPage';
-import ServiceProvidersPage from './components/ServiceProvidersPage';
-import AdminOrdersPage from './components/AdminOrdersPage';
-import ComplaintsPage from './components/ComplaintsPage';
-import AdminDashboardLayout from './ui/AdminDashBoardLayout.jsx';
+
+// Styles
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import ComplaintCard from '../ui/ComplaintCard.jsx';
+import ComplaintCard from '../../ui/ComplaintCard.jsx';
 
 function ComplaintsPage() {
   return (

@@ -1,6 +1,6 @@
 /** @format */
 
-import ChecklistItem from '../ui/CheckListItem';
+import ChecklistItem from '../../ui/CheckListItem';
 
 // Correct paths for images directly in the public folder
 const WindowCleanerImg = '/WindowCleanerImg.png';

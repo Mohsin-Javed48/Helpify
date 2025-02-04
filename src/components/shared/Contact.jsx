@@ -1,12 +1,12 @@
 /** @format */
 
-import FormImg from "/Image (1).png";
-import ProfileImg from "/Profile.png";
-import EmailImg from "/Message.png";
-import CallImg from "/FormCall.png";
-import MessageImg from "/FormMessage.png";
+import FormImg from '/Image (1).png';
+import ProfileImg from '/Profile.png';
+import EmailImg from '/Message.png';
+import CallImg from '/FormCall.png';
+import MessageImg from '/FormMessage.png';
 
-import BookButton from "../ui/BookButton";
+import BookButton from '../../ui/BookButton';
 const MsgButton = BookButton;
 
 function Contact() {
@@ -78,7 +78,7 @@ function Contact() {
         <div className="text-center mt-[44px]">
           <MsgButton
             text="Sent Message"
-            onClick={() => console.log("Primary button clicked!")}
+            onClick={() => console.log('Primary button clicked!')}
             variant="primary"
           />
         </div>

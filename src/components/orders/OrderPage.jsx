@@ -1,10 +1,10 @@
 /** @format */
 
-import DateTimeSelector from "./DateTimeSelector";
-import InformationForm from "./InformationForm";
-import ServiceItems from "./ServiceItems";
-import OrderSummary from "./OrderSummary";
-import { useNavigate } from "react-router-dom";
+import DateTimeSelector from './DateTimeSelector';
+import InformationForm from './InformationForm';
+import ServiceItems from '../services/ServiceItems';
+import OrderSummary from './OrderSummary';
+import { useNavigate } from 'react-router-dom';
 
 function OrderPage() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function OrderPage() {
     <div className="flex flex-col relative">
       {/* Back Button */}
       <div
-        onClick={() => navigate("/services")}
+        onClick={() => navigate('/services')}
         className="absolute top-0 right-0 cursor-pointer"
       >
         <svg width="76" height="68" fill="black">

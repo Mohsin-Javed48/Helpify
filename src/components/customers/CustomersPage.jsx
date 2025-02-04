@@ -1,4 +1,4 @@
-import CustomerCard from '../ui/CustomerCard.jsx';
+import CustomerCard from '../../ui/CustomerCard.jsx';
 
 function CustomersPage() {
   return (

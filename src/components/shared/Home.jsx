@@ -35,7 +35,7 @@ const GardnerIcon = '/Icon9.png';
 const GardenerBackImg = '/GardenerBackImg.jpg';
 
 import Carousell from './Carousell';
-import BookButton from '../ui/BookButton';
+import BookButton from '../../ui/BookButton';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {

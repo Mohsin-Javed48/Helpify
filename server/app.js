@@ -20,7 +20,7 @@ app.use(
     origin: "http://localhost:5173",
   })
 );
-
+///comem
 app.use("/api/v1", router);
 
 sequelize

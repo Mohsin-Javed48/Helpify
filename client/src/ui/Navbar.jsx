@@ -4,17 +4,43 @@ import { useState, useContext } from "react";
 import Button from "./Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"; // Assuming you have an AuthContext
+import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { useRef } from "react";
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
   const { user, logout } = useContext(AuthContext); // Get user and logout from AuthContext
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Check if Navbar is hidden on certain routes
+  if (location.pathname.includes('/services')) {
+    return null;
+  }
 
   const handleLogout = () => {
     logout();
     navigate("/auth/login");
   };
-
   return (
     <>
       <nav className="bg-[#ffff]">
@@ -45,7 +71,6 @@ function Navbar() {
               />
             </svg>
           </button>
-
           {/* Desktop Navbar */}
           <ul className="hidden md:flex items-center md:gap-[28px] lg:gap-[32px] text-[#2937B1] font-medium text-[16px] leading-[26px] tracking-[-0.16px] font-wixmadefor">
             <li>
@@ -68,35 +93,63 @@ function Navbar() {
                 About
               </NavLink>
             </li>
-            <li className="flex items-center gap-[5px]">
-              <span>
-                <NavLink
-                  to="/services"
-                  className={({ isActive }) =>
-                    isActive ? "border-b-2 border-blue-700" : ""
-                  }
-                >
-                  Services
-                </NavLink>
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
-                fill="none"
-              >
-                <path
-                  d="M9 3.5L5 7.25L1 3.5"
-                  stroke="#141414"
-                  strokeOpacity="0.7"
-                  strokeWidth="1.2"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <li 
+          className="flex items-center gap-[5px] relative"
+          onClick={() => setIsDropdownOpen(d => !d)}
+        >
+          
+        <span onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="cursor-pointer flex items-center gap-1">
+        <NavLink
+          to="/#"
+          className={({ isActive }) =>
+            isActive ? "border-b-2 border-blue-700" : ""
+          }
+        >
+          Services
+        </NavLink>
+
+        {/* Dropdown Arrow Icon */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+        >
+          <path
+            d="M9 3.5L5 7.25L1 3.5"
+            stroke="#141414"
+            strokeOpacity="0.7"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+
+      {/* Dropdown Menu */}
+      {isDropdownOpen && (
+        <ul className="absolute top-8 left-0 bg-white shadow-lg rounded-md w-40 z-10">
+          {[
+            { name: 'Plumber', path: '/services/plumber' },
+            { name: 'Electrician', path: '/services/electrician' },
+            { name: 'Carpenter', path: '/services/carpenter' },
+            { name: 'Painter', path: '/services/painter' },
+            { name: 'Home Appliances', path: '/services/homeAppliences' },
+            { name: 'Geyser', path: '/services/geyser' },
+            { name: 'Gardener', path: '/services/gardner' },
+            { name: 'AC Repair', path: '/services/acRepair' },
+          ].map(service => (
+            <li key={service.name} className="px-4 py-2 hover:bg-gray-100">
+              <NavLink to={service.path} className="block">
+                {service.name}
+              </NavLink>
             </li>
+          ))}
+        </ul>
+      )}
+
+        </li>
             <li>
               <NavLink
                 to="/blog"

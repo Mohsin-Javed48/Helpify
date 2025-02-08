@@ -138,7 +138,7 @@ const app_routes = [
           { path: "/notification", element: <Notification /> },
           { path: "/wallet", element: <Wallet /> },
         ],
-      },
+      },      
       {
         element: <AdminDashboardLayout />,
         children: [

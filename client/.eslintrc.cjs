@@ -6,7 +6,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
-
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
@@ -16,10 +15,12 @@ module.exports = {
     "react/prop-types": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
+    "no-unused-vars": "warn", // Unused variables will show as warnings (yellow underline)
+    "no-undef": "error", // Undefined variables will show as errors (red underline)
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   },
-}
+};

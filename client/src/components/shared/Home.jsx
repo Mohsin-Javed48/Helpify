@@ -65,7 +65,9 @@ function Home() {
 
       {/* Service List  */}
 
-      <div className="py-[100px] flex flex-col items-center justify-center w-screen">
+      <div className="py-[100px] flex flex-col items-center justify-center w-screen bg-white
+      
+      ">
         <div className="mb-[50px]">
           <h2 className="not-italic text-[#000] font-bold text-[28px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-normal tracking-[-0.48px]">
             Our Services

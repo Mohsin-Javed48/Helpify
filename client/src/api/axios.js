@@ -14,7 +14,7 @@ export const setAuthToken = (token) => {
   }
 };
 
-// Function to refresh token
+// Function to refresh tokenT
 const refreshToken = async () => {
   try {
     const user = getUser(); // Assuming you store the user data in localStorage

@@ -141,9 +141,13 @@ function Login() {
           </div>
 
           {/* Remember me and Forgot password */}
+          <Link to="/auth/forget">
+          
           <div className="flex justify-between items-center text-sm text-gray-600 mt-4">
+
             <p className="text-[#007bff] cursor-pointer">Forgot password?</p>
           </div>
+          </Link>
 
           {/* Sign in button */}
           <button
@@ -156,20 +160,20 @@ function Login() {
           {/* Divider */}
           <hr className="border-t border-gray-200 w-full my-4" />
 
-          {/* Google sign-in button */}
+          {/* Google sign-in button
           <button
             type="button"
             className="w-full h-10 bg-[#303030] text-white font-normal rounded-lg flex justify-center items-center text-sm hover:bg-[#404040] transition-colors"
           >
             <GoogleIcon className="mr-2" /> Or sign in with Google
-          </button>
+          </button> */}
 
           {/* Sign up link */}
           <div className="text-center mt-4 text-sm">
             <p>
               Don’t have an account?
-              <Link to="/signup" className="text-[#007bff] cursor-pointer ml-1">
-                Signup now
+              <Link to="/auth/register" className="text-[#007bff] cursor-pointer ml-1">
+                Register now
               </Link>
             </p>
           </div>

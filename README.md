@@ -23,7 +23,7 @@ git clone https://github.com/Mohsin-Javed48/Helpify.git
 cd helpify
 
 # Install dependencies
-npm install
+npm i
 
 # Start the development server
-npm start
+npm run dev

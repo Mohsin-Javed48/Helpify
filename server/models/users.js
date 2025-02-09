@@ -1,49 +1,57 @@
-'use strict';
-const {role}=require('../constants');
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    //add associations here
+    static associate(models) {
+      User.belongsTo(models.Role, { foreignKey: "roleId" }); // Each User belongs to one Role
+    }
   }
-  User.init({
-    firstName:{
-      type:DataTypes.STRING,
-      allowNull:false
+
+  User.init(
+    {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      contact: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      forgetToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      roleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "Roles", key: "id" }, // Foreign Key to Role Table
+      },
     },
-    lastName:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    address :{
-      type: DataTypes.STRING,
-      allowNull: true,
-    },    
-    contact :{
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    password: {
-      type:DataTypes.STRING,
-      allowNull:false
-    },
-   
-    forgetToken: {
-       type: DataTypes.STRING,
-       allowNull: true,
-     },
-  },
-  {
-    sequelize,
-    modelName: 'User',
-    tableName: "Users",
-    timestamps:true,
-  });
+    {
+      sequelize,
+      modelName: "User",
+      tableName: "Users",
+      timestamps: true,
+    }
+  );
+
   return User;
 };

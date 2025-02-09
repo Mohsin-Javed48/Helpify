@@ -7,7 +7,7 @@ const { sendMail } = require("../helper/mail");
 
 const signUp = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password,role, vatNumber } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     console.log(firstName, lastName, email, password);
 
     if (!firstName || !lastName || !email || !password) {
@@ -32,8 +32,8 @@ const signUp = async (req, res, next) => {
       lastName,
       email,
       password: hashedPassword,
-      role: role|| 1,
-      vatNumber:vatNumber||"1233"
+      roleId: 3, // Assign Provider role
+
     });
 
     res.status(201).json({ message: "User registered successfully", user: newUser });

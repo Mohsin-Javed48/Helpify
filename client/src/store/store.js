@@ -1,21 +1,21 @@
 /** @format */
 
-import { configureStore } from "@reduxjs/toolkit";
-import plumberReducer from "./plumberSlice"; // Import your slice reducer
-import authReducer from "./authSlice"; // Another example slice reducer
-import acRepairReducer from "./acRepairSlice";
-import carpenterReducer from "./carpenterSlice";
-import handymanReducer from "./handymanSlice";
-import gardnerReducer from "./gardnerSlice";
-import homeAppliencesReducer from "./homeAppliencesSlice";
-import painterReducer from "./painterSlice";
-import geyserReducer from "./geyserSlice";
-import electricianReducer from "./electricianSlice";
-import ordersReducer from "./ordersSlice";
+import { configureStore } from '@reduxjs/toolkit';
+// import plumberReducer from './plumberSlice'; // Import your slice reducer
+import authReducer from './authSlice'; // Another example slice reducer
+import acRepairReducer from './acRepairSlice';
+import carpenterReducer from './carpenterSlice';
+import handymanReducer from './handymanSlice';
+import gardnerReducer from './gardnerSlice';
+import homeAppliencesReducer from './homeAppliencesSlice';
+import painterReducer from './painterSlice';
+import geyserReducer from './geyserSlice';
+import electricianReducer from './electricianSlice';
+import ordersReducer from './ordersSlice';
 
 const store = configureStore({
   reducer: {
-    plumber: plumberReducer, // Add your slices here
+    // plumber: plumberReducer, // Add your slices here
     auth: authReducer, // Add other slices as needed
     acRepair: acRepairReducer,
     carpenter: carpenterReducer,

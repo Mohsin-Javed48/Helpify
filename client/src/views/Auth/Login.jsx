@@ -33,26 +33,39 @@ function Login() {
     onSubmit: async (values) => {
       try {
         const response = await login(values);
+  
+        // Success Alert
         Swal.fire({
           position: "center",
           icon: "success",
-          title: response.message,
+          title: response?.message || "Login successful!",
           showConfirmButton: false,
           timer: 1500,
         });
+  
+        // Set user and reload
         setUser(response.token);
         window.location.reload();
+  
       } catch (error) {
+  
+        // Enhanced Error Handling
+        const errorMessage =
+          error.response?.data?.message || "An unexpected error occurred.";
+  
         Swal.fire({
           position: "center",
           icon: "error",
-          title: error.response.data.message,
+          title: errorMessage,
           showConfirmButton: false,
           timer: 1500,
         });
+  
+        console.error("Login error:", error); // For debugging
       }
     },
   });
+  
 
   return (
     <form

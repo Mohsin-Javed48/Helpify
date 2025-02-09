@@ -14,7 +14,7 @@ const initialState = {
   services: [
     {
       id: 1,
-      title: "Mixer Tap Installation",
+      name: "Mixer Tap Installation",
       image: mixerTapInstallation,
       subtitle: "--Per piece",
       price: 300,

@@ -24,11 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     address :{
       type: DataTypes.STRING,
       allowNull: true,
-    },
-    vatNumber :{
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    },    
     contact :{
       type: DataTypes.STRING,
       allowNull: true,
@@ -37,11 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull:false
     },
-    role: {
-      type:DataTypes.INTEGER,
-      allowNull:false,
-      defaultValue:role.user,
-    },
+   
     forgetToken: {
        type: DataTypes.STRING,
        allowNull: true,

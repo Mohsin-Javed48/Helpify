@@ -1,15 +1,13 @@
-const { User, Role } = require("../models");
+const { User, Role, Service } = require("../models");
 const { generateHash } = require("../helper/hash");
 
 // Function to add a Service Provider
-const addServiceProvider = async (req, res) => {
+const registerProvider = async (req, res) => {
   try {
-      console.log('providerRole',"------------------------smkm[[[[[[[00----------");
     const { firstName, lastName, email, password, address, contact } = req.body;
 
     // Check if the role "Provider" exists
     const providerRole = await Role.findOne({ where: { name: "Provider" } });
-
 
     if (!providerRole) {
       return res.status(400).json({ message: "Provider role not found!" });
@@ -54,5 +52,21 @@ const addServiceProvider = async (req, res) => {
   }
 };
 
+const addService = async (req, res) => {
+  try {
+    const { name, description, price } = req.body;
+    const providerId = req.user.id; // Assuming the user ID is stored in req.user after authentication
 
-module.exports = { addServiceProvider};
+    const service = await Service.create({
+      name,
+      description,
+      price,
+      providerId,
+    });
+
+    res.status(201).json(service);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+module.exports = { registerProvider, addService };

@@ -8,7 +8,6 @@ function AuthProvider({ children }) {
   const [jwt, setJwt] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [invoiceData, setInvoiceData] = useState(null);
 
   useEffect(() => {
     const storedJwt = getUser();
@@ -41,8 +40,6 @@ function AuthProvider({ children }) {
     jwt,
     user,
     setUser,
-    invoiceData,
-    setInvoiceData,
   };
 
   return <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>;

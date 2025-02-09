@@ -12,6 +12,7 @@ export const me = (token) => {
         }
     ).then(res => res.data);
 }
+
 export const login = (body) => {
     return axios.post(
         `${BASE_URL}/auth/login`,

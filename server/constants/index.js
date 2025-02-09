@@ -1,12 +1,9 @@
-const role={
-    user:2,
-    admin:1
-}
-
-const paymentStatus={
-    paid:1,
-    unpaid:2,
-    cancel:3
-}
-
-module.exports={paymentStatus, role}
+// constants.js
+const role = {
+    ADMIN: 1,
+    PROVIDER: 2, // Service providers
+    CUSTOMER: 3, // People booking services
+  };
+  
+  module.exports = { role };
+  

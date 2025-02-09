@@ -11,7 +11,7 @@ function OrderPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative bg-white">
       {/* Back Button */}
       <div
         onClick={() => navigate('/services')}
@@ -26,7 +26,7 @@ function OrderPage() {
         </svg>
       </div>
 
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10 px-4">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10 px-4 bg-white">
         <div>
           <DateTimeSelector />
           <ServiceItems />

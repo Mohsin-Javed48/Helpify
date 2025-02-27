@@ -134,7 +134,7 @@ const forgotPassword = async (req, res, next) => {
       attachments: [
         {
           filename: "logo.png",
-      path: "./einvoice.png",
+      path: "",//shoiuld be path of logo
       cid: "logo",
   
         },

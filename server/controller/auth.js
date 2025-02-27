@@ -124,7 +124,7 @@ const forgotPassword = async (req, res, next) => {
     await user.save();
 
     await sendMail({
-      from: `Support E invoicing`,
+      from: `Support Helpify`,
       to: email, 
       subject: 'Reset Your Password',
       html: resetPasswordEmail(

@@ -32,6 +32,10 @@ function App() {
       setAuthToken(token);
       const response = await me(token);
       setUser(response.user);
+
+
+      console.log(response.user)
+    
       setIsLoading(false);
     } catch (error) {
       // clear user here

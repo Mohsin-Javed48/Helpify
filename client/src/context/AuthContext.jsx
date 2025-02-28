@@ -21,7 +21,9 @@ function AuthProvider({ children }) {
   function login(token) {
     setIsLoggedIn(true);
     setJwt(token);
+    
     localStorage.setItem("jwt", token);
+
   }
 
   function logout() {

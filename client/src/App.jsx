@@ -43,6 +43,43 @@ import Login from './views/Auth/Login';
 import Forget from './views/Auth/Forget';
 
 function App() {
+<<<<<<< HEAD
+=======
+  // const navigate = useNavigate();
+  const queryClient = new QueryClient();
+  const routing = useRoutes(app_routes);
+  const { setUser, setIsLoading } = useContext(AuthContext);
+  const fetchUserData = async () => {
+    try {
+      setIsLoading(true);
+      const user = getUser();
+      if (!user) {
+        setIsLoading(false);
+        return;
+      }
+      const token = user.token;
+      setAuthToken(token);
+      const response = await me(token);
+      setUser(response.user);
+
+
+      console.log(response.user)
+    
+      setIsLoading(false);
+    } catch (error) {
+      // clear user here
+      clearUser();
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      fetchUserData();
+    })();
+  }, []);
+
+>>>>>>> 68b87cd7a2b9e90fdd84117f5c21c22591e7be05
   return (
     <BrowserRouter>
       <Routes>

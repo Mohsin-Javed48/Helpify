@@ -9,6 +9,7 @@ const Header = () => {
     navigate('/auth/login');
   };
   return (
+<<<<<<< HEAD
     <Navbar
       bg="light"
       className="px-4 shadow-sm d-flex justify-content-between"
@@ -51,6 +52,9 @@ const Header = () => {
         </Dropdown>
       </Nav>
     </Navbar>
+=======
+    <></>
+>>>>>>> 68b87cd7a2b9e90fdd84117f5c21c22591e7be05
   );
 };
 

@@ -29,7 +29,7 @@ const resetPasswordEmail = (name, resetUrl) => {
         <p style="color: #555; text-align: start; line-height: 1.6; font-size: 14px; margin-top: 20px;">
           For further assistance, feel free to reach out to our support team.
         </p>
-        <p style="color: #555; text-align: start; font-size: 14px; margin-top: 20px;">Best regards,<br/>The E-Invoicing Support Team</p>
+        <p style="color: #555; text-align: start; font-size: 14px; margin-top: 20px;">Best regards,<br/>Helpify Support Team</p>
       </div>
     </body>
     </html>

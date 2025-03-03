@@ -15,8 +15,7 @@ import ordersReducer from './ordersSlice';
 
 const store = configureStore({
   reducer: {
-    // plumber: plumberReducer, // Add your slices here
-    auth: authReducer, // Add other slices as needed
+    auth: authReducer, 
     acRepair: acRepairReducer,
     carpenter: carpenterReducer,
     handyman: handymanReducer,

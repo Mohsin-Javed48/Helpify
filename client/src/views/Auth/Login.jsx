@@ -1,5 +1,6 @@
 /** @format */
 
+<<<<<<< HEAD
 import { useState } from 'react';
 import Google_icon from '../../assets/Google_icon';
 import { FaEye as ViewPasswordIcon } from 'react-icons/fa';
@@ -11,6 +12,24 @@ import Swal from 'sweetalert2'; // Import alert for better UI
 
 function LoginPage() {
   const dispatch = useDispatch();
+=======
+import React, { useContext } from "react";
+import { useFormik } from "formik";
+import { useState } from "react";
+import * as Yup from "yup";
+import { FaEye as ViewPasswordIcon } from "react-icons/fa";
+import loginMen from "/src/assets/images/auth/image.png";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../api/auth";
+import Swal from "sweetalert2";
+import { setUser } from "../../utills/user";
+import GoogleIcon from "../../assets/Google_icon";
+import { AuthContext } from "../../context/AuthContext";
+
+
+function Login() {
+  const { setUser: updateUser } = useContext(AuthContext);
+>>>>>>> 68b87cd7a2b9e90fdd84117f5c21c22591e7be05
   const navigate = useNavigate();
   const [viewPassword, setViewPassword] = useState(false);
 
@@ -21,6 +40,7 @@ function LoginPage() {
     formState: { errors },
   } = useForm();
 
+<<<<<<< HEAD
   const password = watch('password');
 
   const onSubmit = async (data) => {
@@ -56,6 +76,53 @@ function LoginPage() {
           'An error occurred. Please try again later.',
           'error'
         );
+=======
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await login(values);
+
+  
+        // Success Alert
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: response?.message || "Login successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+  
+        // Set user and reload
+        setUser(response.token);
+        updateUser(response.user);
+
+        
+
+        // alert("Hello! This is an alert box.",response);
+
+        window.location.reload();
+  
+      } catch (error) {
+  
+        // Enhanced Error Handling
+        const errorMessage =
+          error.response?.data?.message || "An unexpected error occurred.";
+  
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: errorMessage,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+  
+        console.error("Login error:", error); // For debugging
+>>>>>>> 68b87cd7a2b9e90fdd84117f5c21c22591e7be05
       }
     }
   };
@@ -157,10 +224,14 @@ function LoginPage() {
           {/* Divider */}
           <hr className="border-t border-gray-200 w-full my-4" />
 
+<<<<<<< HEAD
           {/* Google sign-in button */}
           <button className="w-full h-10 bg-[#303030] text-white font-normal rounded-lg flex justify-center items-center text-sm">
             <Google_icon className="mr-2" /> Or sign in with Google
           </button>
+=======
+         
+>>>>>>> 68b87cd7a2b9e90fdd84117f5c21c22591e7be05
 
           {/* Sign up link */}
           <div className="text-center mt-4 text-sm ">

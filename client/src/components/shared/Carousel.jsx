@@ -1,43 +1,43 @@
 /** @format */
 
-import Slider from "react-slick";
-import { useRef, useState } from "react";
-import FounderIcon from "/Ellipse 15.png";
+import Slider from 'react-slick';
+import { useRef, useState } from 'react';
+import FounderIcon from '/Ellipse 15.png';
 
 const testimonials = [
   {
-    name: "Zohaib",
-    role: "Founder and co-CEO",
+    name: 'Zohaib',
+    role: 'Founder and co-CEO',
     review:
-      "A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.",
+      'A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.',
     rating: 5,
   },
   {
-    name: "Fakhra Rabbani",
-    role: "Founder and co-CEO",
+    name: 'Fakhra Rabbani',
+    role: 'Founder and co-CEO',
     review:
-      "A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.",
+      'A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.',
     rating: 5,
   },
   {
-    name: "Zaina",
-    role: "Founder and co-CEO",
+    name: 'Zaina',
+    role: 'Founder and co-CEO',
     review:
-      "A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.",
+      'A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.',
     rating: 5,
   },
   {
-    name: "Mohsin",
-    role: "Founder and co-CEO",
+    name: 'Mohsin',
+    role: 'Founder and co-CEO',
     review:
-      "A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.",
+      'A great little app that some of the big guns have clearly been taking their cue from. Looks like Income might actually be cleaner and simpler to use than competitors.',
     rating: 5,
   },
 ];
 
-const Carousell = () => {
+const Carousel = () => {
   const sliderRef = useRef(null);
-  const [activeButton, setActiveButton] = useState(""); // State to track active button
+  const [activeButton, setActiveButton] = useState(''); // State to track active button
 
   const settings = {
     dots: true,
@@ -78,10 +78,10 @@ const Carousell = () => {
             fill="none"
             onClick={() => {
               sliderRef.current.slickPrev();
-              setActiveButton("prev");
+              setActiveButton('prev');
             }}
             className={`w-[29px] sm:w-[39px] md:w-[49px] lg:w-[59px] h-[29px] sm:h-[39px] md:h-[49px] lg:h-[59px] cursor-pointer ${
-              activeButton === "prev" ? "opacity-100" : "opacity-40"
+              activeButton === 'prev' ? 'opacity-100' : 'opacity-40'
             }`}
           >
             <g>
@@ -109,10 +109,10 @@ const Carousell = () => {
             fill="none"
             onClick={() => {
               sliderRef.current.slickNext();
-              setActiveButton("next");
+              setActiveButton('next');
             }}
             className={`w-[29px] sm:w-[39px] md:w-[49px] lg:w-[59px] h-[29px] sm:h-[39px] md:h-[49px] lg:h-[59px] cursor-pointer ${
-              activeButton === "next" ? "opacity-100" : "opacity-40"
+              activeButton === 'next' ? 'opacity-100' : 'opacity-40'
             }`}
           >
             <path
@@ -180,4 +180,4 @@ const Carousell = () => {
   );
 };
 
-export default Carousell;
+export default Carousel;

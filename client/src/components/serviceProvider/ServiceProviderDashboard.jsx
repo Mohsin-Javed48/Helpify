@@ -4,7 +4,7 @@ import ChartCards from '../shared/ChartCards';
 import DashboardCards from '../../ui/DashboardCards';
 import { useState } from 'react';
 
-function ServiveProviderDashboard() {
+function ServiceProviderDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <>
@@ -66,4 +66,4 @@ function ServiveProviderDashboard() {
   );
 }
 
-export default ServiveProviderDashboard;
+export default ServiceProviderDashboard;

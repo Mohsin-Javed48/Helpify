@@ -2,28 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import ServicesCard from './ServicesCard';
-import getAllServices from '../../api/service';
+// import getAllServices from '../../api/service';
 
 function PlumberServices() {
   const [services, setServices] = useState([]); // Manage services state
   const [error, setError] = useState(null); // Manage error state if any
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const fetchedServices = await getAllServices();
-        setServices(fetchedServices.services); // Assuming API returns { success: true, services: [...] }
-        console.log(fetchedServices);
-      } catch (err) {
-        console.error('Error fetching services:', err);
-        setError('Failed to fetch services');
-      }
-    };
-
-    fetchServices(); // Fetch data on component mount
-  }, []); // Empty dependency array ensures it runs once on mount
-
-  const name = 'Plumber';
 
   if (error) {
     return <div>{error}</div>; // Display error if any
@@ -31,12 +14,13 @@ function PlumberServices() {
 
   return (
     <div>
-      {/* Render ServicesCard only when services are fetched */}
+      {/* Render ServicesCard only when services are fetched
       {services.length > 0 ? (
         <ServicesCard services={services} name={name} />
       ) : (
         <p>Loading services...</p> // Loading indicator
-      )}
+      )} */}
+      <h1>hello</h1>
     </div>
   );
 }

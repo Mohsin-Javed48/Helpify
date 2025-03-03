@@ -34,7 +34,7 @@ const GeyserBackImg = '/GeyserBackImg.jpeg';
 const GardnerIcon = '/Icon9.png';
 const GardenerBackImg = '/GardenerBackImg.jpg';
 
-import Carousell from './Carousell';
+import Carousell from './Carousel';
 import BookButton from '../../ui/BookButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -65,9 +65,11 @@ function Home() {
 
       {/* Service List  */}
 
-      <div className="py-[100px] flex flex-col items-center justify-center w-screen bg-white
+      <div
+        className="py-[100px] flex flex-col items-center justify-center w-screen bg-white
       
-      ">
+      "
+      >
         <div className="mb-[50px]">
           <h2 className="not-italic text-[#000] font-bold text-[28px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-normal tracking-[-0.48px]">
             Our Services
@@ -133,9 +135,7 @@ function Home() {
             <div
               key={index}
               className="cursor-pointer group flex flex-col justify-center items-start gap-[28px] w-[270px] md:w-[320px] lg:w-[270px] xl:w-[370px]   h-[164px] transition-all duration-300 ease-in-out relative"
-              onClick={() =>
-                navigate(`/services/${item.name}`)
-              }
+              onClick={() => navigate(`/services/${item.name}`)}
             >
               {/* Background Image Layer */}
               <div

@@ -26,7 +26,7 @@ function OrderPage() {
         </svg>
       </div>
 
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10 px-4">
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 mt-10 px-4 bg-white">
         <div>
           <DateTimeSelector />
           <ServiceItems />

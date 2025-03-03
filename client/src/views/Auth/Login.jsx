@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
@@ -11,7 +11,11 @@ import { login } from "../../api/auth";
 import Swal from "sweetalert2";
 import { setUser } from "../../utills/user";
 import GoogleIcon from "../../assets/Google_icon";
+import { AuthContext } from "../../context/AuthContext";
+
+
 function Login() {
+  const { setUser: updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [viewPassword, setViewPassword] = useState(false);
 
@@ -33,6 +37,7 @@ function Login() {
     onSubmit: async (values) => {
       try {
         const response = await login(values);
+
   
         // Success Alert
         Swal.fire({
@@ -45,6 +50,8 @@ function Login() {
   
         // Set user and reload
         setUser(response.token);
+        updateUser(response.user);
+
         
 
         // alert("Hello! This is an alert box.",response);

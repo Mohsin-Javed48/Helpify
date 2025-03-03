@@ -12,35 +12,7 @@ const Header = () => {
     navigate('/auth/login');
   }
   return (
-    <Navbar bg="light" className="px-4 shadow-sm d-flex justify-content-between">
-      <div className="d-flex align-items-center">
-        <i className="bi bi-list fs-4"></i>
-      </div>
-
-      <Nav className="d-flex align-items-center">  
-
-        <Dropdown align="end">
-          <Dropdown.Toggle variant="light" className="d-flex align-items-center border-0">
-            <Image
-             src={proImg}
-              alt="Profile"
-              roundedCircle
-              width={32}
-              height={32}
-              className="me-2"
-            />
-            Invoika Admin
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/profile">Profile</Dropdown.Item>
-            <Dropdown.Item href="#/settings">Settings</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item ><button onClick={handdleLogout} className='btn btn-outline-warning'> Logout</button></Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Nav>
-    </Navbar>
+    <></>
   );
 };
 

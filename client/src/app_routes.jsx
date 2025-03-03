@@ -80,6 +80,7 @@ import SignupPage from "./ui/SignupPage";
 import SubServiceCard from "./ui/SubServiceCard";
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import ProtectedRoute from "./protectedRoute";
 
 /* ***Layouts**** */
 const Auth = Loadable(lazy(() => import("./views/Auth/Auth")));
@@ -88,6 +89,7 @@ const Register = Loadable(lazy(() => import("./views/Auth/Register")));
 const Forget = Loadable(lazy(() => import("./views/Auth/Forget")));
 
 const app_routes = [
+  // Authentication Routes
   {
     path: "/auth",
     element: (
@@ -101,11 +103,15 @@ const app_routes = [
       { path: "/auth/forget/:token?", exact: true, element: <Forget /> },
     ],
   },
+
+  // User Routes (Role 3)
   {
     path: "/",
     element: (
       <RouteGuard>
-        <AppLayout />
+        <ProtectedRoute allowedRoles={[3]}>
+          <AppLayout />
+        </ProtectedRoute>
       </RouteGuard>
     ),
     children: [
@@ -123,35 +129,56 @@ const app_routes = [
       { path: "/services/painter", element: <PainterServices /> },
       { path: "/services/carpenter", element: <CarpenterServices /> },
       { path: "/services/electrician", element: <ElectricianServices /> },
-      { path: "/services/homeAppliences", element: <HomeAppliencesServices /> },
+      { path: "/services/homeAppliances", element: <HomeAppliencesServices /> },
       { path: "/services/geyser", element: <GeyserServices /> },
-      { path: "/services/gardner", element: <GardnerServices /> },
+      { path: "/services/gardener", element: <GardnerServices /> },
       { path: "/services/plumber", element: <PlumberServices /> },
-      {
-        element: <ServiveProviderDashboardLayout />,
-        children: [
-          { path: "/dashboard", element: <ServiveProviderDashboard /> },
-          { path: "/orderlist", element: <OrderList /> },
-          { path: "/customer", element: <Customer /> },
-          { path: "/customerhistory", element: <CustomerHistory /> },
-          { path: "/chat", element: <Chat /> },
-          { path: "/notification", element: <Notification /> },
-          { path: "/wallet", element: <Wallet /> },
-        ],
-      },      
-      {
-        element: <AdminDashboardLayout />,
-        children: [
-          { path: "/admin-dashboard", element: <AdminDashboard /> },
-          { path: "/customers-page", element: <CustomersPage /> },
-          { path: "/service-providers", element: <ServiceProvidersPage /> },
-          { path: "/admin-orders", element: <AdminOrdersPage /> },
-          { path: "/complaints-page", element: <ComplaintsPage /> },
-        ],
-      },
       { path: "*", element: <Navigate to="/home" /> },
+    ],
+  },
+
+  // Service Provider Routes (Role 2)
+  {
+    path: "/provider",
+    element: (
+      <RouteGuard>
+        <ProtectedRoute allowedRoles={[2]}>
+          <ServiveProviderDashboardLayout />
+        </ProtectedRoute>
+      </RouteGuard>
+    ),
+    children: [
+      { path: "/provider/", element: <ServiveProviderDashboard /> },
+      { path: "/provider/orderlist", element: <OrderList /> },
+      { path: "/provider/customer", element: <Customer /> },
+      { path: "/provider/customerhistory", element: <CustomerHistory /> },
+      { path: "/provider/chat", element: <Chat /> },
+      { path: "/provider/notification", element: <Notification /> },
+      { path: "/provider/wallet", element: <Wallet /> },
+      { path: "*", element: <Navigate to="/provider/dashboard" /> },
+    ],
+  },
+
+  // Admin Routes (Role 1)
+  {
+    path: "/admin",
+    element: (
+      <RouteGuard>
+        <ProtectedRoute allowedRoles={[1]}>
+          <AdminDashboardLayout />
+        </ProtectedRoute>
+      </RouteGuard>
+    ),
+    children: [
+      { path: "/admin/", element: <AdminDashboard /> },
+      { path: "/admin/customers", element: <CustomersPage /> },
+      { path: "/admin/service-providers", element: <ServiceProvidersPage /> },
+      { path: "/admin/orders", element: <AdminOrdersPage /> },
+      { path: "/admin/complaints", element: <ComplaintsPage /> },
+      { path: "*", element: <Navigate to="/admin/dashboard" /> },
     ],
   },
 ];
 
 export default app_routes;
+

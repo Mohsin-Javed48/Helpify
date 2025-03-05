@@ -11,7 +11,7 @@ function OrderPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative bg-white">
       {/* Back Button */}
       <div
         onClick={() => navigate('/services')}

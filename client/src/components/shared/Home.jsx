@@ -37,17 +37,9 @@ const GardenerBackImg = '/GardenerBackImg.jpg';
 import Carousell from './Carousell';
 import BookButton from '../../ui/BookButton';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
 
 function Home() {
   const navigate = useNavigate();
-  const serviceRef = useRef(null);
-
-  const handleBookAppointment = () => {
-    if (serviceRef.current) {
-      serviceRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
   return (
     <>
       {/* Booking summary */}
@@ -65,7 +57,7 @@ function Home() {
           </h1>
           <BookButton
             text="Book Appointment"
-            onClick={handleBookAppointment}
+            onClick={() => console.log('Primary button clicked!')}
             variant="primary"
           />
         </div>
@@ -73,11 +65,10 @@ function Home() {
 
       {/* Service List  */}
 
-      <div
-        className="py-[100px] flex flex-col items-center justify-center w-screen bg-white"
-        ref={serviceRef}
-      >
-        <div className="mb-[50px] ">
+      <div className="py-[100px] flex flex-col items-center justify-center w-screen bg-white
+      
+      ">
+        <div className="mb-[50px]">
           <h2 className="not-italic text-[#000] font-bold text-[28px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-normal tracking-[-0.48px]">
             Our Services
           </h2>
@@ -142,7 +133,9 @@ function Home() {
             <div
               key={index}
               className="cursor-pointer group flex flex-col justify-center items-start gap-[28px] w-[270px] md:w-[320px] lg:w-[270px] xl:w-[370px]   h-[164px] transition-all duration-300 ease-in-out relative"
-              onClick={() => navigate(`/services/${item.name}`)}
+              onClick={() =>
+                navigate(`/services/${item.name}`)
+              }
             >
               {/* Background Image Layer */}
               <div
@@ -236,7 +229,7 @@ function Home() {
         </div>
         <BookButton
           text="Book Appointment"
-          onClick={handleBookAppointment}
+          onClick={() => console.log('Primary button clicked!')}
           variant="secondary"
         />
       </div>
@@ -283,7 +276,7 @@ function Home() {
         </div>
         <BookButton
           text="Book Appointment"
-          onClick={handleBookAppointment}
+          onClick={() => console.log('Primary button clicked!')}
           variant="outline"
         />
       </div>

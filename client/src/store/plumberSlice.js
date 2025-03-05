@@ -1,94 +1,70 @@
-/** @format */
-/** @format */
+// // import mixerTapInstallation from '/mixerTapInstallation.jpg';
+// // import drainCleaning from '/drainCleaning.jpg';
+// // import pipeLeakRepair from '/pipeLeakRepair.jpg';
+// // import waterHeaterInstallation from '/waterHeaterInstallation.jpg';
+// // import toiletInstallation from '/toiletInstallation.jpg';
+// // import showerHeadReplacement from '/showerHeadReplacement.jpg';
+// // import geyserMaintenance from '/geyserMaintenance.jpg';
+// import axios from 'axios';
+// import { BASE_URL } from '../constants';
+// /** @format */
 
-import { createSlice } from "@reduxjs/toolkit";
-import mixerTapInstallation from "/mixerTapInstallation.jpg";
-import drainCleaning from "/drainCleaning.jpg";
-import pipeLeakRepair from "/pipeLeakRepair.jpg";
-import waterHeaterInstallation from "/waterHeaterInstallation.jpg";
-import toiletInstallation from "/toiletInstallation.jpg";
-import showerHeadReplacement from "/showerHeadReplacement.jpg";
-import geyserMaintenance from "/geyserMaintenance.jpg";
-const initialState = {
-  services: [
-    {
-      id: 1,
-      title: "Mixer Tap Installation",
-      image: mixerTapInstallation,
-      subtitle: "--Per piece",
-      price: 300,
-      quantity: 1,
-    },
-    {
-      id: 2,
-      title: "Drain Cleaning",
-      image: drainCleaning,
-      subtitle: "--Per hour",
-      price: 500,
-      quantity: 1,
-    },
-    {
-      id: 3,
-      title: "Pipe Leak Repair",
-      image: pipeLeakRepair, // Replace with actual image variable or path
-      subtitle: "--Per service",
-      price: 400,
-      quantity: 1,
-    },
-    {
-      id: 4,
-      title: "Water Heater Installation",
-      image: waterHeaterInstallation, // Replace with actual image variable or path
-      subtitle: "--Per unit",
-      price: 2000,
-      quantity: 1,
-    },
-    {
-      id: 5,
-      title: "Toilet Installation",
-      image: toiletInstallation, // Replace with actual image variable or path
-      subtitle: "--Per unit",
-      price: 1500,
-      quantity: 1,
-    },
-    {
-      id: 6,
-      title: "Shower Head Replacement",
-      image: showerHeadReplacement, // Replace with actual image variable or path
-      subtitle: "--Per service",
-      price: 250,
-      quantity: 1,
-    },
+// import { createSlice } from '@reduxjs/toolkit';
 
-    {
-      id: 7,
-      title: "Geyser Maintenance",
-      image: geyserMaintenance, // Replace with actual image variable or path
-      subtitle: "--Per hour",
-      price: 600,
-      quantity: 1,
-    },
-  ],
-};
+// const fetchServices = async () => {
+//   try {
+//     const response = await axios.get(`${BASE_URL}/service/`);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error fetching services:', error);
+//     throw error;
+//   }
+// };
+// let initialState; // Define initialState outside the function
 
-const plumberSlice = createSlice({
-  name: "plumber",
-  initialState,
-  reducers: {
-    addService(state, action) {
-      const service = state.services.find(
-        (item) => item.id === action.payload.id
-      );
-      if (service) service.quantity += 1; // Increase quantity
-    },
-    removeService(state, action) {
-      const service = state.services.find(
-        (item) => item.id === action.payload.id
-      );
-      if (service && service.quantity > 0) service.quantity -= 1; // Decrease quantity
-    },
-  },
-});
+// const initializeServices = async () => {
+//   const services = await fetchServices();
+//   console.log(services); // Log fetched services to check structure
 
-export const { addService, removeService } = plumberSlice.actions;
-export default plumberSlice.reducer;
+//   // Ensure services.services exists before accessing it
+//   if (services && services.services) {
+//     initialState = {
+//       services: Object.values(services.services), // Convert to array if needed
+//     };
+//   } else {
+//     initialState = {
+//       services: [], // Fallback in case services.services is undefined
+//     };
+//   }
+
+//   // Log after the async operation completes
+//   console.log(initialState); // Now it will show the populated state
+// };
+
+// initializeServices();
+
+// const plumberSlice = createSlice({
+//   name: 'plumber',
+//   initialState,
+//   reducers: {
+//     addService(state, action) {
+//       const service = state.services.find(
+//         (item) => item.id === action.payload.id
+//       );
+//       if (service) {
+//         service.quantity += 1; // Increase quantity
+//       }
+//     },
+//     removeService(state, action) {
+//       const service = state.services.find(
+//         (item) => item.id === action.payload.id
+//       );
+//       if (service && service.quantity > 0) {
+//         service.quantity -= 1; // Decrease quantity
+//       }
+//     },
+//   },
+// });
+
+// export const { addService, removeService } = plumberSlice.actions;
+// export default plumberSlice.reducer;

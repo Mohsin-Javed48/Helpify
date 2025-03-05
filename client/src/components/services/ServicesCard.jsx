@@ -1,11 +1,12 @@
 /** @format */
 
-import crossIcon from "/crossIcon.png";
-import moneyBagIcon from "/moneyBagIcon.png";
-import SubServiceCard from "../../ui/SubServiceCard";
-import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import crossIcon from '/crossIcon.png';
+import moneyBagIcon from '/moneyBagIcon.png';
+import SubServiceCard from '../../ui/SubServiceCard';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import geyserMaintenance from '../../../public/geyserMaintenance.jpg';
 
 function ServicesCard({ services, name }) {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function ServicesCard({ services, name }) {
           {/* Close Button */}
           <button
             className="flex flex-shrink-0 items-center justify-center w-[80px] h-[70px] sm:w-[90px] sm:h-[75px] lg:w-[106px] lg:h-[85px] border border-black bg-[rgba(217,217,217,0.05)]"
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           >
             <img
               src={crossIcon}
@@ -38,7 +39,7 @@ function ServicesCard({ services, name }) {
           {/* Text */}
           <h1
             className="absolute left-1/2 transform -translate-x-1/2 text-[#000] text-center font-[Wix Madefor Display] text-[24px] sm:text-[30px] lg:text-[35px] font-extrabold leading-[26px] tracking-[-0.35px]"
-            style={{ width: "293px" }}
+            style={{ width: '293px' }}
           >
             <span className="flex items-center justify-center space-x-1">
               <span>Service:</span>
@@ -98,10 +99,10 @@ function ServicesCard({ services, name }) {
                 <SubServiceCard
                   key={index}
                   id={service.id}
-                  title={service.title}
-                  subtitle={service.subtitle}
+                  title={service.name}
+                  subtitle={service.description}
                   price={service.price}
-                  image={service.image}
+                  image={geyserMaintenance}
                   quantity={service.quantity}
                 />
               ))}
@@ -112,7 +113,7 @@ function ServicesCard({ services, name }) {
           {totalQuantity !== 0 ? (
             <div
               className="w-full max-w-screen-xl flex justify-end mt-6 pr-4 sm:pr-8 cursor-pointer  popupAnimate"
-              onClick={() => navigate("/order")}
+              onClick={() => navigate('/order')}
             >
               <div className="flex items-center justify-between w-[250px] sm:w-[334px] h-[65px] bg-[#4184F1] rounded-[4px] p-4">
                 <div className="flex items-center justify-center w-[38px] h-[39px] border border-[#FFF] text-[#FFF] font-[Wix Madefor Display] text-[19px] font-semibold leading-[34px]">
@@ -123,11 +124,11 @@ function ServicesCard({ services, name }) {
                 </div>
                 <div
                   className="flex items-center"
-                  onClick={() => navigate("/order")}
+                  onClick={() => navigate('/order')}
                 >
                   <button
                     className="text-[#FFF] font-[Wix Madefor Display] text-[19px] font-semibold leading-[34px]"
-                    onClick={() => navigate("/order")}
+                    onClick={() => navigate('/order')}
                   >
                     continue
                   </button>
@@ -150,16 +151,5 @@ function ServicesCard({ services, name }) {
     </>
   );
 }
-ServicesCard.propTypes = {
-  services: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      subtitle: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  name: PropTypes.string.isRequired,
-};
 
 export default ServicesCard;

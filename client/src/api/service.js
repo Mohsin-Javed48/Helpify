@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 
-const getAllServices = async () => {
+const getServicesByCategory = async (category) => {
   return axios
-    .get(`${BASE_URL}/service/`, {
+    .get(`${BASE_URL}/service?category=${category}`, {
       headers: {},
     })
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((error) => {
+      console.error('Error fetching services:', error);
+      return { message: 'Error fetching services' };
+    });
 };
 
-export default getAllServices;
+export default getServicesByCategory;

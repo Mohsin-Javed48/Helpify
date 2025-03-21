@@ -28,13 +28,14 @@ function SubServiceCard({
     console.log(orders);
     dispatch(addOrder(newOrder));
   }
-
+  console.log(image);
   return (
     <div className="w-full sm:max-w-[360px] h-auto bg-[#FFF] rounded-[30px] flex-shrink-0 flex flex-wrap sm:flex-nowrap items-center p-4 sm:p-6 gap-4">
       <div
         className="w-[100px] sm:w-[117px] h-[100px] sm:h-[117px] flex-shrink-0 bg-lightgray bg-cover bg-no-repeat"
         style={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${image})`
+
         }}
       ></div>
 

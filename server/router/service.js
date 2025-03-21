@@ -1,7 +1,11 @@
-const { getAllServices } = require("../controller/service");
+const express = require("express");
+const router = express.Router();
+const {
+  
+  getServicesByCategory,
+} = require("../controller/service");
 
-const router = require("express").Router();
-
-router.get("/", getAllServices);
+// 📌 Use multer middleware to handle file uploads
+router.get("/", getServicesByCategory);
 
 module.exports = router;

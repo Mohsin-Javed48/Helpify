@@ -102,7 +102,7 @@ function ServicesCard({ services, name }) {
                   title={service.name}
                   subtitle={service.description}
                   price={service.price}
-                  image={geyserMaintenance}
+                  image={service.image}
                   quantity={service.quantity}
                 />
               ))}

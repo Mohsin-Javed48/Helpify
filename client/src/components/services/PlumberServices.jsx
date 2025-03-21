@@ -2,28 +2,30 @@
 
 import React, { useState, useEffect } from 'react';
 import ServicesCard from './ServicesCard';
-import getAllServices from '../../api/service';
+import getServicesByCategory from '../../api/service';
 
 function PlumberServices() {
   const [services, setServices] = useState([]); // Manage services state
   const [error, setError] = useState(null); // Manage error state if any
 
   useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const fetchedServices = await getAllServices();
-        setServices(fetchedServices.services); // Assuming API returns { success: true, services: [...] }
-        console.log(fetchedServices);
-      } catch (err) {
-        console.error('Error fetching services:', err);
-        setError('Failed to fetch services');
-      }
-    };
-
-    fetchServices(); // Fetch data on component mount
-  }, []); // Empty dependency array ensures it runs once on mount
-
+    // Fetch plumber services
+    getServicesByCategory('plumber')
+      .then((data) => {
+        if (data.message) {
+          setServices([]); // No services found
+        } else {
+          setServices(data);
+        }
+        // setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching plumber services:', error);
+        // setLoading(false);
+      });
+  }, []);
   const name = 'Plumber';
+  console.log(services);
 
   if (error) {
     return <div>{error}</div>; // Display error if any

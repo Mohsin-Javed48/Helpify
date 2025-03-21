@@ -1,47 +1,49 @@
-'use strict';
-const { Model } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
-  class Service extends Model {
-    static associate(models) {
-      // Define associations here
-      Service.belongsTo(models.User, {
-        foreignKey: 'providerId', // Foreign key in the Services table
-        as: 'provider', // Alias for the association
-      });
-    }
-  }
-  Service.init(
+  const Service = sequelize.define(
+    "Service",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING,
-        allowNull: false, // Name is required
+        allowNull: false,
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: true, // Description is optional
+        allowNull: true,
       },
       price: {
-        type: DataTypes.FLOAT,
-        allowNull: false, // Price is required
-        validate: {
-          min: 0, // Price cannot be negative
-        },
+        type: DataTypes.DOUBLE,
+        allowNull: false,
       },
-      providerId: {
-        type: DataTypes.INTEGER,
-        allowNull: false, // Provider ID is required
-        references: {
-          model: 'Users', // References the Users table
-          key: 'id', // References the primary key in the Users table
-        },
+      total_orders: { type: DataTypes.INTEGER, defaultValue: 0 },
+      total_providers: { type: DataTypes.INTEGER, defaultValue: 0 },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true, // Image is optional
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       },
     },
     {
-      sequelize,
-      modelName: 'Service',
-      tableName: 'Services', // Explicitly set the table name
-      timestamps: true, // Enable createdAt and updatedAt
+      tableName: "Services",
+      timestamps: true,
     }
   );
   return Service;

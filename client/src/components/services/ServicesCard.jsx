@@ -5,12 +5,12 @@ import moneyBagIcon from '/moneyBagIcon.png';
 import SubServiceCard from '../../ui/SubServiceCard';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useOrders } from '../../context/OrdersContext';
 import geyserMaintenance from '../../../public/geyserMaintenance.jpg';
 
 function ServicesCard({ services, name }) {
   const navigate = useNavigate();
-  const ordersList = useSelector((state) => state.orders.ordersList);
+  const { ordersList } = useOrders();
   const totalQuantity = ordersList.reduce(
     (total, order) => total + order.quantity,
     0
@@ -151,5 +151,10 @@ function ServicesCard({ services, name }) {
     </>
   );
 }
+
+ServicesCard.propTypes = {
+  services: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+};
 
 export default ServicesCard;

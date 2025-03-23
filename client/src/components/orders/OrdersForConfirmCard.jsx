@@ -2,7 +2,6 @@
 
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { removeOrder } from '../../store/ordersSlice'; // Ensure this action is defined
 
 function OrdersForConfirmCard({ order }) {
   const dispatch = useDispatch();

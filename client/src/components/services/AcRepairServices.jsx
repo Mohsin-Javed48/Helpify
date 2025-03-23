@@ -1,14 +1,14 @@
 /** @format */
 
-import { useSelector } from "react-redux";
-import ServicesCard from "./ServicesCard";
+import { useServices } from '../../context/ServicesContext';
+import ServicesCard from './ServicesCard';
 
 function AcRepairServices() {
-  const services = useSelector((state) => state.acRepair.services);
-  const name = "AcRepair";
+  const { acRepairServices } = useServices();
+  const name = 'AcRepair';
   return (
     <div>
-      <ServicesCard services={services} name={name} />
+      <ServicesCard services={acRepairServices} name={name} />
     </div>
   );
 }

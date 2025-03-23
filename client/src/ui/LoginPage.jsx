@@ -1,15 +1,14 @@
 /** @format */
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 // import Google_icon from '../assets/google_icon';
 import { FaEye as ViewPasswordIcon } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-import { login } from '../store/authSlice';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 function LoginPage() {
-  const dispatch = useDispatch();
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [viewPassword, setViewPassword] = useState(false);
@@ -24,7 +23,7 @@ function LoginPage() {
 
   function onSubmit(data) {
     try {
-      dispatch(login(data));
+      login(data); // Using AuthContext login function
       console.log('jel');
       navigate('/');
     } catch (error) {

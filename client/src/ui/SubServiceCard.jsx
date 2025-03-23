@@ -1,20 +1,18 @@
 /** @format */
 
-import React from "react";
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { addOrder } from "../components/store/ordersSlice";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useOrders } from '../context/OrdersContext';
 
 function SubServiceCard({
   id,
-  title = "Default Title", // Default value for title
-  subtitle = "Default Subtitle", // Default value for subtitle
-  price = "0", // Default value for price
-  image = "https://via.placeholder.com/100", // Default value for image
-  quantity = "1", // Default value for quantity
+  title = 'Default Title', // Default value for title
+  subtitle = 'Default Subtitle', // Default value for subtitle
+  price = '0', // Default value for price
+  image = 'https://via.placeholder.com/100', // Default value for image
+  quantity = '1', // Default value for quantity
 }) {
-  const orders = useSelector((state) => state.orders?.ordersList || []);
-  const dispatch = useDispatch();
+  const { ordersList, addOrder } = useOrders();
 
   function addOrderItem() {
     const newOrder = {
@@ -25,8 +23,8 @@ function SubServiceCard({
       quantity: quantity,
     };
     console.log(newOrder);
-    console.log(orders);
-    dispatch(addOrder(newOrder));
+    console.log(ordersList);
+    addOrder(newOrder);
   }
 
   return (

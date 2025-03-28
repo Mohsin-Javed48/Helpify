@@ -2,8 +2,12 @@ import axios from 'axios';
 import { getUser, setUser } from '../utills/user';
 import { refreshTokenAPI } from './auth';
 
-
-const instance = axios.create();
+const instance = axios.create({
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
 
 // Function to set token in request headers
 export const setAuthToken = (token) => {

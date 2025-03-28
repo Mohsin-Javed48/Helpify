@@ -111,26 +111,27 @@ function ServicesCard({ services, name }) {
 
           {/* Continue Button */}
           {totalQuantity !== 0 ? (
-            <div
-              className="w-full max-w-screen-xl flex justify-end mt-6 pr-4 sm:pr-8 cursor-pointer  popupAnimate"
-              onClick={() => navigate('/order')}
-            >
-              <div className="flex items-center justify-between w-[250px] sm:w-[334px] h-[65px] bg-[#4184F1] rounded-[4px] p-4">
+            <div className="w-full max-w-screen-xl flex justify-between mt-6 pr-4 sm:pr-8">
+              <button
+                onClick={() => navigate('/order')}
+                className="flex items-center justify-center px-6 py-3 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+              >
+                <span className="mr-2">View Details</span>
+              </button>
+
+              <div
+                className="flex items-center justify-between w-[250px] sm:w-[334px] h-[65px] bg-[#4184F1] rounded-[4px] p-4 cursor-pointer popupAnimate"
+                onClick={() => navigate('/booking')}
+              >
                 <div className="flex items-center justify-center w-[38px] h-[39px] border border-[#FFF] text-[#FFF] font-[Wix Madefor Display] text-[19px] font-semibold leading-[34px]">
                   {totalQuantity}
                 </div>
                 <div className="text-[#FFF] font-[Wix Madefor Display] text-[19px] font-semibold leading-[34px] mx-2">
                   Rs {totalPrice}
                 </div>
-                <div
-                  className="flex items-center"
-                  onClick={() => navigate('/order')}
-                >
-                  <button
-                    className="text-[#FFF] font-[Wix Madefor Display] text-[19px] font-semibold leading-[34px]"
-                    onClick={() => navigate('/order')}
-                  >
-                    continue
+                <div className="flex items-center">
+                  <button className="text-[#FFF] font-[Wix Madefor Display] text-[19px] font-semibold leading-[34px]">
+                    Book Now
                   </button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

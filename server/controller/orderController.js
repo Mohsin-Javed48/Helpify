@@ -1,0 +1,484 @@
+const {
+  Order,
+  OrderService,
+  Service,
+  User,
+  ServiceProvider,
+} = require("../models");
+const { sequelize } = require("../models");
+
+/**
+ * Create a new order with associated services
+ * @route POST /api/orders
+ */
+const createOrder = async (req, res) => {
+  const transaction = await sequelize.transaction();
+
+  try {
+    const {
+      userId,
+      serviceProviderId,
+      title,
+      description,
+      address,
+      scheduledDate,
+      scheduledTime,
+      paymentMethod,
+      amount,
+      services,
+    } = req.body;
+
+    // Validate required fields
+    if (
+      !userId ||
+      !serviceProviderId ||
+      !scheduledDate ||
+      !scheduledTime ||
+      !address ||
+      !services ||
+      services.length === 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields for order creation",
+      });
+    }
+
+    // Create the order
+    const order = await Order.create(
+      {
+        userId,
+        serviceProviderId,
+        title,
+        description,
+        address,
+        scheduledDate,
+        scheduledTime,
+        amount,
+        status: "pending",
+        paymentStatus: "pending",
+        paymentMethod,
+      },
+      { transaction }
+    );
+
+    // Create the associated order services
+    await Promise.all(
+      services.map(async (service) => {
+        await OrderService.create(
+          {
+            orderId: order.id,
+            serviceId: service.serviceId,
+            quantity: service.quantity,
+            price: service.price,
+            subtotal: service.subtotal,
+            notes: service.notes || null,
+          },
+          { transaction }
+        );
+      })
+    );
+
+    // Update service provider statistics
+    await ServiceProvider.increment("totalOrders", {
+      by: 1,
+      where: { id: serviceProviderId },
+      transaction,
+    });
+
+    await transaction.commit();
+
+    return res.status(201).json({
+      success: true,
+      id: order.id,
+      message: "Order created successfully",
+    });
+  } catch (error) {
+    await transaction.rollback();
+    console.error("Error creating order:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to create order",
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * Get order details including associated services
+ * @route GET /api/orders/:id
+ */
+const getOrderById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const order = await Order.findByPk(id, {
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "email", "phone"],
+        },
+        {
+          model: ServiceProvider,
+          as: "serviceProvider",
+          attributes: [
+            "id",
+            "designation",
+            "rating",
+            "experience",
+            "totalOrders",
+            "completedOrders",
+          ],
+        },
+        {
+          model: OrderService,
+          as: "orderServices",
+          include: [
+            {
+              model: Service,
+              as: "service",
+              attributes: ["id", "name", "description", "price"],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // Format response
+    const formattedOrder = {
+      id: order.id,
+      title: order.title,
+      description: order.description,
+      address: order.address,
+      scheduledDate: order.scheduledDate,
+      scheduledTime: order.scheduledTime,
+      amount: parseFloat(order.amount),
+      status: order.status,
+      paymentStatus: order.paymentStatus,
+      paymentMethod: order.paymentMethod,
+      rating: order.rating,
+      review: order.review,
+      completedAt: order.completedAt,
+      cancellationReason: order.cancellationReason,
+      createdAt: order.createdAt,
+      updatedAt: order.updatedAt,
+      customer: order.user
+        ? {
+            id: order.user.id,
+            name: order.user.name,
+            email: order.user.email,
+            phone: order.user.phone,
+          }
+        : null,
+      serviceProvider: order.serviceProvider
+        ? {
+            id: order.serviceProvider.id,
+            designation: order.serviceProvider.designation,
+            rating: order.serviceProvider.rating,
+            experience: order.serviceProvider.experience,
+            totalOrders: order.serviceProvider.totalOrders,
+            completedOrders: order.serviceProvider.completedOrders,
+          }
+        : null,
+      services: order.orderServices
+        ? order.orderServices.map((orderService) => ({
+            id: orderService.serviceId,
+            name: orderService.service.name,
+            description: orderService.service.description,
+            quantity: orderService.quantity,
+            price: parseFloat(orderService.price),
+            subtotal: parseFloat(orderService.subtotal),
+            notes: orderService.notes,
+          }))
+        : [],
+    };
+
+    return res.status(200).json({
+      success: true,
+      order: formattedOrder,
+    });
+  } catch (error) {
+    console.error("Error fetching order:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch order details",
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * Get all orders for a user (customer or service provider)
+ * @route GET /api/orders
+ */
+const getOrders = async (req, res) => {
+  try {
+    const {
+      userId,
+      serviceProviderId,
+      status,
+      limit = 10,
+      page = 1,
+    } = req.query;
+
+    const offset = (page - 1) * limit;
+    const where = {};
+
+    // Filter by user or service provider
+    if (userId) where.userId = userId;
+    if (serviceProviderId) where.serviceProviderId = serviceProviderId;
+    if (status) where.status = status;
+
+    const { count, rows: orders } = await Order.findAndCountAll({
+      where,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [["createdAt", "DESC"]],
+      include: [
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "name", "email", "phone"],
+        },
+        {
+          model: ServiceProvider,
+          as: "serviceProvider",
+          attributes: ["id", "designation", "rating"],
+        },
+      ],
+    });
+
+    // Format response
+    const formattedOrders = orders.map((order) => ({
+      id: order.id,
+      title: order.title,
+      description: order.description,
+      address: order.address,
+      scheduledDate: order.scheduledDate,
+      scheduledTime: order.scheduledTime,
+      amount: parseFloat(order.amount),
+      status: order.status,
+      paymentStatus: order.paymentStatus,
+      createdAt: order.createdAt,
+      customer: order.user
+        ? {
+            id: order.user.id,
+            name: order.user.name,
+          }
+        : null,
+      serviceProvider: order.serviceProvider
+        ? {
+            id: order.serviceProvider.id,
+            designation: order.serviceProvider.designation,
+            rating: order.serviceProvider.rating,
+          }
+        : null,
+    }));
+
+    return res.status(200).json({
+      success: true,
+      orders: formattedOrders,
+      pagination: {
+        total: count,
+        page: parseInt(page),
+        limit: parseInt(limit),
+        pages: Math.ceil(count / limit),
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch orders",
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * Update order status
+ * @route PATCH /api/orders/:id/status
+ */
+const updateOrderStatus = async (req, res) => {
+  const transaction = await sequelize.transaction();
+
+  try {
+    const { id } = req.params;
+    const { status, cancellationReason } = req.body;
+
+    // Validate status
+    const validStatuses = [
+      "pending",
+      "accepted",
+      "rejected",
+      "in_progress",
+      "completed",
+      "cancelled",
+    ];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid status value",
+      });
+    }
+
+    const order = await Order.findByPk(id);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // Update order status
+    const updateData = { status };
+
+    // Handle completed orders
+    if (status === "completed" && order.status !== "completed") {
+      updateData.completedAt = new Date();
+
+      // Update service provider statistics
+      await ServiceProvider.increment("completedOrders", {
+        by: 1,
+        where: { id: order.serviceProviderId },
+        transaction,
+      });
+
+      // Update total earnings
+      await ServiceProvider.increment("totalEarnings", {
+        by: parseFloat(order.amount),
+        where: { id: order.serviceProviderId },
+        transaction,
+      });
+    }
+
+    // Handle cancelled or rejected orders
+    if (
+      (status === "cancelled" || status === "rejected") &&
+      cancellationReason
+    ) {
+      updateData.cancellationReason = cancellationReason;
+    }
+
+    await order.update(updateData, { transaction });
+    await transaction.commit();
+
+    return res.status(200).json({
+      success: true,
+      message: `Order status updated to ${status}`,
+    });
+  } catch (error) {
+    await transaction.rollback();
+    console.error("Error updating order status:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update order status",
+      error: error.message,
+    });
+  }
+};
+
+/**
+ * Add review and rating to a completed order
+ * @route PATCH /api/orders/:id/review
+ */
+const addReview = async (req, res) => {
+  const transaction = await sequelize.transaction();
+
+  try {
+    const { id } = req.params;
+    const { rating, review } = req.body;
+
+    // Validate rating
+    if (typeof rating !== "number" || rating < 1 || rating > 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Rating must be a number between 1 and 5",
+      });
+    }
+
+    const order = await Order.findByPk(id);
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // Check if order is completed
+    if (order.status !== "completed") {
+      return res.status(400).json({
+        success: false,
+        message: "Only completed orders can be reviewed",
+      });
+    }
+
+    // Update order with review and rating
+    await order.update(
+      {
+        rating,
+        review,
+      },
+      { transaction }
+    );
+
+    // Update service provider's average rating
+    const serviceProvider = await ServiceProvider.findByPk(
+      order.serviceProviderId
+    );
+    if (serviceProvider) {
+      // Get all ratings for this service provider
+      const orders = await Order.findAll({
+        where: {
+          serviceProviderId: order.serviceProviderId,
+          rating: { [sequelize.Op.ne]: null },
+        },
+        attributes: ["rating"],
+      });
+
+      // Calculate new average rating
+      const totalRatings = orders.reduce((sum, o) => sum + o.rating, 0);
+      const avgRating = (totalRatings / orders.length).toFixed(1);
+
+      // Update service provider
+      await serviceProvider.update(
+        {
+          rating: avgRating,
+        },
+        { transaction }
+      );
+    }
+
+    await transaction.commit();
+
+    return res.status(200).json({
+      success: true,
+      message: "Review added successfully",
+    });
+  } catch (error) {
+    await transaction.rollback();
+    console.error("Error adding review:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to add review",
+      error: error.message,
+    });
+  }
+};
+
+// Export all functions at the end
+module.exports = {
+  createOrder,
+  getOrderById,
+  getOrders,
+  updateOrderStatus,
+  addReview,
+};

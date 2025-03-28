@@ -1,11 +1,7 @@
-import Header from '../../ui/Header';
-import Sidebar from '../../ui/Sidebar';
 import ChartCards from '../shared/ChartCards';
 import DashboardCards from '../../ui/DashboardCards';
-import { useState } from 'react';
 
-function ServiveProviderDashboard() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+function ServiceProviderDashboard() {
   return (
     <>
       <div
@@ -17,7 +13,7 @@ function ServiveProviderDashboard() {
             Dashboard
           </h1>
           <h2 className="text-[#A3A3A3] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-medium leading-normal">
-            Hi, Samantha. Welcome back to Sedap Admin!
+            Hi, Samantha. Welcome back to Helpify!
           </h2>
         </div>
         <div className="col-span-1 md:col-end-3 lg:col-end-5 flex justify-center gap-[8px] items-center p-3 bg-[#fff]">
@@ -66,4 +62,4 @@ function ServiveProviderDashboard() {
   );
 }
 
-export default ServiveProviderDashboard;
+export default ServiceProviderDashboard;

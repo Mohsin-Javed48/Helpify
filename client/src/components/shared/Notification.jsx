@@ -1,26 +1,149 @@
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import ServiceProviderIcon from '../../../public/ServiceProviderIcon.png';
-// import ServiceProviderIcon from './ServiceProviderIcon.png';
-
-const orders = [
-  {
-    id: 1,
-    name: 'Mohsin Javed',
-
-    timing: '1 min ago',
-    items: 'Lawn cleaning, Garden furnishing',
-    location: 'Dera Jugra plot number 420 A block',
-  },
-  {
-    id: 2,
-    name: 'Mohsin Javed',
-
-    timing: '1 min ago',
-    items: 'Lawn cleaning, Garden furnishing',
-    location: 'Dera Jugra plot number 420 A block',
-  },
-];
+import { useSocket } from '../../context/SocketContext';
 
 function Notification() {
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const user = useSelector((state) => state.auth.user);
+  const { socket, connected } = useSocket();
+
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  useEffect(() => {
+    if (!socket || !connected) {
+      console.log('Socket not connected, skipping socket event setup');
+      return;
+    }
+
+    console.log('Setting up socket event listeners');
+
+    // Listen for real-time notifications
+    const handleServiceRequest = (data) => {
+      addNewNotification({
+        type: 'SERVICE_REQUEST',
+        message: data.message,
+        data: data,
+        createdAt: new Date(),
+      });
+    };
+
+    const handleNewBid = (data) => {
+      addNewNotification({
+        type: 'NEW_BID',
+        message: `New bid received for $${data.bidAmount}`,
+        data: data,
+        createdAt: new Date(),
+      });
+    };
+
+    const handleCounterOffer = (data) => {
+      addNewNotification({
+        type: 'COUNTER_OFFER',
+        message: `Counter offer received for $${data.counterOfferAmount}`,
+        data: data,
+        createdAt: new Date(),
+      });
+    };
+
+    const handleBidAccepted = (data) => {
+      addNewNotification({
+        type: 'BID_ACCEPTED',
+        message: `Your bid has been accepted for $${data.finalAmount}`,
+        data: data,
+        createdAt: new Date(),
+      });
+    };
+
+    // Add event listeners
+    socket.on('new-service-request', handleServiceRequest);
+    socket.on('new-bid-received', handleNewBid);
+    socket.on('counter-offer-received', handleCounterOffer);
+    socket.on('bid-accepted', handleBidAccepted);
+
+    // Cleanup function
+    return () => {
+      if (socket && connected) {
+        socket.off('new-service-request', handleServiceRequest);
+        socket.off('new-bid-received', handleNewBid);
+        socket.off('counter-offer-received', handleCounterOffer);
+        socket.off('bid-accepted', handleBidAccepted);
+      }
+    };
+  }, [socket, connected]);
+
+  const fetchNotifications = async () => {
+    try {
+      const response = await axios.get('/api/notifications');
+      setNotifications(response.data.data || []);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      toast.error('Failed to load notifications');
+      setLoading(false);
+      setNotifications([]);
+    }
+  };
+
+  const addNewNotification = (notification) => {
+    setNotifications((prev) => [notification, ...prev]);
+  };
+
+  const formatTimeAgo = (date) => {
+    const now = new Date();
+    const diff = now - new Date(date);
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return 'Just now';
+  };
+
+  const getNotificationDetails = (notification) => {
+    switch (notification.type) {
+      case 'SERVICE_REQUEST':
+        return {
+          title: 'New Service Request',
+          items:
+            notification.data.services?.map((s) => s.name).join(', ') ||
+            'Service request',
+          location: notification.data.address || 'Location not specified',
+        };
+      case 'NEW_BID':
+        return {
+          title: 'New Bid Received',
+          items: `Bid amount: $${notification.data.bidAmount}`,
+          location: notification.data.message || '',
+        };
+      case 'COUNTER_OFFER':
+        return {
+          title: 'Counter Offer',
+          items: `Counter offer amount: $${notification.data.counterOfferAmount}`,
+          location: notification.data.message || '',
+        };
+      case 'BID_ACCEPTED':
+        return {
+          title: 'Bid Accepted',
+          items: `Final amount: $${notification.data.finalAmount}`,
+          location: 'Your bid has been accepted',
+        };
+      default:
+        return {
+          title: notification.type,
+          items: notification.message,
+          location: '',
+        };
+    }
+  };
+
   return (
     <>
       <div
@@ -32,7 +155,7 @@ function Notification() {
             Notification
           </h1>
           <h2 className="text-[#A3A3A3] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-medium leading-normal">
-            Hi, Samantha. Welcome back to Helpify!
+            Hi, {user?.firstName || 'User'}. Welcome back to Helpify!
           </h2>
         </div>
 
@@ -74,58 +197,73 @@ function Notification() {
         </div>
       </div>
       <div className="bg-[#fff] p-1 sm:p-6 md:p-8 lg:p-10 space-y-4">
-        {orders.map((order) => (
-          <div
-            key={order.id}
-            className="rounded-mds p-4 flex justify-between"
-            style={{
-              background: 'linear-gradient(90deg, #FEF1EC 0%, #AFE1F9 100%)',
-            }}
-          >
-            <div className="flex items-center gap-10">
-              <img
-                src={ServiceProviderIcon}
-                alt="Service Provider"
-                className="hidden sm:block w-[34px] h-[34px] sm:w-[44px] sm:h-[44px] md:w-[54px] md:h-[54px] lg:w-[64px] lg:h-[64px]"
-              />
-              <div className="text-[6px] sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] font-medium">
-                <h2 className="font-poppins text-[18px] sm:text-[22px] md:text-[28px] lg:text-[34px] leading-normal font-bold ">
-                  {order.name}
-                </h2>
-                <h2 className="font-poppins text-[#E23744] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-normal font-meadium">
-                  Timing: {order.timing}
-                </h2>
-                <h2 className="font-poppins text-[#6A6A6A] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-normal font-medium">
-                  Items: {order.items}
-                </h2>
-                <h2 className="font-poppins text-[#6A6A6A] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-normal font-medium">
-                  Location: {order.location}
-                </h2>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="bg-[#7BFF71] p-2 sm:p-3 text-[8px] sm:text-[12px] md:text-[14px] lg:text-[16px] font-semibold rounded-lg">
-                Completed
-              </button>
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="30"
-                  viewBox="0 0 18 30"
-                  fill="none"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M16.8531 16.5997L4.12486 29.3279L0.943359 26.1465L12.0809 15.0089L0.943359 3.87144L4.12486 0.689941L16.8531 13.4182C17.2749 13.8401 17.5119 14.4123 17.5119 15.0089C17.5119 15.6056 17.2749 16.1778 16.8531 16.5997Z"
-                    fill="black"
-                  />
-                </svg>
-              </div>
-            </div>
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
-        ))}
+        ) : notifications.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="mx-auto w-16 h-16 mb-4 text-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-medium text-gray-900">
+              No notifications
+            </h3>
+            <p className="mt-2 text-sm text-gray-500">
+              You're all caught up! New notifications will appear here.
+            </p>
+          </div>
+        ) : (
+          notifications.map((notification) => {
+            const details = getNotificationDetails(notification);
+            return (
+              <div
+                key={notification.id}
+                className="rounded-mds p-4 flex justify-between"
+                style={{
+                  background:
+                    'linear-gradient(90deg, #FEF1EC 0%, #AFE1F9 100%)',
+                }}
+              >
+                <div className="flex items-center gap-10">
+                  <img
+                    src={ServiceProviderIcon}
+                    alt="Service Provider"
+                    className="hidden sm:block w-[34px] h-[34px] sm:w-[44px] sm:h-[44px] md:w-[54px] md:h-[54px] lg:w-[64px] lg:h-[64px]"
+                  />
+                  <div className="text-[6px] sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] font-medium">
+                    <h2 className="font-poppins text-[18px] sm:text-[22px] md:text-[28px] lg:text-[34px] leading-normal font-bold">
+                      {details.title}
+                    </h2>
+                    <h2 className="font-poppins text-[#E23744] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-normal">
+                      Timing: {formatTimeAgo(notification.createdAt)}
+                    </h2>
+                    <h2 className="font-poppins text-[#6A6A6A] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-normal font-medium">
+                      Items: {details.items}
+                    </h2>
+                    {details.location && (
+                      <h2 className="font-poppins text-[#6A6A6A] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] leading-normal font-medium">
+                        Location: {details.location}
+                      </h2>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
     </>
   );

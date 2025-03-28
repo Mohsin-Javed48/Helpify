@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import { clearUser } from '../utills/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faHome, 
-  faListAlt, 
-  faUser, 
-  faUserFriends, 
-  faComments, 
-  faWallet, 
-  faBell, 
-  faSignOutAlt 
+import {
+  faHome,
+  faListAlt,
+  faUser,
+  faUserFriends,
+  faComments,
+  faWallet,
+  faBell,
+  faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
@@ -17,7 +17,7 @@ function Sidebar() {
     clearUser();
     window.location.href = '/auth/login';
   };
-  
+
   return (
     <div className="hidden md:block bg-[#fff] shadow-lg py-4 px-6 lg:py-6 lg:px-8">
       <div className="flex flex-col gap-[930px]">
@@ -29,7 +29,7 @@ function Sidebar() {
             className="mb-[15px] lg:mb-[25px] text-[#B9BBBD] text-[18px] font-medium leading-normal"
             style={{ fontFamily: 'Barlow, sans-serif' }}
           >
-            Customer Dashboard
+            Service Provider Dashboard
           </h2>
           <ul
             className="text-[#464255] space-y-[25px] text-[18px] font-medium leading-[40px]"
@@ -37,20 +37,21 @@ function Sidebar() {
           >
             <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
               <NavLink
-                to="/dashboard"
+                to="/provider"
+                end
                 className={({ isActive }) =>
                   `flex items-center gap-2 p-2 rounded ${
-                    isActive ? 'bg-[#2ED6A326] text-[black]' : 'bg-[white]'
+                    isActive ? 'bg-[#2ED6A326] text-[black]' : ''
                   }`
                 }
               >
-                <FontAwesomeIcon icon={faHome} className="text-[#00B074]" />
+                <FontAwesomeIcon icon={faHome} className="text-[#464255]" />
                 Dashboard
               </NavLink>
             </li>
             <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
               <NavLink
-                to="/provider/orderlist"
+                to="/provider/order-list"
                 className={({ isActive }) =>
                   `flex items-center gap-2 p-2 rounded ${
                     isActive ? 'bg-[#2ED6A326] text-[black]' : ''
@@ -61,7 +62,6 @@ function Sidebar() {
                 Order List
               </NavLink>
             </li>
-
             <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
               <NavLink
                 to="/provider/customer"
@@ -77,14 +77,17 @@ function Sidebar() {
             </li>
             <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
               <NavLink
-                to="/provider/customerhistory"
+                to="/provider/customer-history"
                 className={({ isActive }) =>
                   `flex items-center gap-2 p-2 rounded ${
                     isActive ? 'bg-[#2ED6A326] text-[black]' : ''
                   }`
                 }
               >
-                <FontAwesomeIcon icon={faUserFriends} className="text-[#464255]" />
+                <FontAwesomeIcon
+                  icon={faUserFriends}
+                  className="text-[#464255]"
+                />
                 Customer History
               </NavLink>
             </li>
@@ -103,6 +106,19 @@ function Sidebar() {
             </li>
             <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
               <NavLink
+                to="/provider/notification"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 p-2 rounded ${
+                    isActive ? 'bg-[#2ED6A326] text-[black]' : ''
+                  }`
+                }
+              >
+                <FontAwesomeIcon icon={faBell} className="text-[#464255]" />
+                Notification
+              </NavLink>
+            </li>
+            <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
+              <NavLink
                 to="/provider/wallet"
                 className={({ isActive }) =>
                   `flex items-center gap-2 p-2 rounded ${
@@ -115,26 +131,14 @@ function Sidebar() {
               </NavLink>
             </li>
             <li className="gap-3 text-gray-600 hover:text-blue-500 cursor-pointer">
-              <NavLink
-                to="/provider/notification"
-                className={({ isActive }) =>
-                  `flex items-center gap-2 p-2 rounded ${
-                    isActive ? 'bg-[#2ED6A326] text-[black]' : ''
-                  }`
-                }
-              >
-                <FontAwesomeIcon icon={faBell} className="text-[#464255]" />
-                Notification
-              </NavLink>
-            </li>
-
-            <li className="text-gray-600 hover:text-blue-500 cursor-pointer">
               <button
+                className="flex items-center gap-2 p-2 rounded"
                 onClick={handleLogout}
-                className="flex items-center gap-2 p-2 hover:text-blue-500"
-                aria-label="Logout"
               >
-                <FontAwesomeIcon icon={faSignOutAlt} className="text-[#464255]" />
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  className="text-[#464255]"
+                />
                 Logout
               </button>
             </li>
@@ -145,7 +149,7 @@ function Sidebar() {
             className="mb-[5px] text-[#969BA0] text-[13px] font-bold leading-[18px]"
             style={{ fontFamily: 'Barlow, sans-serif' }}
           >
-            HELPIFY Customer Dashboard
+            HELPIFY Service Provider Dashboard
           </h1>
           <h2
             className="mb-[15px] text-[#969BA0] text-[13px] font-bold leading-[18px]"

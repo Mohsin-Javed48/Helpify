@@ -1,71 +1,71 @@
 /** @format */
 /** @format */
 
-import { createSlice } from "@reduxjs/toolkit";
-import mixerTapInstallation from "/mixerTapInstallation.jpg";
-import drainCleaning from "/drainCleaning.jpg";
-import pipeLeakRepair from "/pipeLeakRepair.jpg";
-import waterHeaterInstallation from "/waterHeaterInstallation.jpg";
-import toiletInstallation from "/toiletInstallation.jpg";
-import showerHeadReplacement from "/showerHeadReplacement.jpg";
-import geyserMaintenance from "/geyserMaintenance.jpg";
+import { createSlice } from '@reduxjs/toolkit';
+import mixerTapInstallation from '/mixerTapInstallation.jpg';
+import drainCleaning from '/drainCleaning.jpg';
+import pipeLeakRepair from '/pipeLeakRepair.jpg';
+import waterHeaterInstallation from '/waterHeaterInstallation.jpg';
+import toiletInstallation from '/toiletInstallation.jpg';
+import showerHeadReplacement from '/showerHeadReplacement.jpg';
+import geyserMaintenance from '/geyserMaintenance.jpg';
 
 const initialState = {
   services: [
     {
       id: 1,
-      name: "Mixer Tap Installation",
+      name: 'Mixer Tap Installation',
       image: mixerTapInstallation,
-      subtitle: "--Per piece",
+      subtitle: '--Per piece',
       price: 300,
       quantity: 1,
     },
     {
       id: 2,
-      title: "Drain Cleaning",
+      title: 'Drain Cleaning',
       image: drainCleaning,
-      subtitle: "--Per hour",
+      subtitle: '--Per hour',
       price: 500,
       quantity: 1,
     },
     {
       id: 3,
-      title: "Pipe Leak Repair",
+      title: 'Pipe Leak Repair',
       image: pipeLeakRepair, // Replace with actual image variable or path
-      subtitle: "--Per service",
+      subtitle: '--Per service',
       price: 400,
       quantity: 1,
     },
     {
       id: 4,
-      title: "Water Heater Installation",
+      title: 'Water Heater Installation',
       image: waterHeaterInstallation, // Replace with actual image variable or path
-      subtitle: "--Per unit",
+      subtitle: '--Per unit',
       price: 2000,
       quantity: 1,
     },
     {
       id: 5,
-      title: "Toilet Installation",
+      title: 'Toilet Installation',
       image: toiletInstallation, // Replace with actual image variable or path
-      subtitle: "--Per unit",
+      subtitle: '--Per unit',
       price: 1500,
       quantity: 1,
     },
     {
       id: 6,
-      title: "Shower Head Replacement",
+      title: 'Shower Head Replacement',
       image: showerHeadReplacement, // Replace with actual image variable or path
-      subtitle: "--Per service",
+      subtitle: '--Per service',
       price: 250,
       quantity: 1,
     },
 
     {
       id: 7,
-      title: "Geyser Maintenance",
+      title: 'Geyser Maintenance',
       image: geyserMaintenance, // Replace with actual image variable or path
-      subtitle: "--Per hour",
+      subtitle: '--Per hour',
       price: 600,
       quantity: 1,
     },
@@ -73,7 +73,7 @@ const initialState = {
 };
 
 const acRepairSlice = createSlice({
-  name: "plumber",
+  name: 'plumber',
   initialState,
   reducers: {
     addService(state, action) {

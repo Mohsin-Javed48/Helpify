@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../ui/Sidebar';
 
-function ServiveProviderDashboardLayout() {
+function ServiceProviderDashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <>
@@ -23,4 +23,4 @@ function ServiveProviderDashboardLayout() {
   );
 }
 
-export default ServiveProviderDashboardLayout;
+export default ServiceProviderDashboardLayout;

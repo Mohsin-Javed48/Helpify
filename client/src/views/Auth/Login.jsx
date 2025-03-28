@@ -1,82 +1,159 @@
 /** @format */
 
-import React, { useContext } from "react";
-import { useFormik } from "formik";
-import { useState } from "react";
-import * as Yup from "yup";
-import { FaEye as ViewPasswordIcon } from "react-icons/fa";
-import loginMen from "/src/assets/images/auth/image.png";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../api/auth";
-import Swal from "sweetalert2";
-import { setUser } from "../../utills/user";
-import GoogleIcon from "../../assets/Google_icon";
-import { AuthContext } from "../../context/AuthContext";
-
+import React, { useContext, useState, useEffect } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { FaEye as ViewPasswordIcon } from 'react-icons/fa';
+import loginMen from '/src/assets/images/auth/image.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { login as apiLogin } from '../../api/auth';
+import Swal from 'sweetalert2';
+import { setUser as saveUserToStorage } from '../../utills/user';
+import GoogleIcon from '../../assets/Google_icon';
+import { AuthContext } from '../../context/AuthContext';
 
 function Login() {
-  const { setUser: updateUser } = useContext(AuthContext);
+  // Access the auth context
+  const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [viewPassword, setViewPassword] = useState(false);
+  const [loginError, setLoginError] = useState(null);
+  const [loginAttempted, setLoginAttempted] = useState(false);
+
+  // Check if context is available
+  useEffect(() => {
+    console.log('Auth context in Login:', auth ? 'Available' : 'Not available');
+
+    // Add an error handler specifically for this component
+    const originalError = console.error;
+    console.error = (...args) => {
+      // Filter out "Host validation" related errors or irrelevant third-party errors
+      if (
+        args[0] &&
+        typeof args[0] === 'string' &&
+        (args[0].includes('Host validation') ||
+          args[0].includes('Receiving end does not exist'))
+      ) {
+        return;
+      }
+      originalError.apply(console, args);
+    };
+
+    return () => {
+      // Restore original console.error when component unmounts
+      console.error = originalError;
+    };
+  }, [auth]);
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
+      .email('Invalid email address')
+      .required('Email is required'),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await login(values);
+        setLoginError(null);
+        setLoginAttempted(true);
+        console.log('Login attempt with:', { email: values.email });
 
-  
+        const response = await apiLogin(values);
+        console.log('Login API response received:', response);
+
+        // Extract user role from response for proper redirection
+        let roleId = 3; // Default to regular user
+        if (response.user && response.user.roleId) {
+          roleId = response.user.roleId;
+        } else if (response.roleId) {
+          roleId = response.roleId;
+        }
+        console.log('Detected user role:', roleId);
+
         // Success Alert
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: response?.message || "Login successful!",
+          position: 'center',
+          icon: 'success',
+          title: response?.message || 'Login successful!',
           showConfirmButton: false,
           timer: 1500,
         });
-  
-        // Set user and reload
-        setUser(response.token);
-        updateUser(response.user);
 
-        
+        // Handle auth with proper error checking
+        if (auth && typeof auth.login === 'function') {
+          console.log('Using AuthContext login with response data');
+          const success = auth.login(response);
 
-        // alert("Hello! This is an alert box.",response);
+          if (!success) {
+            console.error('Auth context login returned false');
+            throw new Error('Failed to update authentication state');
+          }
 
-        window.location.reload();
-  
+          console.log('Login successful, redirecting based on role');
+
+          // Handle redirection based on role
+          const roleRedirects = {
+            1: '/admin',
+            2: '/provider',
+            3: '/',
+          };
+
+          // Navigate after a short delay to ensure the context is updated
+          setTimeout(() => {
+            const redirectPath = roleRedirects[roleId];
+            if (redirectPath) {
+              console.log(`Redirecting to ${redirectPath}`);
+              navigate(redirectPath, { replace: true });
+            } else {
+              // Default to home page if role doesn't match
+              console.log('Unknown role, redirecting to home');
+              navigate('/', { replace: true });
+            }
+          }, 1500);
+        } else {
+          // Fallback if context is not available
+          console.warn(
+            'AuthContext login not available, using fallback storage'
+          );
+          saveUserToStorage(response);
+
+          // Force reload as fallback
+          setTimeout(() => {
+            console.log('Using fallback reload method');
+            window.location.reload();
+          }, 1500);
+        }
       } catch (error) {
-  
+        console.error('Detailed login error:', error);
+        setLoginError(error.message || 'Login failed');
+
         // Enhanced Error Handling
         const errorMessage =
-          error.response?.data?.message || "An unexpected error occurred.";
-  
+          error.response?.data?.message || 'An unexpected error occurred.';
+
         Swal.fire({
-          position: "center",
-          icon: "error",
+          position: 'center',
+          icon: 'error',
           title: errorMessage,
           showConfirmButton: false,
           timer: 1500,
         });
-  
-        console.error("Login error:", error); // For debugging
+      } finally {
+        // Reset login attempted after a delay
+        setTimeout(() => {
+          setLoginAttempted(false);
+        }, 2000);
       }
     },
   });
-  
 
   return (
     <form
@@ -106,6 +183,12 @@ function Login() {
             Nice to see you
           </h2>
 
+          {loginError && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+              {loginError}
+            </div>
+          )}
+
           {/* Email input */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2 ml-3">
@@ -116,8 +199,8 @@ function Login() {
               placeholder="Email or phone number"
               className={`w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300 ${
                 formik.touched.email && formik.errors.email
-                  ? "ring-2 ring-red-500"
-                  : ""
+                  ? 'ring-2 ring-red-500'
+                  : ''
               }`}
               name="email"
               value={formik.values.email}
@@ -138,12 +221,12 @@ function Login() {
             </label>
             <div className="relative">
               <input
-                type={viewPassword ? "text" : "password"}
+                type={viewPassword ? 'text' : 'password'}
                 placeholder="Enter password"
                 className={`w-full bg-gray-200 text-gray-700 placeholder-gray-500 rounded-lg py-3 px-4 border-none focus:outline-none focus:ring-2 focus:ring-gray-300 ${
                   formik.touched.password && formik.errors.password
-                    ? "ring-2 ring-red-500"
-                    : ""
+                    ? 'ring-2 ring-red-500'
+                    : ''
                 }`}
                 name="password"
                 value={formik.values.password}
@@ -166,31 +249,33 @@ function Login() {
 
           {/* Remember me and Forgot password */}
           <Link to="/auth/forget">
-          
-          <div className="flex justify-between items-center text-sm text-gray-600 mt-4">
-
-            <p className="text-[#007bff] cursor-pointer">Forgot password?</p>
-          </div>
+            <div className="flex justify-between items-center text-sm text-gray-600 mt-4">
+              <p className="text-[#007bff] cursor-pointer">Forgot password?</p>
+            </div>
           </Link>
 
           {/* Sign in button */}
           <button
             type="submit"
-            className="w-full h-10 bg-[#007bff] text-white font-medium rounded-lg text-sm mt-4 hover:bg-[#0056b3] transition-colors"
+            disabled={loginAttempted}
+            className={`w-full h-10 ${
+              loginAttempted ? 'bg-gray-400' : 'bg-[#007bff] hover:bg-[#0056b3]'
+            } text-white font-medium rounded-lg text-sm mt-4 transition-colors`}
           >
-            Sign in
+            {loginAttempted ? 'Signing in...' : 'Sign in'}
           </button>
 
           {/* Divider */}
           <hr className="border-t border-gray-200 w-full my-4" />
 
-         
-
           {/* Sign up link */}
           <div className="text-center mt-4 text-sm">
             <p>
-              Don’t have an account?
-              <Link to="/auth/register" className="text-[#007bff] cursor-pointer ml-1">
+              Don't have an account?
+              <Link
+                to="/auth/register"
+                className="text-[#007bff] cursor-pointer ml-1"
+              >
                 Register now
               </Link>
             </p>

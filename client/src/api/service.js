@@ -3,7 +3,7 @@ import { BASE_URL } from '../constants';
 
 const getServicesByCategory = async (category) => {
   return axios
-    .get(`${BASE_URL}/service?category=${category}`, {
+    .get(`${BASE_URL}/services?category=${category}`, {
       headers: {},
     })
     .then((res) => res.data)

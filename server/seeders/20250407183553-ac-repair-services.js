@@ -1,0 +1,126 @@
+"use strict";
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert("Services", [
+      {
+        name: "AC Installation",
+        description:
+          "Professional installation of all types of air conditioners.",
+        price: 500.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/ACService.jfif",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Maintenance",
+        description:
+          "Regular maintenance and servicing of air conditioning units.",
+        price: 150.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/AirConditioner.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Repair",
+        description: "Expert repair services for all AC brands and models.",
+        price: 200.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/DrainCleaning.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Gas Refill",
+        description: "Refrigerant gas refilling and leak detection services.",
+        price: 180.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/GeyserMaintenance.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Deep Cleaning",
+        description:
+          "Thorough cleaning of all AC components for optimal performance.",
+        price: 250.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/MixerTapInstallation.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Filter Replacement",
+        description: "Replacement of AC filters for better air quality.",
+        price: 100.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/PipeLeakRepair.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Noise Repair",
+        description: "Diagnosis and repair of unusual AC noises.",
+        price: 150.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/RefrigeratorRepair.jfif",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Not Cooling Fix",
+        description: "Troubleshooting and fixing cooling efficiency issues.",
+        price: 180.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/ShowerHeadReplacement.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "AC Electrical Issues",
+        description: "Repair of electrical components and wiring problems.",
+        price: 200.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/ToiletInstallation.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "Emergency AC Service",
+        description: "24/7 emergency AC repair and maintenance service.",
+        price: 300.0,
+        total_orders: 0,
+        total_providers: 0,
+        category: "ac_repair",
+        image: "uploads/ACRepairService/WaterHeaterInstallation.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete("Services", { category: "ac_repair" }, {});
+  },
+};

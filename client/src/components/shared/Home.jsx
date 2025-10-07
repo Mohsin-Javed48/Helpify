@@ -55,11 +55,15 @@ function Home() {
       >
         {/* Content */}
         <div className="flex flex-col justify-center items-center sm:items-start max-w-screen-xl mx-auto h-full px-[25px] sm:px-[40px]">
-          <h1 className="text-center sm:text-start text-[#ffff] not-italic text-white font-bold text-[25px] sm:text-[48px] md:text-[64px] lg:text-[78px] leading-normal capitalize tracking-[-2.34px]">
-            Get Help From <br />
-            Experienced Person, <br />
-            And Made Life Easy.
+          <h1 className="text-center sm:text-start text-[#ffff] not-italic text-white font-bold text-[25px] sm:text-[48px] md:text-[64px] lg:text-[78px] leading-normal tracking-[-2.34px]">
+            Skilled Experts, On‑Demand. <br />
+            Helpify Makes Life Easy.
           </h1>
+          <p className="mt-4 text-center sm:text-start text-white/80 font-medium text-[12px] sm:text-[14px] md:text-[16px] max-w-2xl">
+            Book trusted pros for plumbing, electric, AC repair, cleaning, and
+            more — whenever you need them. Transparent pricing, vetted experts,
+            and quick scheduling so your home runs smoothly without the hassle.
+          </p>
           <BookButton
             text="Book Appointment"
             onClick={handleBookAppointment}

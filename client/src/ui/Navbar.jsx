@@ -1,7 +1,6 @@
 /** @format */
 
 import { useState, useContext } from 'react';
-import Button from './Button';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'; // Assuming you have an AuthContext
 import { useLocation } from 'react-router-dom';
@@ -11,21 +10,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import BookingDropdownMenu from '../components/services/BookingDropdownMenu';
 
-// Updated styles for an even cooler Navbar
+// Updated styles for a modern, on-brand Navbar
 const navStyles = {
   container:
-    'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-xl',
-  logo: 'text-white font-extrabold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wide',
-  navLinks: 'hidden md:flex items-center gap-8 text-white font-semibold',
-  navLink: 'hover:text-yellow-400 transition-colors duration-300 ease-in-out',
+    'sticky top-0 z-40 backdrop-blur-md bg-gradient-to-r from-[#242D7D]/90 via-[#2F3EBB]/90 to-[#4B5DFF]/90 border-b border-white/10 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.4)]',
+  inner:
+    'flex items-center justify-between px-4 md:px-8 lg:px-16 py-4 max-w-screen-xl mx-auto',
+  logo: 'text-white font-extrabold text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-tight',
+  navLinks:
+    'hidden md:flex items-center gap-6 lg:gap-8 text-white/90 font-medium text-sm lg:text-base',
+  navLink:
+    'relative transition-colors duration-200 ease-in-out hover:text-white after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#FFD166] after:transition-all after:duration-300 hover:after:w-full',
   dropdown:
-    'absolute top-8 left-0 bg-blue-500 bg-opacity-75 shadow-md rounded-md w-40 z-10 transition-transform duration-300 ease-in-out transform scale-95 origin-top-left',
-  dropdownItem: 'px-4 py-2 hover:bg-blue-600 transition-colors duration-200',
-  button:
-    'text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-blue-500 hover:to-green-400 transition-all duration-300 ease-in-out shadow-md',
+    'absolute top-8 left-0 bg-[#1f2870]/80 backdrop-blur-md text-white shadow-md rounded-md w-44 z-10 ring-1 ring-white/10 overflow-hidden',
+  dropdownItem: 'px-4 py-2 hover:bg-white/10 transition-colors duration-200',
+  ctaPrimary:
+    'px-4 py-2 rounded-full bg-[#242D7D] text-white font-semibold shadow hover:brightness-110 transition',
+  ctaSecondary:
+    'px-4 py-2 rounded-full border border-[#FFD166]/80 text-white hover:bg-white/10 transition',
   sidebar:
-    'fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-indigo-500 to-purple-600 shadow-xl transform transition-transform duration-300 ease-in-out md:hidden z-50',
-  closeButton: 'absolute top-2 right-2 text-white hover:text-red-500',
+    'fixed top-0 left-0 h-full w-72 bg-gradient-to-b from-[#242D7D]/95 to-[#2F3EBB]/95 backdrop-blur-md shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden z-50',
+  closeButton: 'absolute top-3 right-3 text-white/90 hover:text-white',
 };
 
 function Navbar() {
@@ -64,7 +69,7 @@ function Navbar() {
   return (
     <>
       <nav className={navStyles.container}>
-        <div className="flex items-center justify-between px-4 md:px-8 lg:px-16 py-4 max-w-screen-xl mx-auto">
+        <div className={navStyles.inner}>
           {/* Logo */}
           <h2 className={navStyles.logo}>HELPIFY</h2>
 
@@ -84,7 +89,9 @@ function Navbar() {
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  isActive ? 'border-b-2 border-yellow-400' : navStyles.navLink
+                  isActive
+                    ? navStyles.navLink + ' text-white after:w-full'
+                    : navStyles.navLink
                 }
               >
                 Home
@@ -94,7 +101,9 @@ function Navbar() {
               <NavLink
                 to="/about"
                 className={({ isActive }) =>
-                  isActive ? 'border-b-2 border-yellow-400' : navStyles.navLink
+                  isActive
+                    ? navStyles.navLink + ' text-white after:w-full'
+                    : navStyles.navLink
                 }
               >
                 About
@@ -138,7 +147,9 @@ function Navbar() {
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  isActive ? 'border-b-2 border-yellow-400' : navStyles.navLink
+                  isActive
+                    ? navStyles.navLink + ' text-white after:w-full'
+                    : navStyles.navLink
                 }
               >
                 Blog
@@ -148,7 +159,9 @@ function Navbar() {
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
-                  isActive ? 'border-b-2 border-yellow-400' : navStyles.navLink
+                  isActive
+                    ? navStyles.navLink + ' text-white after:w-full'
+                    : navStyles.navLink
                 }
               >
                 Contact
@@ -161,7 +174,7 @@ function Navbar() {
                   to="/become-provider"
                   className={({ isActive }) =>
                     isActive
-                      ? 'border-b-2 border-yellow-400'
+                      ? navStyles.navLink + ' text-yellow-300 after:w-full'
                       : 'text-yellow-300 ' + navStyles.navLink
                   }
                 >
@@ -172,7 +185,7 @@ function Navbar() {
           </ul>
 
           {/* User Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
             {user ? (
               <div className="flex items-center gap-4 relative">
                 <div className="relative group">
@@ -203,18 +216,11 @@ function Navbar() {
               </div>
             ) : (
               <>
-                <Button
-                  text="Lahore"
-                  variant="secondary"
-                  onClick={() => console.log('Lahore button clicked')}
-                  className={navStyles.button}
-                />
                 <NavLink to="/auth/login">
-                  <Button
-                    text="Signup"
-                    variant="primary"
-                    className={navStyles.button}
-                  />
+                  <span className={navStyles.ctaSecondary}>Login</span>
+                </NavLink>
+                <NavLink to="/auth/register">
+                  <span className={navStyles.ctaPrimary}>Signup</span>
                 </NavLink>
               </>
             )}
@@ -352,15 +358,26 @@ function Navbar() {
                 </button>
               </li>
             ) : (
-              <li>
-                <NavLink
-                  to="/auth/login"
-                  className={navStyles.navLink}
-                  onClick={() => setIsSidebarOpen(false)}
-                >
-                  Login
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink
+                    to="/auth/login"
+                    className={navStyles.navLink}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    Login
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/auth/register"
+                    className={navStyles.navLink}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    Signup
+                  </NavLink>
+                </li>
+              </>
             )}
           </ul>
         </div>

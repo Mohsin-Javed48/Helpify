@@ -13,7 +13,13 @@ function RouteGuard({ children }) {
     if (isLoading) return;
 
     // If user is NOT logged in and trying to access a protected route, redirect to login
-    if (!isLoggedIn && !location.pathname.startsWith('/auth/')) {
+    const isPublicPath =
+      location.pathname === '/' || location.pathname === '/home';
+    if (
+      !isLoggedIn &&
+      !location.pathname.startsWith('/auth/') &&
+      !isPublicPath
+    ) {
       navigate('/auth/login', { replace: true });
       return;
     }
@@ -46,7 +52,9 @@ function RouteGuard({ children }) {
 
   // If user is not logged in and trying to access a protected route,
   // we return null here because the redirect happens in the useEffect
-  if (!isLoggedIn && !location.pathname.startsWith('/auth/')) {
+  const isPublicPath =
+    location.pathname === '/' || location.pathname === '/home';
+  if (!isLoggedIn && !location.pathname.startsWith('/auth/') && !isPublicPath) {
     return null;
   }
 

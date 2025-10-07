@@ -120,9 +120,7 @@ const app_routes = [
     path: '/',
     element: (
       <RouteGuard>
-        <ProtectedRoute allowedRoles={[3]}>
-          <AppLayout />
-        </ProtectedRoute>
+        <AppLayout />
       </RouteGuard>
     ),
     children: [

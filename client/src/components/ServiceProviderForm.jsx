@@ -142,13 +142,18 @@ function ServiceProviderForm() {
         }
 
         // Extract the actual user ID from the token payload
-        const tokenData = userData?.token?.token;
+        const tokenString =
+          localStorage.getItem('authToken') ||
+          (typeof userData?.token === 'string'
+            ? userData.token
+            : userData?.token?.token);
+
         let userId;
 
-        if (tokenData) {
+        if (tokenString) {
           try {
             // Decode the JWT token to get the user ID
-            const base64Url = tokenData.split('.')[1];
+            const base64Url = tokenString.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
             const jsonPayload = decodeURIComponent(
               atob(base64)
@@ -160,7 +165,8 @@ function ServiceProviderForm() {
             );
 
             const payload = JSON.parse(jsonPayload);
-            userId = payload.id;
+            // Prefer id, but fall back to common claims if needed
+            userId = payload.id || payload.userId || payload.sub;
             console.log('Using user ID from token:', userId);
           } catch (error) {
             console.error('Error decoding token:', error);

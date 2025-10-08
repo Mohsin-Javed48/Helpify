@@ -1,53 +1,60 @@
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-import forgetIllustration from "/src/assets/images/auth/image.png";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { forgetPassword, resetPassword } from "../../api/auth";
-import Swal from "sweetalert2";
+import forgetIllustration from '/src/assets/images/auth/image.png';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { forgetPassword, resetPassword } from '../../api/auth';
+import Swal from 'sweetalert2';
 
 export default function Forget() {
   const { token } = useParams();
+  const [otpSent, setOtpSent] = React.useState(false);
+  const [emailForOtp, setEmailForOtp] = React.useState('');
   const navigate = useNavigate();
 
   const forgetValidationSchema = Yup.object({
     email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
+      .email('Invalid email address')
+      .required('Email is required'),
   });
 
   const resetValidationSchema = Yup.object({
+    otp: Yup.string()
+      .length(6, 'Enter 6-digit code')
+      .required('OTP is required'),
     newPassword: Yup.string()
-      .min(8, "Password must be at least 8 characters long")
+      .min(8, 'Password must be at least 8 characters long')
       .matches(
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-        "Password must include uppercase, lowercase, number, and special character"
+        'Password must include uppercase, lowercase, number, and special character'
       )
-      .required("New Password is required"),
+      .required('New Password is required'),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("newPassword")], "Passwords must match")
-      .required("Confirm Password is required"),
+      .oneOf([Yup.ref('newPassword')], 'Passwords must match')
+      .required('Confirm Password is required'),
   });
 
   const forgetFormik = useFormik({
     initialValues: {
-      email: "",
+      email: '',
     },
     validationSchema: forgetValidationSchema,
     onSubmit: async (values) => {
       try {
         Swal.fire({
-          title: "Verification",
-          html: "Sending you the mail",
+          title: 'Verification',
+          html: 'Sending you the mail',
           didOpen: () => {
             Swal.showLoading();
           },
         });
         const response = await forgetPassword(values);
+        setOtpSent(true);
+        setEmailForOtp(values.email);
         Swal.fire({
-          position: "center",
-          icon: "success",
+          position: 'center',
+          icon: 'success',
           title: response.message,
           showConfirmButton: false,
           timer: 1500,
@@ -55,8 +62,8 @@ export default function Forget() {
       } catch (error) {
         console.log(error);
         Swal.fire({
-          position: "center",
-          icon: "error",
+          position: 'center',
+          icon: 'error',
           title: error.response.data.message,
           showConfirmButton: false,
           timer: 1500,
@@ -67,26 +74,27 @@ export default function Forget() {
 
   const resetFormik = useFormik({
     initialValues: {
-      newPassword: "",
-      confirmPassword: "",
+      otp: '',
+      newPassword: '',
+      confirmPassword: '',
     },
     validationSchema: resetValidationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await resetPassword({ token: token, ...values });
+        const response = await resetPassword({ email: emailForOtp, ...values });
         Swal.fire({
-          position: "center",
-          icon: "success",
+          position: 'center',
+          icon: 'success',
           title: response.message,
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/auth/login");
+        navigate('/auth/login');
       } catch (error) {
         console.log(error);
         Swal.fire({
-          position: "center",
-          icon: "error",
+          position: 'center',
+          icon: 'error',
           title: error.response.data.message,
           showConfirmButton: false,
           timer: 1500,
@@ -102,7 +110,7 @@ export default function Forget() {
         <div></div>
         <p className="text-lg font-bold text-gray-800">
           {token ? (
-            "Reset Your Password"
+            'Reset Your Password'
           ) : (
             <>
               Did you forget <br /> your Password
@@ -116,11 +124,39 @@ export default function Forget() {
         {/* Form Section */}
         <div className="p-6 flex flex-col justify-center bg-white sm:rounded-r-3xl  rounded-l-3xl w-80 md:h-96">
           <h3 className="text-center text-xl font-semibold mb-4">
-            {token ? "Reset Password" : "Forget Password"}
+            {token ? 'Reset Password' : 'Forget Password'}
           </h3>
 
-          {token ? (
+          {token || otpSent ? (
             <form onSubmit={resetFormik.handleSubmit} className="space-y-4">
+              {/* New Password Field */}
+              <div>
+                <label
+                  htmlFor="newPassword"
+                  className="block font-semibold mb-1"
+                >
+                  OTP Code
+                </label>
+                <input
+                  type="text"
+                  id="otp"
+                  name="otp"
+                  placeholder="Enter 6-digit code"
+                  className={`w-full p-2 border rounded ${
+                    resetFormik.touched.otp && resetFormik.errors.otp
+                      ? 'border-red-500'
+                      : 'border-gray-300'
+                  }`}
+                  value={resetFormik.values.otp}
+                  onChange={resetFormik.handleChange}
+                  onBlur={resetFormik.handleBlur}
+                />
+                {resetFormik.touched.otp && resetFormik.errors.otp && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {resetFormik.errors.otp}
+                  </p>
+                )}
+              </div>
               {/* New Password Field */}
               <div>
                 <label
@@ -137,8 +173,8 @@ export default function Forget() {
                   className={`w-full p-2 border rounded ${
                     resetFormik.touched.newPassword &&
                     resetFormik.errors.newPassword
-                      ? "border-red-500"
-                      : "border-gray-300"
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                   value={resetFormik.values.newPassword}
                   onChange={resetFormik.handleChange}
@@ -168,8 +204,8 @@ export default function Forget() {
                   className={`w-full p-2 border rounded ${
                     resetFormik.touched.confirmPassword &&
                     resetFormik.errors.confirmPassword
-                      ? "border-red-500"
-                      : "border-gray-300"
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                   value={resetFormik.values.confirmPassword}
                   onChange={resetFormik.handleChange}
@@ -204,8 +240,8 @@ export default function Forget() {
                   placeholder="Enter your email"
                   className={`w-full p-2 border rounded ${
                     forgetFormik.touched.email && forgetFormik.errors.email
-                      ? "border-red-500"
-                      : "border-gray-300"
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                   value={forgetFormik.values.email}
                   onChange={forgetFormik.handleChange}
@@ -231,10 +267,7 @@ export default function Forget() {
                 <hr className="flex-1" />
               </div>
 
-              <Link
-                to="/auth/login"
-                
-              >
+              <Link to="/auth/login">
                 <button
                   type="submit"
                   className="w-full py-2 bg-yellow-500 text-white text-center rounded-lg hover:bg-yellow-600 transition"

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOrders } from '../../context/OrdersContext';
 import { useSelector } from 'react-redux';
 import { selectAllBookings } from '../../store/bookingsSlice';
+import { AuthContext } from '../../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const ContinueToBookingButton = () => {
   const navigate = useNavigate();
   const { ordersList } = useOrders();
   const bookings = useSelector(selectAllBookings);
+  const { isLoggedIn } = useContext(AuthContext);
 
   // Only show if there are items in the cart
   if (!ordersList || ordersList.length === 0) {
@@ -51,7 +54,19 @@ const ContinueToBookingButton = () => {
           )}
 
           <button
-            onClick={() => navigate('/booking')}
+            onClick={() => {
+              if (!isLoggedIn) {
+                Swal.fire({
+                  icon: 'info',
+                  title: 'Login required',
+                  text: 'Please login to continue booking.',
+                  timer: 1000,
+                  showConfirmButton: false,
+                }).then(() => navigate('/auth/login'));
+                return;
+              }
+              navigate('/booking');
+            }}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all flex items-center"
           >
             <span>Continue to Booking</span>

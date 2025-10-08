@@ -36,6 +36,7 @@ const navStyles = {
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const { user, logout } = useContext(AuthContext); // Get user and logout from AuthContext
@@ -187,32 +188,85 @@ function Navbar() {
           {/* User Actions */}
           <div className="hidden md:flex items-center gap-3 lg:gap-4">
             {user ? (
-              <div className="flex items-center gap-4 relative">
-                <div className="relative group">
-                  <button className="flex items-center text-white hover:text-yellow-400">
-                    <span className="mr-2">{user.name || user.email}</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
+              <div className="relative">
+                <button
+                  onClick={() => setIsUserMenuOpen((v) => !v)}
+                  className="flex items-center gap-2 text-white hover:text-yellow-300"
+                >
+                  <img
+                    src={user.avatarUrl || '/Profile.png'}
+                    alt="avatar"
+                    className="w-8 h-8 rounded-full object-cover ring-2 ring-white/60"
+                  />
+                  <span className="hidden lg:inline-block max-w-[160px] truncate">
+                    {user.name || user.firstName || user.email}
+                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+                {isUserMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-72 bg-white/95 backdrop-blur rounded-xl shadow-2xl ring-1 ring-black/5 z-20 overflow-hidden">
+                    <div className="flex items-center gap-3 px-4 py-4 bg-gradient-to-r from-[#242D7D]/5 to-transparent">
+                      <img
+                        src={user.avatarUrl || '/Profile.png'}
+                        alt="avatar"
+                        className="w-10 h-10 rounded-full object-cover ring-1 ring-gray-200"
                       />
-                    </svg>
-                  </button>
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                    >
-                      Logout
-                    </button>
+                      <div className="min-w-0">
+                        <div className="text-sm font-semibold text-gray-900 truncate">
+                          {user.name || user.firstName || 'Account'}
+                        </div>
+                        <div className="text-xs text-gray-500 truncate">
+                          {user.email}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="py-2">
+                      {user.roleId === 3 && (
+                        <a
+                          href="/my-bookings"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        >
+                          My Bookings
+                        </a>
+                      )}
+                      {user.roleId === 2 && (
+                        <a
+                          href="/provider/dashboard"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        >
+                          Provider Dashboard
+                        </a>
+                      )}
+                      {user.roleId === 1 && (
+                        <a
+                          href="/admin/dashboard"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        >
+                          Admin Dashboard
+                        </a>
+                      )}
+                    </div>
+                    <div className="px-4 pb-3 pt-2 border-t border-gray-100">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left text-sm font-medium text-red-600 hover:text-red-700"
+                      >
+                        Logout
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             ) : (
               <>

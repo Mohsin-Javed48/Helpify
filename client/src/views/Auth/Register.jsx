@@ -43,11 +43,13 @@ export default function Register() {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Congratulations! Your account was created successfully.',
+          title: 'We sent a 6-digit code to your email. Verify to activate.',
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate('/auth/login');
+        navigate(
+          `/auth/verify?email=${encodeURIComponent(values.email)}&token=${encodeURIComponent(response.registrationToken)}`
+        );
       } catch (error) {
         Swal.fire({
           position: 'center',
@@ -62,16 +64,18 @@ export default function Register() {
 
   return (
     <div className="flex justify-around items-center w-full  bg-gray-100 p-4">
-  
       {/* Right Section */}
-      <div className="flex items-center border-4 border-black rounded-3xl shadow-lg bg-white  "  >
+      <div className="flex items-center border-4 border-black rounded-3xl shadow-lg bg-white  ">
         {/* Form Section */}
         <div className="p-6  rounded-l-3xl w-96">
           <form onSubmit={formik.handleSubmit}>
             {/* First Name and Last Name */}
             <div className="flex gap-3 mb-4">
               <div className="w-1/2">
-                <label htmlFor="firstName" className="block font-semibold text-gray-700">
+                <label
+                  htmlFor="firstName"
+                  className="block font-semibold text-gray-700"
+                >
                   First Name
                 </label>
                 <input
@@ -80,19 +84,26 @@ export default function Register() {
                   name="firstName"
                   placeholder="Enter your first name"
                   className={`w-full p-3 mt-2 border rounded-md bg-gray-100 text-gray-800 ${
-                    formik.touched.firstName && formik.errors.firstName ? 'border-red-500' : 'border-gray-300'
+                    formik.touched.firstName && formik.errors.firstName
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                   value={formik.values.firstName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.firstName && formik.errors.firstName && (
-                  <div className="text-red-500 text-sm mt-1">{formik.errors.firstName}</div>
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.firstName}
+                  </div>
                 )}
               </div>
 
               <div className="w-1/2">
-                <label htmlFor="lastName" className="block font-semibold text-gray-700 ">
+                <label
+                  htmlFor="lastName"
+                  className="block font-semibold text-gray-700 "
+                >
                   Last Name
                 </label>
                 <input
@@ -101,21 +112,28 @@ export default function Register() {
                   name="lastName"
                   placeholder="Enter your last name"
                   className={`w-full p-3 mt-2 border rounded-md bg-gray-100 text-gray-800 ${
-                    formik.touched.lastName && formik.errors.lastName ? 'border-red-500' : 'border-gray-300'
+                    formik.touched.lastName && formik.errors.lastName
+                      ? 'border-red-500'
+                      : 'border-gray-300'
                   }`}
                   value={formik.values.lastName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
                 {formik.touched.lastName && formik.errors.lastName && (
-                  <div className="text-red-500 text-sm mt-1">{formik.errors.lastName}</div>
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.lastName}
+                  </div>
                 )}
               </div>
             </div>
 
             {/* Email */}
             <div className="mb-4">
-              <label htmlFor="email" className="block font-semibold text-gray-700 ">
+              <label
+                htmlFor="email"
+                className="block font-semibold text-gray-700 "
+              >
                 Email Address
               </label>
               <input
@@ -124,20 +142,27 @@ export default function Register() {
                 name="email"
                 placeholder="Enter your email"
                 className={`w-full p-3 border mt-2 rounded-md bg-gray-100 text-gray-800 ${
-                  formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'
+                  formik.touched.email && formik.errors.email
+                    ? 'border-red-500'
+                    : 'border-gray-300'
                 }`}
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               {formik.touched.email && formik.errors.email && (
-                <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.email}
+                </div>
               )}
             </div>
 
             {/* Password */}
             <div className="mb-4">
-              <label htmlFor="password" className="block font-semibold text-gray-700">
+              <label
+                htmlFor="password"
+                className="block font-semibold text-gray-700"
+              >
                 Password
               </label>
               <input
@@ -146,20 +171,27 @@ export default function Register() {
                 name="password"
                 placeholder="Enter your password"
                 className={`w-full p-3 mt-2 border rounded-md bg-gray-100 text-gray-800 ${
-                  formik.touched.password && formik.errors.password ? 'border-red-500' : 'border-gray-300'
+                  formik.touched.password && formik.errors.password
+                    ? 'border-red-500'
+                    : 'border-gray-300'
                 }`}
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               {formik.touched.password && formik.errors.password && (
-                <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.password}
+                </div>
               )}
             </div>
 
             {/* Confirm Password */}
             <div className="mb-4">
-              <label htmlFor="confirmPassword" className="block font-semibold text-gray-700">
+              <label
+                htmlFor="confirmPassword"
+                className="block font-semibold text-gray-700"
+              >
                 Confirm Password
               </label>
               <input
@@ -168,7 +200,8 @@ export default function Register() {
                 name="confirmPassword"
                 placeholder="Re-enter your password"
                 className={`w-full p-3 border mt-2 rounded-md bg-gray-100 text-gray-800 ${
-                  formik.touched.confirmPassword && formik.errors.confirmPassword
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
                     ? 'border-red-500'
                     : 'border-gray-300'
                 }`}
@@ -176,9 +209,12 @@ export default function Register() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                <div className="text-red-500 text-sm mt-1">{formik.errors.confirmPassword}</div>
-              )}
+              {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {formik.errors.confirmPassword}
+                  </div>
+                )}
             </div>
 
             {/* Submit and Links */}
@@ -206,9 +242,12 @@ export default function Register() {
 
         {/* Illustration Section */}
         <div className="hidden md:block">
-
-          <img src={registerMen} className=" h-[41rem] object-contain rounded-r-3xl" alt="Register illustration" />
-      </div>
+          <img
+            src={registerMen}
+            className=" h-[41rem] object-contain rounded-r-3xl"
+            alt="Register illustration"
+          />
+        </div>
       </div>
     </div>
   );

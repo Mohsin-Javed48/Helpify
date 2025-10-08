@@ -98,6 +98,7 @@ const Auth = Loadable(lazy(() => import('./views/Auth/Auth')));
 const Login = Loadable(lazy(() => import('./views/Auth/Login')));
 const Register = Loadable(lazy(() => import('./views/Auth/Register')));
 const Forget = Loadable(lazy(() => import('./views/Auth/Forget')));
+const VerifyEmail = Loadable(lazy(() => import('./views/Auth/VerifyEmail')));
 
 const app_routes = [
   // Authentication Routes
@@ -112,6 +113,7 @@ const app_routes = [
       { path: '/auth/login', exact: true, element: <Login /> },
       { path: '/auth/register', exact: true, element: <Register /> },
       { path: '/auth/forget/:token?', exact: true, element: <Forget /> },
+      { path: '/auth/verify', exact: true, element: <VerifyEmail /> },
     ],
   },
 

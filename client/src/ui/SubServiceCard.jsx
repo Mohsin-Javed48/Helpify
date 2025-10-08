@@ -15,8 +15,12 @@ function SubServiceCard({
 }) {
   const { addOrder } = useOrders();
   const [imgError, setImgError] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const [addedFlash, setAddedFlash] = useState(false);
 
   function addOrderItem() {
+    if (isAdding) return;
+    setIsAdding(true);
     const newOrder = {
       id,
       title,
@@ -26,6 +30,11 @@ function SubServiceCard({
       quantity: Number(quantity),
     };
     addOrder(newOrder);
+    setAddedFlash(true);
+    setTimeout(() => {
+      setAddedFlash(false);
+      setIsAdding(false);
+    }, 700);
   }
   console.log('image', image);
 
@@ -51,25 +60,50 @@ function SubServiceCard({
           Rs {price}
         </p>
 
-        <div
-          className="flex items-center justify-center sm:justify-start w-[120px] h-[41px] border border-black rounded-sm mx-auto sm:mx-0 cursor-pointer"
+        <button
+          type="button"
           onClick={addOrderItem}
+          disabled={isAdding}
+          className={`group relative overflow-hidden flex items-center justify-center sm:justify-start w-[120px] h-[41px] border border-black rounded-sm mx-auto sm:mx-0 cursor-pointer transition-transform duration-150 active:scale-95 ${isAdding ? 'opacity-80' : ''}`}
+          aria-label="Add service"
         >
-          <div className="flex-1 flex items-center justify-center text-[#000] font-[Wix Madefor Display] text-[18px] sm:text-[20px] font-semibold">
-            ADD
+          <div
+            className={`flex-1 flex items-center justify-center font-[Wix Madefor Display] text-[18px] sm:text-[20px] font-semibold transition-colors ${addedFlash ? 'text-green-700' : 'text-[#000]'}`}
+          >
+            {addedFlash ? 'ADDED' : 'ADD'}
           </div>
-          <div className="flex items-center justify-center w-[37px] h-[41px] bg-[#1400AD]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="19"
-              height="19"
-              viewBox="0 0 19 19"
-              fill="#FFF"
-            >
-              <path d="M18.583 10.333H10.833V18.583H7.25V10.333H0V7.75H7.25V0H10.833V7.75H18.583V10.333Z" />
-            </svg>
+          <div
+            className={`flex items-center justify-center w-[37px] h-[41px] transition-colors ${addedFlash ? 'bg-green-500' : 'bg-[#1400AD]'} group-hover:brightness-110`}
+          >
+            {addedFlash ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                viewBox="0 0 20 20"
+                fill="#FFF"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3-3A1 1 0 016.207 9.793L8.5 12.086l6.793-6.793a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="19"
+                height="19"
+                viewBox="0 0 19 19"
+                fill="#FFF"
+              >
+                <path d="M18.583 10.333H10.833V18.583H7.25V10.333H0V7.75H7.25V0H10.833V7.75H18.583V10.333Z" />
+              </svg>
+            )}
           </div>
-        </div>
+          {/* Ripple effect */}
+          <span className="pointer-events-none absolute inset-0 scale-0 group-active:scale-100 rounded-full bg-black/10 transition-transform duration-300" />
+        </button>
       </div>
     </div>
   );

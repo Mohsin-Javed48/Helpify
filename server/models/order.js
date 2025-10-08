@@ -23,8 +23,9 @@ module.exports = (sequelize, DataTypes) => {
       // Order can have many services
       if (models.Service) {
         Order.belongsToMany(models.Service, {
-          through: "OrderServices",
+          through: models.OrderService,
           foreignKey: "orderId",
+          otherKey: "serviceId",
           as: "services",
         });
       }

@@ -543,8 +543,19 @@ const getOrdersByUserId = async (req, res) => {
       where: { userId },
       include: [
         {
-          model: OrderService,
+          model: Service,
           as: "services",
+          through: {
+            model: OrderService,
+            attributes: [
+              "quantity",
+              "price",
+              "subtotal",
+              "title",
+              "subtitle",
+              "image",
+            ],
+          },
         },
       ],
       order: [["createdAt", "DESC"]],

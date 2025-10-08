@@ -19,6 +19,12 @@ export const register = (body) => {
   return axiosInstance.post('auth/register', body).then((res) => res.data);
 };
 
+export const verifyEmailOtp = (body) => {
+  return axiosInstance
+    .post('auth/verify-email-otp', body)
+    .then((res) => res.data);
+};
+
 export const updateProfile = (body) => {
   return axiosInstance.put('auth/me', body).then((res) => res.data);
 };
@@ -55,13 +61,17 @@ export const getProfile = (username) => {
 };
 
 export const forgetPassword = (body) => {
-  return axiosInstance
-    .post('auth/forget-password', body)
-    .then((res) => res.data);
+  return axiosInstance.post('auth/forgot', body).then((res) => res.data);
 };
 
 export const resetPassword = (body) => {
   return axiosInstance
-    .post('auth/reset-password', body)
+    .post('auth/reset-with-otp', body)
+    .then((res) => res.data);
+};
+
+export const resendRegistrationOtp = (body) => {
+  return axiosInstance
+    .post('auth/resend-registration-otp', body)
     .then((res) => res.data);
 };

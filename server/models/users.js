@@ -40,6 +40,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      emailOtp: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      emailOtpExpiresAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
       roleId: {
         type: DataTypes.INTEGER,
         allowNull: false,

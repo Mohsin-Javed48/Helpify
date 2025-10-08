@@ -2,6 +2,7 @@ const { User } = require("../models");
 const { generateHash, compare } = require("../helper/hash");
 const { generateToken, verifyToken } = require("../helper/jwt");
 const { resetPasswordEmail } = require("../email/resetPassword");
+const { otpEmail } = require("../email/otpEmail");
 const { sendMail } = require("../helper/mail");
 
 const signUp = async (req, res, next) => {
@@ -24,22 +25,80 @@ const signUp = async (req, res, next) => {
       throw error;
     }
 
+    // generate OTP; don't store user yet – return a signed registration token
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
     const hashedPassword = await generateHash(password);
 
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
-      roleId: 3, // Assign Provider role
+    // encode pending registration data in JWT, valid for 10 minutes
+    const registrationToken = generateToken(
+      { firstName, lastName, email, password: hashedPassword, roleId: 3, otp },
+      "10m"
+    );
+
+    await sendMail({
+      to: email,
+      subject: "Verify your Helpify account",
+      html: otpEmail(firstName, otp),
     });
 
     res
       .status(201)
-      .json({ message: "User registered successfully", user: newUser });
+      .json({ message: "OTP sent to your email", registrationToken });
   } catch (error) {
     console.error(error);
     next(error);
+  }
+};
+
+// Verify email OTP and activate account
+const verifyEmailOtp = async (req, res, next) => {
+  try {
+    const { email, otp, registrationToken } = req.body;
+
+    const tokenData = await verifyToken(registrationToken);
+
+    if (
+      !tokenData ||
+      tokenData.email !== email ||
+      String(tokenData.otp) !== String(otp)
+    ) {
+      return res.status(400).json({ message: "Invalid or mismatched OTP" });
+    }
+
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
+    }
+
+    // Create user now that email is verified
+    const createdUser = await User.create({
+      firstName: tokenData.firstName,
+      lastName: tokenData.lastName,
+      email: tokenData.email,
+      password: tokenData.password,
+      roleId: tokenData.roleId || 3,
+      status: "active",
+    });
+
+    // Auto-login: generate auth tokens and return user info
+    const token = generateToken(createdUser.toJSON());
+    const refreshToken = generateToken(createdUser.toJSON(), "1yr");
+
+    return res.status(200).json({
+      message: "Email verified successfully",
+      user: {
+        firstName: createdUser.firstName,
+        lastName: createdUser.lastName,
+        email: createdUser.email,
+        roleId: createdUser.roleId,
+        status: createdUser.status,
+      },
+      token: { token, refreshToken },
+    });
+  } catch (error) {
+    return next(error);
   }
 };
 
@@ -175,30 +234,94 @@ const forgotPassword = async (req, res, next) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const resetToken = generateToken({ email }, "1h");
-    await user.update({ forgetToken: resetToken });
-    const resetUrl = `${req?.headers?.origin}/auth/forget/${resetToken}`;
-
-    user.forgetToken = resetToken;
+    // generate OTP for password reset
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    user.emailOtp = otp;
+    user.emailOtpExpiresAt = expiresAt;
     await user.save();
 
     await sendMail({
-      from: `Support Helpify`,
       to: email,
-      subject: "Reset Your Password",
-      html: resetPasswordEmail(user.firstName, resetUrl),
-      attachments: [
-        {
-          filename: "logo.png",
-          path: "", //shoiuld be path of logo
-          cid: "logo",
-        },
-      ],
+      subject: "Your Helpify password reset code",
+      html: otpEmail(user.firstName, otp),
+    });
+
+    return res.status(200).send({ message: "OTP sent to your email" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// Reset password using OTP
+const setPasswordWithOtp = async (req, res, next) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    const user = await User.findOne({ where: { email } });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (!user.emailOtp || !user.emailOtpExpiresAt) {
+      return res.status(400).json({ message: "No OTP pending" });
+    }
+    if (new Date(user.emailOtpExpiresAt).getTime() < Date.now()) {
+      return res.status(400).json({ message: "OTP expired" });
+    }
+    if (String(user.emailOtp) !== String(otp)) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    const pass = await generateHash(newPassword);
+    user.password = pass;
+    user.emailOtp = null;
+    user.emailOtpExpiresAt = null;
+    await user.save();
+
+    return res.status(200).send({ message: "Password reset successfully" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+// Resend registration OTP using the previous short-lived registration token
+const resendRegistrationOtp = async (req, res, next) => {
+  try {
+    const { registrationToken } = req.body;
+    const data = await verifyToken(registrationToken);
+    if (!data || !data.email) {
+      return res.status(400).json({ message: "Invalid token" });
+    }
+
+    // make sure user does not already exist
+    const existingUser = await User.findOne({ where: { email: data.email } });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
+    }
+
+    const newOtp = String(Math.floor(100000 + Math.random() * 900000));
+    const newToken = generateToken(
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+        roleId: data.roleId || 3,
+        otp: newOtp,
+      },
+      "10m"
+    );
+
+    await sendMail({
+      to: data.email,
+      subject: "Your Helpify verification code",
+      html: otpEmail(data.firstName, newOtp),
     });
 
     return res
       .status(200)
-      .send({ message: "Reset passwrod URL is send to Your mail" });
+      .json({ message: "OTP resent", registrationToken: newToken });
   } catch (error) {
     return next(error);
   }
@@ -245,4 +368,7 @@ module.exports = {
   getRefreshToken,
   forgotPassword,
   setPassword,
+  verifyEmailOtp,
+  setPasswordWithOtp,
+  resendRegistrationOtp,
 };

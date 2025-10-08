@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOrders } from '../../context/OrdersContext';
 import { useSelector } from 'react-redux';
@@ -11,6 +11,8 @@ const ContinueToBookingButton = () => {
   const { ordersList } = useOrders();
   const bookings = useSelector(selectAllBookings);
   const { isLoggedIn } = useContext(AuthContext);
+  const [bump, setBump] = useState(false);
+  const prevTotalRef = useRef(0);
 
   // Only show if there are items in the cart
   if (!ordersList || ordersList.length === 0) {
@@ -27,6 +29,18 @@ const ContinueToBookingButton = () => {
     0
   );
 
+  useEffect(() => {
+    if (totalAmount !== prevTotalRef.current) {
+      if (prevTotalRef.current !== 0 || totalAmount > 0) {
+        setBump(true);
+        const t = setTimeout(() => setBump(false), 400);
+        return () => clearTimeout(t);
+      }
+      prevTotalRef.current = totalAmount;
+    }
+    prevTotalRef.current = totalAmount;
+  }, [totalAmount]);
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 border-t border-gray-200 z-50">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -39,7 +53,11 @@ const ContinueToBookingButton = () => {
           </div>
           <div className="text-center sm:text-left">
             <span className="text-gray-800 font-medium">Total: </span>
-            <span className="text-blue-600 font-bold">Rs {totalAmount}</span>
+            <span
+              className={`text-blue-600 font-bold inline-block transition-transform duration-200 ${bump ? 'scale-110 text-green-600' : ''}`}
+            >
+              Rs {totalAmount}
+            </span>
           </div>
         </div>
 

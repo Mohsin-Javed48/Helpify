@@ -72,7 +72,9 @@ function Navbar() {
       <nav className={navStyles.container}>
         <div className={navStyles.inner}>
           {/* Logo */}
-          <h2 className={navStyles.logo}>HELPIFY</h2>
+          <NavLink to="/" className={navStyles.logo}>
+            HELPIFY
+          </NavLink>
 
           {/* Mobile Menu Button */}
           <button

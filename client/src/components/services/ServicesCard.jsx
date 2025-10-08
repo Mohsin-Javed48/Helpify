@@ -127,21 +127,21 @@ function ServicesCard({ name, category }) {
     <>
       <div className="w-full min-h-screen bg-white mx-auto flex flex-col">
         {/* Header */}
-        <div className="w-full max-w-[1665px] h-[85px] bg-white flex items-center justify-between flex-shrink-0 border-b border-gray-200">
+        <div className="w-full max-w-[1665px] h-[50px] sm:h-[55px] lg:h-[60px] bg-white flex items-center justify-between flex-shrink-0 border-b border-gray-200">
           {/* Close Button */}
           <button
-            className="flex flex-shrink-0 items-center justify-center w-[80px] h-[70px] sm:w-[90px] sm:h-[75px] lg:w-[106px] lg:h-[85px] border border-black bg-[rgba(217,217,217,0.05)]"
+            className="flex flex-shrink-0 items-center justify-center w-[50px] sm:w-[60px] lg:w-[70px] h-full border border-black bg-[rgba(217,217,217,0.05)]"
             onClick={() => navigate('/')}
           >
             <img
               src={crossIcon}
               alt="Close Page"
-              className="w-[25px] h-[20px] sm:w-[35px] sm:h-[25px] lg:w-[39.31px] lg:h-[28.74px]"
+              className="w-[18px] h-[14px] sm:w-[22px] sm:h-[18px] lg:w-[26px] lg:h-[20px]"
             />
           </button>
           {/* Text */}
           <h1
-            className="absolute left-1/2 transform -translate-x-1/2 text-[#000] text-center font-[Wix Madefor Display] text-[24px] sm:text-[30px] lg:text-[35px] font-extrabold leading-[26px] tracking-[-0.35px]"
+            className="absolute left-1/2 transform -translate-x-1/2 text-[#000] text-center font-[Wix Madefor Display] text-[18px] sm:text-[24px] lg:text-[28px] font-extrabold leading-[20px] tracking-[-0.35px]"
             style={{ width: '293px' }}
           >
             <span className="flex items-center justify-center space-x-1">
@@ -183,20 +183,20 @@ function ServicesCard({ name, category }) {
         {/* Services Section */}
         <div className="w-full flex flex-col items-center justify-center mt-10 mb-20 px-4 sm:px-8">
           <div className="max-w-screen-xl h-auto bg-[#EDEDED] rounded-[20px] shadow-lg p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              <div className="text-[#000] font-[Wix Madefor Display] text-[21px] font-semibold leading-[26px] tracking-[-0.21px]">
-                {name} Services
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-3 sm:space-y-0 mb-4 sm:mb-0">
+              <div className="text-[#000] font-[Wix Madefor Display] text-[12px] sm:text-[21px] font-semibold leading-[16px] sm:leading-[26px] tracking-[-0.21px] w-full sm:w-auto truncate">
+                {name.charAt(0).toUpperCase() + name.slice(1)} Services
               </div>
-              <div className="w-full sm:w-[334px] h-[50px] sm:h-[71px] bg-[#FFF] rounded-[32px] relative">
+              <div className="w-full sm:w-[334px] h-[40px] sm:h-[71px] bg-[#FFF] rounded-[20px] sm:rounded-[32px] relative">
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={handleSearchChange}
                   placeholder="Search services..."
-                  className="w-full h-full bg-transparent text-[#968D8D] pl-[17px] pr-[45px] font-[Wix Madefor Display] text-[16px] sm:text-[17px] font-normal leading-[26px] tracking-[-0.17px] outline-none rounded-[32px]"
+                  className="w-full h-full bg-transparent text-[#968D8D] pl-[12px] sm:pl-[17px] pr-[35px] sm:pr-[45px] font-[Wix Madefor Display] text-[14px] sm:text-[17px] font-normal leading-[20px] sm:leading-[26px] tracking-[-0.17px] outline-none rounded-[20px] sm:rounded-[32px]"
                 />
                 <svg
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                  className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -218,7 +218,7 @@ function ServicesCard({ name, category }) {
               </div>
             ) : (
               /* Services Grid */
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6 mt-8">
                 {filteredServices.map((service) => (
                   <SubServiceCard
                     key={service.id}

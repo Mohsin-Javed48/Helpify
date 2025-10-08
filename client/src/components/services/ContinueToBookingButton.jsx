@@ -14,11 +14,6 @@ const ContinueToBookingButton = () => {
   const [bump, setBump] = useState(false);
   const prevTotalRef = useRef(0);
 
-  // Only show if there are items in the cart
-  if (!ordersList || ordersList.length === 0) {
-    return null;
-  }
-
   // Calculate the total items and amount
   const totalItems = ordersList.reduce(
     (total, item) => total + item.quantity,
@@ -41,8 +36,16 @@ const ContinueToBookingButton = () => {
     prevTotalRef.current = totalAmount;
   }, [totalAmount]);
 
+  // Only show if there are items in the cart
+  if (!ordersList || ordersList.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 border-t border-gray-200 z-50">
+    <div
+      className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 border-t border-gray-200 z-50"
+      style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
+    >
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           <div className="text-center sm:text-left">
